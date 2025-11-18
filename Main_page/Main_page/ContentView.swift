@@ -12,6 +12,34 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
+            ScrollView(.horizontal){
+                HStack{
+                    Group{
+                        Image("first_slide")
+                            .resizable()
+                            .frame(width:360, height: 200)
+                            .position(x:180, y: 100)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        Image("second_slide")
+                            .resizable()
+                            .frame(width:360, height: 200)
+                            .position(x:180, y: 100)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        Image("third_slide")
+                            .resizable()
+                            .frame(width:360, height: 200)
+                            .position(x:180, y: 100)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        Image("fourth_slide")
+                            .resizable()
+                            .frame(width:360, height: 200)
+                            .position(x:180, y: 100)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                }
+                .padding()
+                
+            }
             HeaderView()
             HStack{
                 Button {
