@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SVG Coordinate Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f0f0f0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .svg-container {
+            width: 365px;
+            height: 388px;
+            border: 3px solid blue;
+            margin: 20px auto;
+            position: relative;
+            cursor: crosshair;
+            overflow: hidden;
+            background: white;
+        }
+        .svg-content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        #svgImage {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .coordinates {
+            background: lightyellow;
+            padding: 15px;
+            border: 2px solid orange;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .marker {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: red;
+            border: 1px solid darkred;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        .coord-text {
+            position: absolute;
+            color: red;
+            font-weight: bold;
+            font-size: 10px;
+            transform: translate(-50%, -20px);
+            background: white;
+            padding: 1px 4px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            z-index: 10;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .history {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-height: 150px;
+            overflow-y: auto;
+            text-align: left;
+        }
+        .grid-line {
+            position: absolute;
+            background: rgba(0,100,255,0.1);
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 SVG Coordinate Finder</h1>
+        <p>Загрузи SVG файл и кликай для получения координат</p>
+
+        <div class="coordinates" id="coordDisplay">
+            Координаты появятся здесь
+        </div>
+
+        <div>
+            <input type="file" id="fileInput" accept=".svg" style="display: none;">
+            <button onclick="document.getElementById('fileInput').click()">📁 Загрузить SVG</button>
+            <button onclick="clearPoints()">🗑️ Очистить точки</button>
+        </div>
+
+        <div class="svg-container">
+            <div class="svg-content" id="svgContent">
+                <div id="svgImage"></div>
+                <div id="gridContainer"></div>
+                <div id="markersContainer"></div>
+            </div>
+        </div>
+
+        <div class="history">
+            <strong>История координат:</strong>
+            <div id="coordHistory"></div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button onclick="exportCoordinates()">💾 Экспорт в CSV</button>
+        </div>
+    </div>
+
+    <script>
+        const svgWidth = 365;
+        const svgHeight = 388;
+        let points = [];
+
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file && file.name.toLowerCase().endsWith('.svg')) {
+                loadSVGFile(file);
+            }
+        });
+
+        function loadSVGFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const svgContent = e.target.result;
+                displaySVG(svgContent);
+                document.getElementById('coordDisplay').textContent = `Загружен: ${file.name}`;
+            };
+            reader.onerror = function() {
+                alert('Ошибка при чтении файла');
+            };
+            reader.readAsText(file);
+        }
+
+        function displaySVG(svgContent) {
+            const svgImage = document.getElementById('svgImage');
+            svgImage.innerHTML = '';
+            svgImage.innerHTML = svgContent;
+            
+            const svgElement = svgImage.querySelector('svg');
+            if (svgElement) {
+                svgElement.setAttribute('width', '100%');
+                svgElement.setAttribute('height', '100%');
+                svgElement.style.pointerEvents = 'none';
+            }
+            
+            createGrid();
+            clearPoints();
+        }
+
+        function createGrid() {
+            const gridContainer = document.getElementById('gridContainer');
+            gridContainer.innerHTML = '';
+
+            for (let x = 0; x <= svgWidth; x += 50) {
+                const line = document.createElement('div');
+                line.className = 'grid-line';
+                line.style.left = x + 'px';
+                line.style.top = '0';
+                line.style.width = '1px';
+                line.style.height = svgHeight + 'px';
+                gridContainer.appendChild(line);
+            }
+
+            for (let y = 0; y <= svgHeight; y += 50) {
+                const line = document.createElement('div');
+                line.className = 'grid-line';
+                line.style.left = '0';
+                line.style.top = y + 'px';
+                line.style.width = svgWidth + 'px';
+                line.style.height = '1px';
+                gridContainer.appendChild(line);
+            }
+        }
+
+        document.getElementById('svgContent').addEventListener('click', function(event) {
+            const rect = this.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            if (x < 0 || x > svgWidth || y < 0 || y > svgHeight) return;
+
+            const normX = (x / svgWidth).toFixed(3);
+            const normY = (y / svgHeight).toFixed(3);
+
+            document.getElementById('coordDisplay').innerHTML = 
+                `Абсолютные: (${Math.round(x)}, ${Math.round(y)})<br>` +
+                `Нормализованные: (${normX}, ${normY})`;
+
+            addMarker(x, y, Math.round(x), Math.round(y));
+            addToHistory(Math.round(x), Math.round(y), normX, normY);
+
+            points.push({
+                x: Math.round(x), 
+                y: Math.round(y), 
+                normX, 
+                normY,
+                timestamp: new Date().toLocaleTimeString()
+            });
+
+            console.log(`Клик: (${Math.round(x)}, ${Math.round(y)})`);
+        });
+
+        function addMarker(x, y, labelX, labelY) {
+            const markersContainer = document.getElementById('markersContainer');
+
+            const marker = document.createElement('div');
+            marker.className = 'marker';
+            marker.style.left = x + 'px';
+            marker.style.top = y + 'px';
+
+            const text = document.createElement('div');
+            text.className = 'coord-text';
+            text.style.left = x + 'px';
+            text.style.top = y + 'px';
+            text.textContent = `(${labelX},${labelY})`;
+
+            markersContainer.appendChild(marker);
+            markersContainer.appendChild(text);
+        }
+
+        function addToHistory(x, y, normX, normY) {
+            const history = document.getElementById('coordHistory');
+            const entry = document.createElement('div');
+            entry.style.padding = '2px 0';
+            entry.style.fontSize = '12px';
+            entry.innerHTML = `• (${x}, ${y}) - [${normX}, ${normY}]`;
+            history.appendChild(entry);
+            history.scrollTop = history.scrollHeight;
+        }
+
+        function clearPoints() {
+            const markersContainer = document.getElementById('markersContainer');
+            markersContainer.innerHTML = '';
+            document.getElementById('coordHistory').innerHTML = '';
+            document.getElementById('coordDisplay').textContent = 'Точки очищены';
+            points = [];
+        }
+
+        function exportCoordinates() {
+            if (points.length === 0) {
+                alert('Нет точек для экспорта');
+                return;
+            }
+
+            let csvContent = "X,Y,Normalized_X,Normalized_Y,Time\n";
+            points.forEach(point => {
+                csvContent += `${point.x},${point.y},${point.normX},${point.normY},${point.timestamp}\n`;
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'coordinates.csv';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function createSampleSVG() {
+            const sampleSVG = `
+                <svg width="365" height="388" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100%" height="100%" fill="#f0f8ff"/>
+                    <text x="30" y="30" font-family="Arial" font-size="14" fill="#3366cc">Загрузите свой SVG файл</text>
+                    <text x="30" y="50" font-family="Arial" font-size="12" fill="#666">Или кликайте для теста координат</text>
+                    <circle cx="100" cy="150" r="30" fill="#ff6b6b" opacity="0.7"/>
+                    <rect x="200" y="120" width="80" height="60" fill="#4ecdc4" opacity="0.7"/>
+                    <polygon points="150,250 200,200 250,250" fill="#45b7d1" opacity="0.7"/>
+                </svg>
+            `;
+            displaySVG(sampleSVG);
+        }
+
+        window.onload = function() {
+            createSampleSVG();
+        };
+    </script>
+</body>
+</html>
