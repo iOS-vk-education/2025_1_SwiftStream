@@ -17,7 +17,7 @@
 
 ## Команда:
 * Глызина Кристина (Team Lead) - [KristinaGlyzina](https://github.com/KristinaGlyzina)
-* Подобедов Владислав - (VladislavDoff)(https://github.com/VladislavDoff)
+* Подобедов Владислав - [VladislavDoff](https://github.com/VladislavDoff)
 * Бирюкова София - [basonik](https://github.com/basonik)
 * Ридигер Валентин - [well806](https://github.com/well806)
 * Агошков Иван - [rcc-57](https://github.com/rcc-57)
