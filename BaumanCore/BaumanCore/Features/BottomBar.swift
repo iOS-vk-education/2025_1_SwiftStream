@@ -14,7 +14,7 @@ struct BottomBarView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             
-            Color.clear
+            MapView()
                 .tag(0)
                 .tabItem {
                     Image(systemName: "map")
@@ -28,7 +28,7 @@ struct BottomBarView: View {
                     Text("Главная")
                 }
             
-            Color.clear
+            ScheduleView()
                 .tag(2)
                 .tabItem {
                     Image(systemName: "calendar")
