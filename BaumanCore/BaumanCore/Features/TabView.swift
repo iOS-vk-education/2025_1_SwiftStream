@@ -1,53 +1,55 @@
 //
-//  BottomBar.swift
-//  BaumanCore
-//
-//  Created by Иван Агошков on 21.11.2025.
+//  CustomTabView.swift
+//  Main_page
 //
 
 import SwiftUI
 
-struct BottomBarView: View {
-    
-    @State private var selectedTab: Int = 1
+struct CustomTabView: View {
+    @Binding var selectedTab: Int
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            
-            MapView()
+            Color.clear
                 .tag(0)
                 .tabItem {
                     Image(systemName: "map")
                     Text("Маршрут")
                 }
-            
-            MainPageWiew()
+            Color.clear
                 .tag(1)
                 .tabItem {
                     Image(systemName: "house")
                     Text("Главная")
                 }
-            
-            ScheduleView()
+            Color.clear
                 .tag(2)
                 .tabItem {
                     Image(systemName: "calendar")
                     Text("Расписание")
                 }
-            
-            GradesView()
+            Color.clear
                 .tag(3)
                 .tabItem {
                     Image(systemName: "chart.bar")
                     Text("Успеваемость")
                 }
-            
-            ProfileView()
+            Color.clear
                 .tag(4)
                 .tabItem {
                     Image(systemName: "person")
                     Text("Аккаунт")
                 }
+        }
+        .onChange(of: selectedTab) { newValue in
+            switch newValue {
+            case 0: print("Маршрут")
+            case 1: print("Главная")
+            case 2: print("Расписание")
+            case 3: print("Успеваемость")
+            case 4: print("Аккаунт")
+            default: break
+            }
         }
     }
 }
