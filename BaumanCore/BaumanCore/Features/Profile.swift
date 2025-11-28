@@ -1,12 +1,12 @@
 import SwiftUI
 
-struct ProfileView: View {
+struct Profile: View {
     @State private var student = Student(
         name: "Подобедов Владислав Владимирович",
-        faculty: "ИУ",
+        faculty: "ФН",
         group: "ФН12-71Б",
         studentID: "pvv22f019",
-        email: "podobedovvv@stundent.bmstu.ru"
+        email: "vlad@stundent.bmstu.ru"
     )
     
     var body: some View {
@@ -51,5 +51,11 @@ struct ProfileView: View {
             Text(value)
         }
         .font(.subheadline)
+    }
+}
+
+struct Profile_Previews: PreviewProvider {
+    static var previews: some View {
+        BottomBarView(selectedTab: 4)
     }
 }

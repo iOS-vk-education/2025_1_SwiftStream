@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct GradesView: View {
+struct Grades: View {
     @State private var selectedTab: Tab = .current
     
     enum Tab {
@@ -89,7 +89,7 @@ struct GradesView: View {
                 .padding(.horizontal, 16)
                 .background(
                     Capsule()
-                        .fill(isActive ? Color.gradesBlue : .white)
+                        .fill(isActive ? Color(hex: "2932D9") : .white)
                         .overlay(
                             Capsule()
                                 .stroke(Color.black.opacity(isActive ? 0 : 0.5), lineWidth: 1)
@@ -148,7 +148,7 @@ struct SubjectRowView: View {
             
             // Выпадение
             if isExpanded {
-                VStack(alignment: .leading, spacing: 8,) {
+                VStack(alignment: .leading, spacing: 8) {
                     Text("Семинар 1:")
                     Text("Лабораторная:")
                     Text("Контрольная:")
@@ -279,6 +279,12 @@ struct SessionTabView: View {
    }
 }
 
+
+struct Grades_Previews: PreviewProvider {
+    static var previews: some View {
+        BottomBarView(selectedTab: 3)
+    }
+}
 
 
 

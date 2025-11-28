@@ -1,15 +1,39 @@
-//
-//  BottomBar.swift
-//  BaumanCore
-//
-//  Created by Иван Агошков on 21.11.2025.
-//
-
 import SwiftUI
+
+
+struct MapView: View {
+    var body: some View {
+        Map()
+    }
+}
+
+struct MainPageView: View {
+    var body: some View {
+        MainPage()
+    }
+}
+
+struct ScheduleView: View {
+    var body: some View {
+        Schedule()
+    }
+}
+
+struct GradesView: View {
+    var body: some View {
+        Grades()
+    }
+}
+
+struct ProfileView: View {
+    var body: some View {
+        Profile()
+    }
+}
 
 struct BottomBarView: View {
     
-    @State private var selectedTab: Int = 1
+    @State var selectedTab: Int = 1
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -21,7 +45,7 @@ struct BottomBarView: View {
                     Text("Маршрут")
                 }
             
-            MainPageWiew()
+            MainPageView()
                 .tag(1)
                 .tabItem {
                     Image(systemName: "house")
@@ -49,5 +73,6 @@ struct BottomBarView: View {
                     Text("Аккаунт")
                 }
         }
+        .tint(Color(hex: "2932D9"))
     }
 }

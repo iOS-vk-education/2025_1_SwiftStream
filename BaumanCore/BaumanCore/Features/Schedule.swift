@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ScheduleView: View {
+struct Schedule: View {
     
     @State private var selectedDay: Int = 1
     @State private var selectedTab: Int = 2
@@ -41,7 +41,7 @@ struct ScheduleView: View {
                             .frame(width: 50, height: 50)
                             .background(
                                 selectedDay == day.id
-                                ? Color(.gradesBlue)
+                                ? Color(hex: "2932D9")
                                 :Color.clear
                             )
                             .foregroundColor(selectedDay == day.id ? .white : .black)
@@ -49,7 +49,7 @@ struct ScheduleView: View {
                                 RoundedRectangle(cornerRadius: 12)
                                     .stroke(
                                         selectedDay == day.id
-                                        ? Color(.gradesBlue)
+                                        ? Color(hex: "2932D9")
                                         :Color.gray.opacity(0.4),
                                         lineWidth: 2
                                     )
@@ -68,8 +68,8 @@ struct ScheduleView: View {
     }
 }
 
-struct ScheduleView_Previews: PreviewProvider {
+struct Schedule_Previews: PreviewProvider {
     static var previews: some View {
-        ScheduleView()
+        BottomBarView(selectedTab: 2)
     }
 }

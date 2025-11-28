@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct MainPageWiew: View {
+struct MainPage: View {
     let IconColor = Color(red: 0.16, green: 0.19, blue: 0.85)
     @State private var selectedTab: Int = 2
     
@@ -53,6 +53,8 @@ struct HeaderView: View {
     }
 }
 
-#Preview {
-    MainPageWiew()
+struct MainPage_Previews: PreviewProvider {
+    static var previews: some View {
+        BottomBarView(selectedTab: 1)
+    }
 }

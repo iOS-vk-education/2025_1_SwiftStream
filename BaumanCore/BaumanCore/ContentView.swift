@@ -3,11 +3,13 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationStack {
-            BottomBarView()            
+            BottomBarView()
         }
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

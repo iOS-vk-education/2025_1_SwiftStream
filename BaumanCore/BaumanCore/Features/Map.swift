@@ -2,7 +2,7 @@
 import SwiftUI
 
 
-struct MapView: View {
+struct Map: View {
     @State private var fromLocation = ""
     @State private var toLocation = ""
     @State private var selectedFloor = "1"
@@ -36,7 +36,7 @@ struct MapView: View {
                                     .foregroundColor(selectedFloor == floor ? .white : .primary)
                                     .frame(height: 32)
                                     .frame(maxWidth: .infinity)
-                                    .background(selectedFloor == floor ? Color.blue : Color.gray.opacity(0.1))
+                                    .background(selectedFloor == floor ? Color(hex: "2932D9") : Color.gray.opacity(0.1))
                                     .cornerRadius(8)
                             }
                             
@@ -55,9 +55,9 @@ struct MapView: View {
                         }) {
                             Image(systemName: showingLowerFloors ? "chevron.down" : "chevron.up")
                                 .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(.blue)
+                                .foregroundColor(Color(hex: "2932D9"))
                                 .frame(width: 32, height: 32)
-                                .background(Color.blue.opacity(0.1))
+                                .background(Color(hex: "2932D9").opacity(0.1))
                                 .cornerRadius(8)
                         }
                     }
@@ -106,7 +106,7 @@ struct MapView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 50)
-                        .background(Color.blue)
+                        .background(Color(hex: "2932D9"))
                         .cornerRadius(10)
                 }
                 .padding(.horizontal, 20)
@@ -160,8 +160,8 @@ struct CustomTextField: View {
 }
 
 
-struct MapView_Previews: PreviewProvider {
+struct Map_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        BottomBarView(selectedTab: 0)
     }
 }
