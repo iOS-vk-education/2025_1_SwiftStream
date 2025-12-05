@@ -73,6 +73,6 @@ struct BottomBarView: View {
                     Text("Аккаунт")
                 }
         }
-        .tint(Color(hex: "2932D9"))
+        .tint(Color(red: 0.16, green: 0.19, blue: 0.85))
     }
 }

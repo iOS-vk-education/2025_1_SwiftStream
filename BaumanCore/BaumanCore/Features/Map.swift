@@ -36,7 +36,7 @@ struct Map: View {
                                     .foregroundColor(selectedFloor == floor ? .white : .primary)
                                     .frame(height: 32)
                                     .frame(maxWidth: .infinity)
-                                    .background(selectedFloor == floor ? Color(hex: "2932D9") : Color.gray.opacity(0.1))
+                                    .background(selectedFloor == floor ? Color(red: 0.16, green: 0.19, blue: 0.85): Color.gray.opacity(0.1))
                                     .cornerRadius(8)
                             }
                             
@@ -55,9 +55,9 @@ struct Map: View {
                         }) {
                             Image(systemName: showingLowerFloors ? "chevron.down" : "chevron.up")
                                 .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(Color(hex: "2932D9"))
+                                .foregroundColor(Color(red: 0.16, green: 0.19, blue: 0.85))
                                 .frame(width: 32, height: 32)
-                                .background(Color(hex: "2932D9").opacity(0.1))
+                                .background(Color(red: 0.16, green: 0.19, blue: 0.85)).opacity(0.1)
                                 .cornerRadius(8)
                         }
                     }
@@ -106,7 +106,7 @@ struct Map: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 50)
-                        .background(Color(hex: "2932D9"))
+                        .background(Color(red: 0.16, green: 0.19, blue: 0.85))
                         .cornerRadius(10)
                 }
                 .padding(.horizontal, 20)
@@ -137,7 +137,7 @@ struct CustomTextField: View {
                 .cornerRadius(10)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(isFocused ? Color.blue : Color.gray.opacity(0.3), lineWidth: 1)
+                        .stroke(isFocused ? Color(red: 0.16, green: 0.19, blue: 0.85) : Color.gray.opacity(0.3), lineWidth: 1)
                 )
             
             if text.isEmpty && !isFocused {

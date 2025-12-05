@@ -89,7 +89,7 @@ struct Grades: View {
                 .padding(.horizontal, 16)
                 .background(
                     Capsule()
-                        .fill(isActive ? Color(hex: "2932D9") : .white)
+                        .fill(isActive ? Color(red: 0.16, green: 0.19, blue: 0.85) : .white)
                         .overlay(
                             Capsule()
                                 .stroke(Color.black.opacity(isActive ? 0 : 0.5), lineWidth: 1)
