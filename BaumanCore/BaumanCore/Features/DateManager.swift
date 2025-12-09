@@ -1,10 +1,12 @@
 import Foundation
+import SwiftUI
 
 class ScheduleDateManager: ObservableObject {
     @Published var currentWeek: Int = 1
     @Published var currentDayIndex: Int = 1
     @Published var isEvenWeek: Bool = false
     @Published var currentWeekStartDate: Date = Date()
+    @Published var animateDayButtons: Bool = false // Новое свойство для анимации
     
     init() {
         updateRealDate()
@@ -59,18 +61,39 @@ class ScheduleDateManager: ObservableObject {
         calculateWeekStartDate()
     }
     
-    func nextWeek() {
-        currentWeek += 1
-        isEvenWeek = currentWeek % 2 == 0
-        calculateWeekStartDate()
-    }
     
-    func prevWeek() {
-        currentWeek -= 1
-        if currentWeek < 1 { currentWeek = 1 }
-        isEvenWeek = currentWeek % 2 == 0
-        calculateWeekStartDate()
-    }
+    func nextWeek() {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                animateDayButtons = true
+            }
+            
+            currentWeek += 1
+            isEvenWeek = currentWeek % 2 == 0
+            calculateWeekStartDate()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                withAnimation(.easeInOut(duration: 0.1)) {
+                    self.animateDayButtons = false
+                }
+            }
+        }
+        
+        func prevWeek() {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                animateDayButtons = true
+            }
+            
+            currentWeek -= 1
+            if currentWeek < 1 { currentWeek = 1 }
+            isEvenWeek = currentWeek % 2 == 0
+            calculateWeekStartDate()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                withAnimation(.easeInOut(duration: 0.1)) {
+                    self.animateDayButtons = false
+                }
+            }
+        }
     
     var weekTitle: String {
         "\(currentWeek) неделя, \(isEvenWeek ? "знаменатель" : "числитель")"

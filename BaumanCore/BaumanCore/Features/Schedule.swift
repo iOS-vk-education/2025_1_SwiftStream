@@ -5,7 +5,7 @@ enum LessonType: String {
     case lecture = "Лекция"
     case seminar = "Семинар"
     case lab = "Лабораторная"
-    
+
     var color: Color {
         switch self {
         case .lecture: return Color.blue.opacity(0.4)
@@ -32,7 +32,7 @@ struct LessonCardView: View {
                 .padding(.vertical, 3)
                 .padding(.leading, 12)
                 .background(type.color)
-            
+
             HStack(alignment: .top, spacing: 12) {
                 VStack(alignment: .leading) {
                     Text(timeStart)
@@ -41,7 +41,7 @@ struct LessonCardView: View {
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
                 }
-                
+
                 VStack(alignment: .leading, spacing: 4) {
                     Text(subject)
                         .font(.system(size: 16, weight: .semibold))
@@ -108,8 +108,9 @@ struct Schedule: View {
             }
             .padding(.top, 20)
 
+
             HStack(spacing: 12) {
-                ForEach(days, id: \.id) { day in
+                ForEach(Array(days.enumerated()), id: \.element.id) { index, day in
                     Button(action: {
                         selectedDay = day.id
                         print("\(day.name) and \(day.id)")
@@ -138,6 +139,13 @@ struct Schedule: View {
                         )
                         .cornerRadius(12)
                     }
+                    .opacity(dateManager.animateDayButtons ? 0 : 2)
+                    .offset(y: dateManager.animateDayButtons ? 15 : 0)
+                    .animation(
+                        .easeOut(duration: 0.4)
+                        .delay(Double(index) * 0.05),
+                        value: dateManager.animateDayButtons
+                    )
                 }
             }
             .padding(.vertical, 15)
@@ -150,6 +158,7 @@ struct Schedule: View {
                     }
                 }
             )
+
 
             VStack(spacing: 16) {
                 ForEach(0..<LessonsCount, id: \.self) { index in
@@ -192,3 +201,5 @@ struct Schedule_Previews: PreviewProvider {
         BottomBarView(selectedTab: 2)
     }
 }
+
+// сделать переключение недели без синей кнопки. при нажатии на другую дату актуальную отрисовывать серым
