@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC8012752EE8F159003B6419 /* SubjectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8012742EE8F159003B6419 /* SubjectData.swift */; };
+		AC8012772EE8F166003B6419 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8012762EE8F166003B6419 /* Lesson.swift */; };
 		CE2A3DE12ED85A7B00C09F87 /* BaumanCoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A3DE02ED85A7B00C09F87 /* BaumanCoreApp.swift */; };
 		CE2A3DE32ED85A7B00C09F87 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A3DE22ED85A7B00C09F87 /* ContentView.swift */; };
 		CE2A3DE52ED85A7D00C09F87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2A3DE42ED85A7D00C09F87 /* Assets.xcassets */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC8012742EE8F159003B6419 /* SubjectData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectData.swift; sourceTree = "<group>"; };
+		AC8012762EE8F166003B6419 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		CE2A3DDD2ED85A7B00C09F87 /* BaumanCore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaumanCore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2A3DE02ED85A7B00C09F87 /* BaumanCoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaumanCoreApp.swift; sourceTree = "<group>"; };
 		CE2A3DE22ED85A7B00C09F87 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				CE2A3DF82ED8C97800C09F87 /* Student.swift */,
+				AC8012742EE8F159003B6419 /* SubjectData.swift */,
+				AC8012762EE8F166003B6419 /* Lesson.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,12 +192,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC8012772EE8F166003B6419 /* Lesson.swift in Sources */,
 				CE2A3DE32ED85A7B00C09F87 /* ContentView.swift in Sources */,
 				CE2A3DF62ED8C92700C09F87 /* Profile.swift in Sources */,
 				CE2A3E052ED8DEC400C09F87 /* Map.swift in Sources */,
 				CE2A3E032ED8DCC400C09F87 /* QR.swift in Sources */,
 				CE2A3DFD2ED8DC7000C09F87 /* MainPage.swift in Sources */,
 				CE2A3DE12ED85A7B00C09F87 /* BaumanCoreApp.swift in Sources */,
+				AC8012752EE8F159003B6419 /* SubjectData.swift in Sources */,
 				CE2A3DF22ED8C35100C09F87 /* Schedule.swift in Sources */,
 				CE2A3DF42ED8C3CD00C09F87 /* ColorFile.swift in Sources */,
 				CE2A3E012ED8DCB500C09F87 /* Three_blueLinks.swift in Sources */,
