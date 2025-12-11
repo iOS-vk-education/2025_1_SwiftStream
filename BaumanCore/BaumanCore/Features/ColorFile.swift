@@ -15,3 +15,14 @@ extension Color {
         self.init(red: r, green: g, blue: b)
     }
 }
+
+// расширение цветов из assets
+
+extension Color {
+    static let systemblue = Color("systemblue")
+    static let excellentmark = Color("excellentmark")
+    static let goodmark = Color("goodmark")
+    static let mediummark = Color("mediummark")
+    static let badmark = Color("badmark")
+    static let nomark = Color("nomark")
+}
