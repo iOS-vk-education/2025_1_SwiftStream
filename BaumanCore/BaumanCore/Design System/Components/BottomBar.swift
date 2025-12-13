@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct BottomBarView: View {
-    @EnvironmentObject var appState: AppState
     @State var selectedTab: Int = 0
     
     var body: some View {
