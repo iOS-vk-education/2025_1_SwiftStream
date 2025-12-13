@@ -1,56 +1,72 @@
 import SwiftUI
 
 struct MainPage: View {
+    @State private var showQR = false
+    
     var body: some View {
-        ZStack {
+        VStack(spacing: 0) {
             ImageCarousel()
-                .position(x: 197, y: 110)
-            
-            HeaderView()
+                .padding(.top, 8)
             
             ThreeBlueLinks()
+                .padding(.top, 20)
             
+            HeaderView()
+                .padding(.top, 40)
+            
+            Spacer()
+            
+            PassButton {
+                showQR = true
+            }
+            .padding(.horizontal, 16)
+            .padding(.bottom, 20)
+        }
+        .fullScreenCover(isPresented: $showQR) {
             QRView()
         }
     }
-}
-
-struct HeaderView: View {
-    var body: some View {
-        VStack {
-            VStack(alignment: .leading, spacing: 0) {
-                Spacer()
-                Text("Привет, Влад!")
-                    .font(.SFPro(38, weight: .semibold))
-                    .padding(.leading)
-                    .padding(.bottom, 15)
-                
-                Text("Сегодня пятница, 10 неделя")
-                    .font(.SFPro(20))
-                    .padding(.leading)
-                
-                Text("7 ноября")
-                    .font(.SFPro(20))
-                    .padding(.leading)
-                    .foregroundColor(AppColor.lightGrey)
-                    .padding(.bottom, 3)
-                
-                Text("3 пары")
-                    .font(.SFPro(15))
-                    .foregroundColor(AppColor.lightGrey)
-                    .padding(.leading)
+    
+    struct PassButton: View {
+        let action: () -> Void
+        
+        var body: some View {
+            Button(action: action) {
+                RoundedRectangle(cornerRadius: 14)
+                    .frame(height: 56)
+                    .foregroundColor(AppColor.mainColor)
+                    .overlay(
+                        Text("Пропуск")
+                            .foregroundColor(AppColor.white)
+                            .font(.system(size: 17, weight: .semibold))
+                    )
             }
-            .padding(.leading, 17)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.bottom, 240)
         }
     }
-}
-
-struct MainPage_Previews: PreviewProvider {
-    static var previews: some View {
-        let appState = AppState()
-        return BottomBarView(selectedTab: 1)
-            .environmentObject(appState)
+    
+    struct HeaderView: View {
+        var body: some View {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Привет, Влад!")
+                    .font(.system(size: 34, weight: .bold))
+                    .padding(.bottom, 2)
+                
+                Text("Сегодня пятница, 10 неделя")
+                    .font(.system(size: 17, weight: .regular))
+                    .foregroundColor(.primary)
+                
+                Text("7 ноября")
+                    .font(.system(size: 17, weight: .regular))
+                    .foregroundColor(.secondary)
+                    .padding(.top, 2)
+                
+                Text("3 пары")
+                    .font(.system(size: 15, weight: .regular))
+                    .foregroundColor(.secondary)
+                    .padding(.top, 6)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 16)
+        }
     }
 }
