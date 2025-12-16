@@ -22,7 +22,7 @@ struct Map: View {
                     .font(.system(size: 34, weight: .bold))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
-                    .padding(.top, 50)
+            //.padding(.top, 2)
                     .padding(.bottom, 30)
                 
                 VStack(spacing: 0) {
@@ -36,7 +36,11 @@ struct Map: View {
                                     .foregroundColor(selectedFloor == floor ? .white : .primary)
                                     .frame(height: 32)
                                     .frame(maxWidth: .infinity)
+<<<<<<< Updated upstream:BaumanCore/BaumanCore/Features/Map.swift
                                     .background(selectedFloor == floor ? Color(red: 0.16, green: 0.19, blue: 0.85): Color.gray.opacity(0.1))
+=======
+                                    .background(selectedFloor == floor ? AppColor.mainColor: Color.gray.opacity(0.1))
+>>>>>>> Stashed changes:BaumanCore/BaumanCore/Features/MapView/Map.swift
                                     .cornerRadius(8)
                             }
                             
@@ -55,9 +59,15 @@ struct Map: View {
                         }) {
                             Image(systemName: showingLowerFloors ? "chevron.down" : "chevron.up")
                                 .font(.system(size: 14, weight: .medium))
+<<<<<<< Updated upstream:BaumanCore/BaumanCore/Features/Map.swift
                                 .foregroundColor(Color(red: 0.16, green: 0.19, blue: 0.85))
                                 .frame(width: 32, height: 32)
                                 .background(Color(red: 0.16, green: 0.19, blue: 0.85)).opacity(0.1)
+=======
+                                .foregroundColor(AppColor.mainColor)
+                                .frame(width: 32, height: 32)
+                                .background(AppColor.mainColor).opacity(0.1)
+>>>>>>> Stashed changes:BaumanCore/BaumanCore/Features/MapView/Map.swift
                                 .cornerRadius(8)
                         }
                     }
@@ -106,7 +116,11 @@ struct Map: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 50)
+<<<<<<< Updated upstream:BaumanCore/BaumanCore/Features/Map.swift
                         .background(Color(red: 0.16, green: 0.19, blue: 0.85))
+=======
+                        .background(AppColor.mainColor)
+>>>>>>> Stashed changes:BaumanCore/BaumanCore/Features/MapView/Map.swift
                         .cornerRadius(10)
                 }
                 .padding(.horizontal, 20)
