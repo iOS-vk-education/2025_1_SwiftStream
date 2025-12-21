@@ -9,7 +9,7 @@ struct Profile: View {
         studentID: "pvv22f019",
         email: "vlad@student.bmstu.ru"
     )
-    
+        
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Профиль")

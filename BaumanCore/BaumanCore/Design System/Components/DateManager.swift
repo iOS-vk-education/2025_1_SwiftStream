@@ -30,33 +30,41 @@ final class ScheduleDateManager: ObservableObject {
         }
     }
     
-    private func getCurrentAcademicWeek() -> Int {
+    private func startOfWeek(for date: Date) -> Date {
         let calendar = Calendar.current
+        let components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)
+        return calendar.date(from: components)!
+    }
+    
+    
+    private func getCurrentAcademicWeek() -> Int {
         let today = Date()
+        let calendar = Calendar.current
 
+        // Определяем дату 1 сентября
         let year = calendar.component(.year, from: today)
-        
         var septemberComponents = DateComponents()
         septemberComponents.year = year
         septemberComponents.month = 9
         septemberComponents.day = 1
-        
-        guard let firstSeptember = calendar.date(from: septemberComponents) else {
-            return 1
-        }
 
-        let actualFirstSeptember: Date
+        var firstSeptember = calendar.date(from: septemberComponents)!
         if today < firstSeptember {
-            var pastYearComponents = septemberComponents
-            pastYearComponents.year = year - 1
-            actualFirstSeptember = calendar.date(from: pastYearComponents) ?? firstSeptember
-        } else {
-            actualFirstSeptember = firstSeptember
+            septemberComponents.year = year - 1
+            firstSeptember = calendar.date(from: septemberComponents)!
         }
 
-        let weekDifference = calendar.dateComponents([.weekOfYear],
-                                                    from: actualFirstSeptember,
-                                                    to: today).weekOfYear ?? 0
+        // Получаем понедельник недели, в которую попадает 1 сентября
+        let startOfAcademicWeek = startOfWeek(for: firstSeptember)
+
+        // Получаем понедельник недели, в которую попадает сегодня
+        let startOfCurrentWeek = startOfWeek(for: today)
+
+        // Считаем разницу в днях между этими двумя понедельниками
+        let daysBetween = calendar.dateComponents([.day], from: startOfAcademicWeek, to: startOfCurrentWeek).day ?? 0
+
+        // Переводим разницу в неделях
+        let weekDifference = daysBetween / 7
 
         return max(1, weekDifference + 1)
     }
@@ -74,14 +82,15 @@ final class ScheduleDateManager: ObservableObject {
     
     func updateRealDate() {
         let today = Date()
-
         let weekday = calendar.component(.weekday, from: today)
 
-        currentDayIndex = weekday == 1 ? 6 : weekday - 1
-        
+        // Оставляем логику как раньше: Пн = 1, ..., Сб = 6, Вс = 0 → делаем 6 (сб)
+        currentDayIndex = weekday == 1 ? 0 : weekday - 1 // Вс = 0, Пн = 1, ..., Сб = 6
 
         currentWeek = getCurrentAcademicWeek()
-        
+        if weekday == 1 { // если сегодня воскресенье
+            currentWeek -= 1 // отображаем предыдущую неделю
+        }
         isEvenWeek = currentWeek % 2 == 0
         calculateWeekStartDate()
     }

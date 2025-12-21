@@ -127,6 +127,7 @@ struct LoginView_Previews: PreviewProvider {
         return NavigationStack {
             LoginView()
                 .environmentObject(appState)
+                .tint(AppColor.mainColor)
         }
     }
 }

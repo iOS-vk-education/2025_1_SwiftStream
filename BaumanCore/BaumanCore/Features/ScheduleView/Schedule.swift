@@ -18,13 +18,19 @@ struct Schedule: View {
     }
     
     var currentSelectedDay: Int? {
-        if dateManager.currentWeek == lastSelectedWeek {
+        if lastSelectedWeek == dateManager.currentWeek && lastSelectedDay >= 0 {
             return lastSelectedDay
         }
         return nil
     }
     
     var LessonsCount: Int {
+        if lastSelectedWeek == dateManager.currentWeek && lastSelectedDay == 0 {
+            return 0 // если выбрано воскресенье на текущей (предыдущей) неделе
+        }
+        if lastSelectedDay < 0 {
+            return 0 // если день не выбран
+        }
         let mod = lastSelectedDay % 3
         return mod == 0 ? 3 : mod
     }
@@ -62,7 +68,13 @@ struct Schedule: View {
                         .background(
                             currentSelectedDay == day.id
                             ? AppColor.mainColor
-                            : (dateManager.currentDayIndex == day.id && Calendar.current.component(.weekOfYear, from: Date()) == Calendar.current.component(.weekOfYear, from: dateManager.currentWeekStartDate) ? Color.gray.opacity(0.3) : Color.clear)
+                            : (
+                                dateManager.currentDayIndex == day.id &&
+                                dateManager.currentWeek == lastSelectedWeek && // важно: текущая неделя
+                                dateManager.currentDayIndex != 0 // не воскресенье
+                                ? Color.gray.opacity(0.3)
+                                : Color.clear
+                            )
                         )
                         .foregroundColor(currentSelectedDay == day.id ? .white : .black)
                         .overlay(
@@ -96,23 +108,31 @@ struct Schedule: View {
 
 
             VStack(spacing: 16) {
-                ForEach(0..<LessonsCount, id: \.self) { index in
-                    let type: LessonType = {
-                        switch index % 3 {
-                        case 0: return .lecture
-                        case 1: return .seminar
-                        default: return .lab
-                        }
-                    }()
-                    
-                    LessonCardView(
-                        type: type,
-                        timeStart: "10:\(index)0",
-                        timeEnd: "11:\(index)5",
-                        subject: "Окружающий мир",
-                        teacher: "Иванов Иван Иванович",
-                        classroom: "21\(index)л"
-                    )
+                if LessonsCount == 0 {
+                    Text("Сегодня воскресенье, поэтому пар нет")
+                            .font(.title2)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    ForEach(0..<LessonsCount, id: \.self) { index in
+                        let type: LessonType = {
+                            switch index % 3 {
+                            case 0: return .lecture
+                            case 1: return .seminar
+                            default: return .lab
+                            }
+                        }()
+                        
+                        LessonCardView(
+                            type: type,
+                            timeStart: "10:\(index)0",
+                            timeEnd: "11:\(index)5",
+                            subject: "Окружающий мир",
+                            teacher: "Иванов Иван Иванович",
+                            classroom: "21\(index)л"
+                        )
+                    }
                 }
             }
             .padding(.bottom, 20)
@@ -122,8 +142,9 @@ struct Schedule: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .padding()
         .onAppear {
+            dateManager.updateRealDate()
             lastSelectedWeek = dateManager.currentWeek
-            lastSelectedDay = dateManager.currentDayIndex
+            lastSelectedDay = -1 // не выбран
         }
     }
 }

@@ -195,7 +195,7 @@ struct Grades: View {
             
             if #available(iOS 26.0, *) { // версия iOS
                 GradesHatView(selectedTab: $selectedTab)
-                    .glassEffect(.clear, in: .rect(cornerRadius: 0, style: .continuous))
+                    //.glassEffect(.clear, in: .rect(cornerRadius: 0, style: .continuous))
                     .clipShape(HorizontalInsetShape(insetX: 16))
                     .zIndex(1)
             } else {

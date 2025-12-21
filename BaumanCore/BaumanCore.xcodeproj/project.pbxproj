@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		63684A642EE9A6BA00B1DCD8 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63684A632EE9A6B500B1DCD8 /* WelcomeView.swift */; };
 		63684A662EE9AB8100B1DCD8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63684A652EE9AB7D00B1DCD8 /* LoginView.swift */; };
 		63684A682EE9CB7200B1DCD8 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63684A672EE9CB6800B1DCD8 /* RegisterView.swift */; };
 		63684A6B2EE9CFC000B1DCD8 /* FontFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63684A6A2EE9CFB700B1DCD8 /* FontFile.swift */; };
@@ -34,10 +33,10 @@
 		CE2A3E012ED8DCB500C09F87 /* ThreeBlueLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A3E002ED8DCB500C09F87 /* ThreeBlueLinks.swift */; };
 		CE2A3E032ED8DCC400C09F87 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A3E022ED8DCC400C09F87 /* QRView.swift */; };
 		CE2A3E052ED8DEC400C09F87 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A3E042ED8DEC400C09F87 /* Map.swift */; };
+		CE7B93E42EF844F800A74073 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B93E32EF844F800A74073 /* WelcomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		63684A632EE9A6B500B1DCD8 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		63684A652EE9AB7D00B1DCD8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		63684A672EE9CB6800B1DCD8 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		63684A6A2EE9CFB700B1DCD8 /* FontFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontFile.swift; sourceTree = "<group>"; };
@@ -65,6 +64,7 @@
 		CE2A3E002ED8DCB500C09F87 /* ThreeBlueLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeBlueLinks.swift; sourceTree = "<group>"; };
 		CE2A3E022ED8DCC400C09F87 /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
 		CE2A3E042ED8DEC400C09F87 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		CE7B93E32EF844F800A74073 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,9 +81,9 @@
 		63684A622EE9A6A900B1DCD8 /* AuthView */ = {
 			isa = PBXGroup;
 			children = (
-				63684A632EE9A6B500B1DCD8 /* WelcomeView.swift */,
 				63684A672EE9CB6800B1DCD8 /* RegisterView.swift */,
 				63684A652EE9AB7D00B1DCD8 /* LoginView.swift */,
+				CE7B93E32EF844F800A74073 /* WelcomeViewController.swift */,
 			);
 			path = AuthView;
 			sourceTree = "<group>";
@@ -131,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				CE2A3DF12ED8C35100C09F87 /* Schedule.swift */,
+				CE1F703A2EF1EA6A00E42C47 /* Lesson_sched.swift */,
 			);
 			path = ScheduleView;
 			sourceTree = "<group>";
@@ -235,7 +236,6 @@
 				CE2A3DF82ED8C97800C09F87 /* Student.swift */,
 				AC8012742EE8F159003B6419 /* Subject.swift */,
 				AC8012762EE8F166003B6419 /* Lesson.swift */,
-				CE1F703A2EF1EA6A00E42C47 /* Lesson_sched.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -313,7 +313,6 @@
 				AC8012772EE8F166003B6419 /* Lesson.swift in Sources */,
 				CE2A3DF62ED8C92700C09F87 /* Profile.swift in Sources */,
 				63CDC0552EE996180016927C /* ContentView.swift in Sources */,
-				63684A642EE9A6BA00B1DCD8 /* WelcomeView.swift in Sources */,
 				63684A6B2EE9CFC000B1DCD8 /* FontFile.swift in Sources */,
 				CE1F703B2EF1EA6A00E42C47 /* Lesson_sched.swift in Sources */,
 				AC7C34832EF811C2000F47D5 /* Grades_main_structure.swift in Sources */,
@@ -329,6 +328,7 @@
 				CE2A3DF22ED8C35100C09F87 /* Schedule.swift in Sources */,
 				63684A662EE9AB8100B1DCD8 /* LoginView.swift in Sources */,
 				63CDC04E2EE992930016927C /* ColorFile.swift in Sources */,
+				CE7B93E42EF844F800A74073 /* WelcomeViewController.swift in Sources */,
 				AC7C34812EF811A6000F47D5 /* Grades_subjects_content.swift in Sources */,
 				CE2A3E012ED8DCB500C09F87 /* ThreeBlueLinks.swift in Sources */,
 				CE2A3DFB2ED8CACC00C09F87 /* Grades_header.swift in Sources */,

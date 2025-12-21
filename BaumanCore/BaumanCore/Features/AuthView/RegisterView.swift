@@ -36,6 +36,7 @@ struct RegisterView: View {
             .padding(.horizontal, 21)
             .padding(.bottom, 24)
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -43,6 +44,7 @@ struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             RegisterView()
+                .tint(AppColor.mainColor)
         }
     }
 }
