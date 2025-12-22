@@ -1,12 +1,16 @@
 import SwiftUI
+import Firebase
+import FirebaseAuth
 
 struct LoginView: View {
     @EnvironmentObject var appState: AppState
-    
+
     @State private var login: String = ""
     @State private var password: String = ""
     @State private var isPasswordVisible = false
-    
+    @State private var errorMessage: String = ""
+    @State private var isLoading: Bool = false
+
     var body: some View {
         VStack(spacing: 0) {
             Text("Вход в аккаунт")
@@ -15,22 +19,35 @@ struct LoginView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 60)
                 .padding(.horizontal, 24)
+
             
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .font(.caption)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 24)
+                    .padding(.top, 8)
+            }
+
             Spacer()
-            
+
             VStack(alignment: .leading, spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Логин")
+                    Text("Электронная почта")
                         .font(.SFPro(17))
                         .foregroundColor(.black)
-                    
+
                     TextField(
                         "",
                         text: $login,
-                        prompt: Text("Введите логин")
+                        prompt: Text("Введите email")
                             .font(.SFPro(17))
                             .foregroundColor(AppColor.lightlightGrey)
                     )
+                    .keyboardType(.emailAddress)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                     .padding(.horizontal, 16)
                     .frame(height: 52)
                     .background(
@@ -38,12 +55,12 @@ struct LoginView: View {
                             .stroke(AppColor.lightlightGrey, lineWidth: 1)
                     )
                 }
-                
+
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Пароль")
                         .font(.SFPro(17))
                         .foregroundColor(.black)
-                    
+
                     HStack {
                         if isPasswordVisible {
                             TextField(
@@ -62,7 +79,7 @@ struct LoginView: View {
                                     .foregroundColor(AppColor.lightlightGrey)
                             )
                         }
-                        
+
                         Button {
                             isPasswordVisible.toggle()
                         } label: {
@@ -77,8 +94,11 @@ struct LoginView: View {
                             .stroke(AppColor.lightlightGrey, lineWidth: 1)
                     )
                 }
-                
+
                 Button {
+                
+                    errorMessage = ""
+                    attemptLogin()
                 } label: {
                     Text("Забыли пароль?")
                         .font(.SFPro(17))
@@ -86,27 +106,35 @@ struct LoginView: View {
                 }
             }
             .padding(.horizontal, 24)
-            
+
             Spacer()
-            
-            Button {
-                appState.isLoggedIn = true
-            } label: {
-                Text("Войти в аккаунт →")
-                    .font(.SFPro(17, weight: .semibold))
-                    .foregroundColor(AppColor.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 56)
-                    .background(AppColor.mainColor)
-                    .cornerRadius(13)
+
+            Button(action: {
+                errorMessage = ""
+                attemptLogin()
+            }) {
+                HStack {
+                    if isLoading {
+                        ProgressView()
+                            .scaleEffect(1.2)
+                    }
+                    Text(isLoading ? "Вход..." : "Войти в аккаунт →")
+                        .font(.SFPro(17, weight: .semibold))
+                        .foregroundColor(AppColor.white)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
             }
+            .disabled(isLoading)
+            .frame(height: 56)
+            .background(isLoading ? AppColor.mainColor.opacity(0.7) : AppColor.mainColor)
+            .cornerRadius(13)
             .padding(.horizontal, 24)
-            
+
             HStack(spacing: 0) {
                 Text("Нет аккаунта?")
                     .font(.SFPro(17))
                     .foregroundColor(AppColor.lightGrey)
-                
+
                 NavigationLink {
                     RegisterView()
                 } label: {
@@ -118,6 +146,46 @@ struct LoginView: View {
             .padding(.top, 12)
             .padding(.bottom, 24)
         }
+        .disabled(isLoading)
+    }
+
+    private func attemptLogin() {
+        
+        guard isValidEmail(login) else {
+            errorMessage = "Пожалуйста, введите действительный email."
+            return
+        }
+
+       
+        guard password.count >= 6 else {
+            errorMessage = "Пароль должен содержать не менее 6 символов."
+            return
+        }
+
+        isLoading = true
+
+        
+        Auth.auth().signIn(withEmail: login, password: password) { authResult, error in
+            DispatchQueue.main.async {
+                self.isLoading = false
+
+                if let error = error {
+                    
+                    self.errorMessage = error.localizedDescription
+                    print("Ошибка входа: \(error.localizedDescription)")
+                } else {
+                   
+                    print("Успешный вход для: \(login)")
+                    self.appState.isLoggedIn = true
+                }
+            }
+        }
+    }
+
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
     }
 }
 
