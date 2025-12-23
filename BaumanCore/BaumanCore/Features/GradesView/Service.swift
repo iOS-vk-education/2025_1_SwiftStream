@@ -1,16 +1,10 @@
-//
-//  Service.swift
-//  BaumanCore
-//
-//  Created by Иван Агошков on 23.12.2025.
-//
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 
 class FirebaseService {
     
-    // MARK: - Получение данных студента
+// читаем данные
     func fetchStudent(completion: @escaping (Student?) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else {
             print("Ошибка: пользователь не залогинен")
@@ -27,14 +21,14 @@ class FirebaseService {
                 return
             }
             
-            // Личные данные
+            // личные данные
             let name = value["name"] as? String ?? ""
             let faculty = value["faculty"] as? String ?? ""
             let group = value["group"] as? String ?? ""
             let studentID = value["studentID"] as? String ?? ""
             let email = value["email"] as? String ?? ""
             
-            // Текущие предметы
+            // текущие предметы
             var subjects: [SubjectData] = []
             if let subjectsDict = value["subjects"] as? [String: Any] {
                 for (_, subjectData) in subjectsDict {
@@ -60,7 +54,7 @@ class FirebaseService {
                 }
             }
             
-            // Семестры
+            // семестры
             var semesters: [Semester] = []
             if let semestersDict = value["semesters"] as? [String: Any] {
                 for (_, semesterData) in semestersDict {

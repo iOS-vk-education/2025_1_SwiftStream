@@ -19,6 +19,7 @@
 		AC7AAC2C2EF9FC8B00F4CC1D /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7AAC2B2EF9FC8600F4CC1D /* Service.swift */; };
 		AC7AAC2F2EF9FCC500F4CC1D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = AC7AAC2E2EF9FCC500F4CC1D /* FirebaseDatabase */; };
 		AC7AAC332EFA10CB00F4CC1D /* Semester.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7AAC322EFA10C100F4CC1D /* Semester.swift */; };
+		AC7AAC372EFA1D8C00F4CC1D /* ForgotPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7AAC362EFA1D8200F4CC1D /* ForgotPassView.swift */; };
 		AC7C347F2EF8117D000F47D5 /* Grades_semester_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */; };
 		AC7C34812EF811A6000F47D5 /* Grades_subjects_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */; };
 		AC7C34832EF811C2000F47D5 /* Grades_main_structure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */; };
@@ -52,6 +53,7 @@
 		AC7AAC202EF9EB8300F4CC1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AC7AAC2B2EF9FC8600F4CC1D /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		AC7AAC322EFA10C100F4CC1D /* Semester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semester.swift; sourceTree = "<group>"; };
+		AC7AAC362EFA1D8200F4CC1D /* ForgotPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassView.swift; sourceTree = "<group>"; };
 		AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_semester_content.swift; sourceTree = "<group>"; };
 		AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_subjects_content.swift; sourceTree = "<group>"; };
 		AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_main_structure.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				63684A672EE9CB6800B1DCD8 /* RegisterView.swift */,
 				63684A652EE9AB7D00B1DCD8 /* LoginView.swift */,
 				CE7B93E32EF844F800A74073 /* WelcomeViewController.swift */,
+				AC7AAC362EFA1D8200F4CC1D /* ForgotPassView.swift */,
 			);
 			path = AuthView;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 			files = (
 				AC8012772EE8F166003B6419 /* Lesson.swift in Sources */,
 				AC7AAC2C2EF9FC8B00F4CC1D /* Service.swift in Sources */,
+				AC7AAC372EFA1D8C00F4CC1D /* ForgotPassView.swift in Sources */,
 				CE2A3DF62ED8C92700C09F87 /* Profile.swift in Sources */,
 				63CDC0552EE996180016927C /* ContentView.swift in Sources */,
 				63684A6B2EE9CFC000B1DCD8 /* FontFile.swift in Sources */,

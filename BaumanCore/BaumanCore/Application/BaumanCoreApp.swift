@@ -8,7 +8,7 @@ struct BaumanCoreApp: App {
 
 
     init() {
-        FirebaseApp.configure()
+        FirebaseApp.configure() // добавил firebase
     }
 
     var body: some Scene {

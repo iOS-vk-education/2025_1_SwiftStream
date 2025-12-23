@@ -2,16 +2,18 @@ import SwiftUI
 
 struct Profile: View {
     @EnvironmentObject var appState: AppState
+
+
     @State private var student = Student(
-        name: "Подобедов Владислав Владимирович",
-        faculty: "ФН",
-        group: "ФН12-71Б",
-        studentID: "pvv22f019",
-        email: "vlad@student.bmstu.ru",
+        name: "",
+        faculty: "",
+        group: "",
+        studentID: "",
+        email: "",
         subjects: [],
         semesters: []
     )
-        
+
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Профиль")
@@ -95,6 +97,18 @@ struct Profile: View {
             .padding(.bottom, 24)
             
             Spacer()
+        }
+        
+        
+        // данные из бд
+        .onAppear {
+            FirebaseService().fetchStudent { fetchedStudent in
+                DispatchQueue.main.async {
+                    if let fetchedStudent = fetchedStudent {
+                        self.student = fetchedStudent
+                    }
+                }
+            }
         }
     }
 }

@@ -38,7 +38,7 @@ enum MarksColor {
 }
 
 
-
+// оценки уроков
 extension Lesson {
     var statusColor: Color {
         switch status {
@@ -52,7 +52,7 @@ extension Lesson {
 }
 
 
-
+// оценки дисциплин семестра
 func colorForGrade(_ grade: String) -> Color {
     switch grade {
     case "Отлично":
