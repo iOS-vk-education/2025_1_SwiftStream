@@ -1,13 +1,13 @@
 import SwiftUI
 
-struct RegisterView: View {
+struct ForgotPassView: View {
     
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack(spacing: 0) {
-            Text("Создание аккаунта")
-                .font(.SFPro(33, weight: .semibold))
+            Text("Восстановление пароля")
+                .font(.SFPro(29, weight: .semibold))
                 .foregroundColor(AppColor.mainColor)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 60)
@@ -15,7 +15,7 @@ struct RegisterView: View {
             
             Spacer()
             
-            Text("Для получения персонального логина и пароля необходимо обратиться в деканат Вашего факультета или отправить письмо на почту support@bmstu.ru")
+            Text("Для восстановления пароля необходимо обратиться в деканат Вашего факультета или отправить письмо на почту support@bmstu.ru")
                 .font(.SFPro(17))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 24)
@@ -40,10 +40,10 @@ struct RegisterView: View {
     }
 }
 
-struct RegisterView_Previews: PreviewProvider {
+struct ForgotPassView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            RegisterView()
+            ForgotPassView()
                 .tint(AppColor.mainColor)
         }
     }
