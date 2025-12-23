@@ -1,13 +1,20 @@
 import SwiftUI
+import Firebase
 
 @main
 struct BaumanCoreApp: App {
+
     @StateObject private var appState = AppState()
-    
-        var body: some Scene {
-            WindowGroup {
-                ContentView()
-                    .environmentObject(appState)
+
+
+    init() {
+        FirebaseApp.configure() // добавил firebase
+    }
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .environmentObject(appState)
         }
     }
 }
