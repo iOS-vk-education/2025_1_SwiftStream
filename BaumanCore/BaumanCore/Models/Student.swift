@@ -6,4 +6,5 @@ struct Student {
     var group: String
     var studentID: String
     var email: String
+    var password: String
 }

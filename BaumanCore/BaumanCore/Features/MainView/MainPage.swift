@@ -2,14 +2,20 @@ import SwiftUI
 
 struct MainPage: View {
     @State private var showQR = false
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         VStack(spacing: 0) {
-            ImageCarousel()
-                .padding(.top, 8)
-            
-            ThreeBlueLinks()
-                .padding(.top, 20)
+            if let email = appState.student?.email, !email.isEmpty {
+                ImageCarousel()
+                    .padding(.top, 8)
+
+                ThreeBlueLinks(email: email)
+                    .padding(.top, 20)
+            } else {
+                ImageCarousel()
+                    .padding(.top, 8)
+            }
             
             HeaderView()
                 .padding(.top, 40)
