@@ -95,10 +95,8 @@ struct LoginView: View {
                     )
                 }
 
-                Button {
-                
-                    errorMessage = ""
-                    attemptLogin()
+                NavigationLink {
+                    ForgotPassView()
                 } label: {
                     Text("Забыли пароль?")
                         .font(.SFPro(17))
@@ -150,32 +148,58 @@ struct LoginView: View {
     }
 
     private func attemptLogin() {
-        
         guard isValidEmail(login) else {
             errorMessage = "Пожалуйста, введите действительный email."
             return
         }
 
-       
         guard password.count >= 6 else {
             errorMessage = "Пароль должен содержать не менее 6 символов."
             return
         }
 
         isLoading = true
+        errorMessage = ""
 
-        
         Auth.auth().signIn(withEmail: login, password: password) { authResult, error in
             DispatchQueue.main.async {
                 self.isLoading = false
 
-                if let error = error {
-                    
-                    self.errorMessage = error.localizedDescription
-                    print("Ошибка входа: \(error.localizedDescription)")
+                if let error = error as NSError? {
+                    // Печатаем детали для отладки
+                    print("Ошибка Firebase Auth:")
+                    print("Код: \(error.code)")
+                    print("Домен: \(error.domain)")
+                    print("Локализованное описание: \(error.localizedDescription)")
+                                        
+                    let errorCode = error.code
+                                        
+                    switch errorCode {
+                    case 17004: // Неверный пароль
+                        fallthrough
+                    case 17005: // Слишком много попыток
+                        fallthrough
+                    case 17006: // Пользователь не найден
+                        fallthrough
+                    case 17007: // Неверный email
+                        fallthrough
+                    case 17008: // Email уже используется
+                        fallthrough
+                    case 17009: // Слабый пароль
+                        fallthrough
+                    case 17010: // Пользователь отключен
+                        fallthrough
+                    case 17011: // Операция не разрешена
+                        self.errorMessage = "Неверный email или пароль. Проверьте введенные данные."
+                        
+                    case -1009: // Нет интернета (ошибка сети iOS)
+                        self.errorMessage = "Ошибка сети. Проверьте подключение к интернету."
+                        
+                    default:
+                        self.errorMessage = "Неверный email или пароль. Проверьте введенные данные."
+                    }
                 } else {
-                   
-                    print("Успешный вход для: \(login)")
+                    print("Успешный вход для: \(self.login)")
                     self.appState.isLoggedIn = true
                 }
             }
