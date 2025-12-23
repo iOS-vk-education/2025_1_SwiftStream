@@ -28,6 +28,7 @@
 ## Стек:
 * Swift
 * SwiftUI
+* UIKit
 
 ## Артефакты
 * [Макет в Figma](https://www.figma.com/design/k6XbSEYcH4xl44lb2iRawJ/BaumanCore?node-id=0-1&p=f&t=YI9xutABCJhgcF7c-0)
