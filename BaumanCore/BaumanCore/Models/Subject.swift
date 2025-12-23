@@ -1,7 +1,6 @@
-import Foundation
-
 struct SubjectData {
-    let name: String
-    let progress: String
-    let lessons: [Lesson]
+    var id: String
+    var name: String
+    var progress: String
+    var lessons: [Lesson]
 }

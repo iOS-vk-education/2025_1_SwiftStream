@@ -16,6 +16,9 @@
 		AC7AAC212EF9EB8300F4CC1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC7AAC202EF9EB8300F4CC1D /* GoogleService-Info.plist */; };
 		AC7AAC242EF9EC6A00F4CC1D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AC7AAC232EF9EC6A00F4CC1D /* FirebaseAuth */; };
 		AC7AAC262EF9EC6A00F4CC1D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AC7AAC252EF9EC6A00F4CC1D /* FirebaseFirestore */; };
+		AC7AAC2C2EF9FC8B00F4CC1D /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7AAC2B2EF9FC8600F4CC1D /* Service.swift */; };
+		AC7AAC2F2EF9FCC500F4CC1D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = AC7AAC2E2EF9FCC500F4CC1D /* FirebaseDatabase */; };
+		AC7AAC332EFA10CB00F4CC1D /* Semester.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7AAC322EFA10C100F4CC1D /* Semester.swift */; };
 		AC7C347F2EF8117D000F47D5 /* Grades_semester_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */; };
 		AC7C34812EF811A6000F47D5 /* Grades_subjects_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */; };
 		AC7C34832EF811C2000F47D5 /* Grades_main_structure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */; };
@@ -47,6 +50,8 @@
 		63CDC04D2EE9928B0016927C /* ColorFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFile.swift; sourceTree = "<group>"; };
 		63CDC0542EE996180016927C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AC7AAC202EF9EB8300F4CC1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AC7AAC2B2EF9FC8600F4CC1D /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		AC7AAC322EFA10C100F4CC1D /* Semester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semester.swift; sourceTree = "<group>"; };
 		AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_semester_content.swift; sourceTree = "<group>"; };
 		AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_subjects_content.swift; sourceTree = "<group>"; };
 		AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_main_structure.swift; sourceTree = "<group>"; };
@@ -76,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC7AAC2F2EF9FCC500F4CC1D /* FirebaseDatabase in Frameworks */,
 				AC7AAC242EF9EC6A00F4CC1D /* FirebaseAuth in Frameworks */,
 				AC7AAC262EF9EC6A00F4CC1D /* FirebaseFirestore in Frameworks */,
 			);
@@ -154,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */,
+				AC7AAC2B2EF9FC8600F4CC1D /* Service.swift */,
 				AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */,
 				AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */,
 				CE2A3DFA2ED8CACC00C09F87 /* Grades_header.swift */,
@@ -186,10 +193,18 @@
 			path = Colors;
 			sourceTree = "<group>";
 		};
+		AC7AAC2D2EF9FCC500F4CC1D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CE2A3DD42ED85A7B00C09F87 = {
 			isa = PBXGroup;
 			children = (
 				CE2A3DDF2ED85A7B00C09F87 /* BaumanCore */,
+				AC7AAC2D2EF9FCC500F4CC1D /* Frameworks */,
 				CE2A3DDE2ED85A7B00C09F87 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -241,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				CE2A3DF82ED8C97800C09F87 /* Student.swift */,
+				AC7AAC322EFA10C100F4CC1D /* Semester.swift */,
 				AC8012742EE8F159003B6419 /* Subject.swift */,
 				AC8012762EE8F166003B6419 /* Lesson.swift */,
 			);
@@ -322,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC8012772EE8F166003B6419 /* Lesson.swift in Sources */,
+				AC7AAC2C2EF9FC8B00F4CC1D /* Service.swift in Sources */,
 				CE2A3DF62ED8C92700C09F87 /* Profile.swift in Sources */,
 				63CDC0552EE996180016927C /* ContentView.swift in Sources */,
 				63684A6B2EE9CFC000B1DCD8 /* FontFile.swift in Sources */,
@@ -330,6 +347,7 @@
 				CE2A3E052ED8DEC400C09F87 /* Map.swift in Sources */,
 				CE2A3E032ED8DCC400C09F87 /* QRView.swift in Sources */,
 				CE1F70392EF1E9EF00E42C47 /* DateManager.swift in Sources */,
+				AC7AAC332EFA10CB00F4CC1D /* Semester.swift in Sources */,
 				CE2A3DFD2ED8DC7000C09F87 /* MainPage.swift in Sources */,
 				CE2A3DE12ED85A7B00C09F87 /* BaumanCoreApp.swift in Sources */,
 				AC8012752EE8F159003B6419 /* Subject.swift in Sources */,
@@ -566,6 +584,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AC7AAC222EF9EC6A00F4CC1D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		AC7AAC2E2EF9FCC500F4CC1D /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC7AAC222EF9EC6A00F4CC1D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -7,7 +7,9 @@ struct Profile: View {
         faculty: "ФН",
         group: "ФН12-71Б",
         studentID: "pvv22f019",
-        email: "vlad@student.bmstu.ru"
+        email: "vlad@student.bmstu.ru",
+        subjects: [],
+        semesters: []
     )
         
     var body: some View {
