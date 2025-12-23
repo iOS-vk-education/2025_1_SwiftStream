@@ -38,30 +38,29 @@ enum MarksColor {
 }
 
 
-// оценки уроков
+
 extension Lesson {
     var statusColor: Color {
         switch status {
-        case "Посещено", "Сдано", "Отлично": return MarksColor.excellentmark
-        case "Не сдано", "Не посещено", "Неуд": return MarksColor.badmark
-        case "Удов", "Защищено с опозданием": return MarksColor.mediummark
-        case "Хорошо": return MarksColor.goodmark
+        case "Посещено", "Сдано", "Защищено вовремя": return MarksColor.excellentmark
+        case "Не сдано", "Не посещено": return MarksColor.badmark
+        case "Защищено с опозданием": return MarksColor.mediummark
         default: return MarksColor.nomark
         }
     }
 }
 
 
-// оценки дисциплин семестра
+
 func colorForGrade(_ grade: String) -> Color {
     switch grade {
-    case "Отлично":
+    case "Отлично", "Зачтено":
         return MarksColor.excellentmark
     case "Хорошо":
         return MarksColor.goodmark
     case "Удов":
         return MarksColor.mediummark
-    case "Неуд":
+    case "Неуд", "Не зачтено":
         return MarksColor.badmark
     default:
         return MarksColor.nomark
