@@ -36,3 +36,34 @@ enum MarksColor {
     static let badmark = Color(hex: "#E57373")
     static let nomark = Color(hex: "#808080")
 }
+
+
+// оценки уроков
+extension Lesson {
+    var statusColor: Color {
+        switch status {
+        case "Посещено", "Сдано", "Отлично": return MarksColor.excellentmark
+        case "Не сдано", "Не посещено", "Неуд": return MarksColor.badmark
+        case "Удов", "Защищено с опозданием": return MarksColor.mediummark
+        case "Хорошо": return MarksColor.goodmark
+        default: return MarksColor.nomark
+        }
+    }
+}
+
+
+// оценки дисциплин семестра
+func colorForGrade(_ grade: String) -> Color {
+    switch grade {
+    case "Отлично":
+        return MarksColor.excellentmark
+    case "Хорошо":
+        return MarksColor.goodmark
+    case "Удов":
+        return MarksColor.mediummark
+    case "Неуд":
+        return MarksColor.badmark
+    default:
+        return MarksColor.nomark
+    }
+}

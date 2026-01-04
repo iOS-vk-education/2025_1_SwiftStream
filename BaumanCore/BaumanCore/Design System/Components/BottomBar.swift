@@ -6,10 +6,10 @@ struct BottomBarView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack {
-                Map()
+                MapView()
             }
             .tabItem {
-                Image(systemName: "map")
+                Image("tab_route").renderingMode(.template)
                 Text("Маршрут")
             }
             .tag(0)
@@ -18,7 +18,7 @@ struct BottomBarView: View {
                 MainPage()
             }
             .tabItem {
-                Image(systemName: "house")
+                Image("tab_home").renderingMode(.template)
                 Text("Главная")
             }
             .tag(1)
@@ -27,7 +27,7 @@ struct BottomBarView: View {
                 Schedule()
             }
             .tabItem {
-                Image(systemName: "calendar")
+                Image("tab_calendar").renderingMode(.template)
                 Text("Расписание")
             }
             .tag(2)
@@ -36,7 +36,7 @@ struct BottomBarView: View {
                 Grades()
             }
             .tabItem {
-                Image(systemName: "chart.bar")
+                Image("tab_grades").renderingMode(.template)
                 Text("Успеваемость")
             }
             .tag(3)
@@ -45,7 +45,7 @@ struct BottomBarView: View {
                 Profile()
             }
             .tabItem {
-                Image(systemName: "person.circle")
+                Image("tab_profile").renderingMode(.template)
                 Text("Аккаунт")
             }
             .tag(4)
