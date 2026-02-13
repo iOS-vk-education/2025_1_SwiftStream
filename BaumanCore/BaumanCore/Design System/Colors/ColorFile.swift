@@ -16,18 +16,6 @@ extension Color {
     }
 }
 
-enum AppColor {
-    static let black = Color(hex: "#000000")
-    static let darkGrey = Color(hex: "#4B4A4A")
-    static let lightGrey = Color(hex: "#6A6A6A")
-    static let lightlightGrey = Color(hex: "#C4C4C4")
-    static let white = Color(hex: "#FFFFFF")
-    
-    
-    static let mainColor = Color(hex: "#2932D9")
-}
-
-
 
 enum MarksColor {
     static let excellentmark = Color(hex: "#388E3C")
