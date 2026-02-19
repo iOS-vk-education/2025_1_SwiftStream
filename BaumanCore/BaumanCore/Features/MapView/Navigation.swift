@@ -1,9 +1,8 @@
 import Foundation
-import FirebaseFirestoreSwift
 
 
 struct Classroom: Codable, Identifiable, Hashable {
-    @DocumentID var id: String?
+    var id: String?
     let number: String
     let coordinateX: Double
     let coordinateY: Double
@@ -24,7 +23,7 @@ struct ClassroomWithFloor: Hashable {
 }
 
 struct Floor: Codable, Identifiable {
-    @DocumentID var id: String?
+    var id: String?
     let number: String
     let name: String
     let imageName: String
