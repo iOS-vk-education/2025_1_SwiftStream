@@ -3,7 +3,10 @@ import SwiftUI
 struct Profile: View {
     @EnvironmentObject var appState: AppState
     @Environment(\.openURL) private var openURL
-    @AppStorage("userSelectedTheme") private var selectedThemeRawValue = 0 // 0 - Системная, 1 - Светлая, 2 - Темная
+    @AppStorage("userSelectedTheme") private var selectedThemeRawValue = 0
+    @State private var selectedImage: UIImage?
+    @State private var showImagePicker = false
+    @State private var showDeleteAlert = false
 
     @State private var student = Student(
         name: "",
@@ -25,24 +28,54 @@ struct Profile: View {
                     .padding(.top, 60)
                     .padding(.horizontal, 24)
                 
-
                 HStack(spacing: 15) {
-                    Image("user")
-                        .resizable()
-                        .scaledToFill()
+                    ZStack(alignment: .bottomTrailing) {
+                        Group {
+                            if let image = selectedImage {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                            } else {
+                                Image(systemName: "person.circle.fill")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .foregroundColor(.gray)
+                            }
+                        }
                         .frame(width: 80, height: 80)
                         .clipShape(Circle())
+                        
+                        Button { showImagePicker = true } label: {
+                            Image(systemName: "camera.circle.fill")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.white)
+                                .background(Circle().fill(Colors.MainColor))
+                        }
+                    }
+                    .onTapGesture { showImagePicker = true }
+                    .onLongPressGesture {
+                        if selectedImage != nil {
+                            showDeleteAlert = true
+                        }
+                    }
+                    .alert("Удалить аватарку?", isPresented: $showDeleteAlert) {
+                        Button("Отмена", role: .cancel) { }
+                        Button("Удалить", role: .destructive) {
+                            deleteAvatar()
+                        }
+                    } message: {
+                        Text("Вы действительно хотите удалить фото профиля?")
+                    }
 
                     VStack(alignment: .leading, spacing: 4) {
                         Text(student.name)
                             .font(.SFPro(21))
                             .foregroundColor(Colors.black)
-
                         Text(student.email)
                             .font(.SFPro(14))
                             .foregroundColor(Colors.LightGray)
                     }
-
                     Spacer()
                 }
                 .padding(10)
@@ -51,7 +84,13 @@ struct Profile: View {
                         .stroke(Colors.MainColor, lineWidth: 0.7)
                 )
                 .padding(.horizontal, 17)
-
+                .sheet(isPresented: $showImagePicker) {
+                    ImagePicker(
+                        image: $selectedImage,
+                        userID: student.studentID.isEmpty ? "anonymous" : student.studentID
+                    )
+                }
+    
                 HStack {
                     Text("Группа:")
                         .font(.SFPro(15, weight: .semibold))
@@ -87,7 +126,6 @@ struct Profile: View {
                 )
                 .padding(.horizontal, 17)
 
-                // Новый блок "Тема приложения"
                 HStack {
                     Text("Тема приложения:")
                         .font(.SFPro(15, weight: .semibold))
@@ -137,12 +175,20 @@ struct Profile: View {
         .onChange(of: selectedThemeRawValue) { _ in
             updateTheme()
         }
+        
         .onAppear {
             updateTheme()
             FirebaseService().fetchStudent { fetchedStudent in
-                DispatchQueue.main.async {
-                    if let fetchedStudent = fetchedStudent {
-                        self.student = fetchedStudent
+                if let fetchedStudent = fetchedStudent {
+                    Task {
+                        await MainActor.run {
+                            self.student = fetchedStudent
+                        }
+                        let userID = fetchedStudent.studentID.isEmpty ? "anonymous" : fetchedStudent.studentID
+                        let avatar = await AvatarStorage.load(userID: userID)
+                        await MainActor.run {
+                            self.selectedImage = avatar
+                        }
                     }
                 }
             }
@@ -151,6 +197,12 @@ struct Profile: View {
 
     private let themeOptions = ["Системная", "Светлая", "Темная"]
 
+    private func deleteAvatar() {
+        selectedImage = nil
+        let userID = student.studentID.isEmpty ? "anonymous" : student.studentID
+        AvatarStorage.delete(userID: userID)
+    }
+    
     private func updateTheme() {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else { return }

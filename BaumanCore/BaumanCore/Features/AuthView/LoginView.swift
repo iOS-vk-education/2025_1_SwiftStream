@@ -166,7 +166,6 @@ struct LoginView: View {
                 self.isLoading = false
 
                 if let error = error as NSError? {
-                    // Печатаем детали для отладки
                     print("Ошибка Firebase Auth:")
                     print("Код: \(error.code)")
                     print("Домен: \(error.domain)")
