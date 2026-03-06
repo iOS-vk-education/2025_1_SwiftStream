@@ -14,6 +14,7 @@
 		63CDC04E2EE992930016927C /* ColorFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC04D2EE9928B0016927C /* ColorFile.swift */; };
 		63CDC0552EE996180016927C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC0542EE996180016927C /* ContentView.swift */; };
 		AC27A4CD2F5AD0AC00C19D5F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC27A4CC2F5AD0AC00C19D5F /* GoogleService-Info.plist */; };
+		AC27A4CF2F5ADC0800C19D5F /* StudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC27A4CE2F5ADC0500C19D5F /* StudentViewModel.swift */; };
 		AC7C347F2EF8117D000F47D5 /* Grades_semester_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */; };
 		AC7C34812EF811A6000F47D5 /* Grades_subjects_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */; };
 		AC7C34832EF811C2000F47D5 /* Grades_main_structure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */; };
@@ -58,6 +59,7 @@
 		63CDC04D2EE9928B0016927C /* ColorFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFile.swift; sourceTree = "<group>"; };
 		63CDC0542EE996180016927C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AC27A4CC2F5AD0AC00C19D5F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AC27A4CE2F5ADC0500C19D5F /* StudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewModel.swift; sourceTree = "<group>"; };
 		AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_semester_content.swift; sourceTree = "<group>"; };
 		AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_subjects_content.swift; sourceTree = "<group>"; };
 		AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_main_structure.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		63CDC0592EE997570016927C /* GradesView */ = {
 			isa = PBXGroup;
 			children = (
+				AC27A4CE2F5ADC0500C19D5F /* StudentViewModel.swift */,
 				AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */,
 				AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */,
 				AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */,
@@ -412,6 +415,7 @@
 				AC7C34812EF811A6000F47D5 /* Grades_subjects_content.swift in Sources */,
 				CE37A9272F0482EE001CD754 /* NewsCarouselViewModel.swift in Sources */,
 				CE2A3E012ED8DCB500C09F87 /* ThreeBlueLinks.swift in Sources */,
+				AC27A4CF2F5ADC0800C19D5F /* StudentViewModel.swift in Sources */,
 				CE2A3DFB2ED8CACC00C09F87 /* Grades_header.swift in Sources */,
 				CEC878E12EF9F354000863DF /* ForgotPassView.swift in Sources */,
 				CE2A3DFF2ED8DC9D00C09F87 /* ImageCarousel.swift in Sources */,
