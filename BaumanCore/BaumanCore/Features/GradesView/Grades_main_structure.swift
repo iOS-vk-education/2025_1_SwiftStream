@@ -31,8 +31,22 @@ struct Grades: View {
                 .padding(.top, 150)
                 .padding(.bottom, 30)
             }
+            
+            Rectangle()
+                .fill(Color.white)
+                .frame(height: 120)
+                .ignoresSafeArea(edges: .top)
+            
+            // эффект стекла
+            
+        
+            /*GradesHatView(selectedTab: $selectedTab)
+                    .glassEffect(.clear, in: .rect(cornerRadius: 0, style: .continuous))
+                    .clipShape(HorizontalInsetShape(insetX: 16))
+                    .zIndex(1)  */
 
             GradesHatView(selectedTab: $selectedTab)
+                .background(Color.white)
                 .clipShape(HorizontalInsetShape(insetX: 16))
                 .zIndex(1)
         }
