@@ -13,6 +13,7 @@
 		63684A6E2EE9E42B00B1DCD8 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63684A6D2EE9E42800B1DCD8 /* AppState.swift */; };
 		63CDC04E2EE992930016927C /* ColorFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC04D2EE9928B0016927C /* ColorFile.swift */; };
 		63CDC0552EE996180016927C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC0542EE996180016927C /* ContentView.swift */; };
+		AC27A4CD2F5AD0AC00C19D5F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC27A4CC2F5AD0AC00C19D5F /* GoogleService-Info.plist */; };
 		AC7C347F2EF8117D000F47D5 /* Grades_semester_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */; };
 		AC7C34812EF811A6000F47D5 /* Grades_subjects_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */; };
 		AC7C34832EF811C2000F47D5 /* Grades_main_structure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */; };
@@ -35,13 +36,11 @@
 		CE2A3E012ED8DCB500C09F87 /* ThreeBlueLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A3E002ED8DCB500C09F87 /* ThreeBlueLinks.swift */; };
 		CE2A3E032ED8DCC400C09F87 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A3E022ED8DCC400C09F87 /* QRView.swift */; };
 		CE2A3E052ED8DEC400C09F87 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A3E042ED8DEC400C09F87 /* MapView.swift */; };
-		CE37A9222F047ED4001CD754 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE37A9212F047ED3001CD754 /* GoogleService-Info.plist */; };
 		CE37A9242F0480FB001CD754 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37A9232F0480FB001CD754 /* News.swift */; };
 		CE37A9272F0482EE001CD754 /* NewsCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37A9262F0482EE001CD754 /* NewsCarouselViewModel.swift */; };
 		CE37A92A2F048333001CD754 /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37A9292F048333001CD754 /* NewsService.swift */; };
 		CE37A92D2F054CCB001CD754 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37A92C2F054CCB001CD754 /* NavigationViewModel.swift */; };
 		CE37A92F2F054CE0001CD754 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37A92E2F054CE0001CD754 /* Navigation.swift */; };
-		CE37A9312F0ABFFE001CD754 /* GoogleService-Info-Nav.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE37A9302F0ABFFE001CD754 /* GoogleService-Info-Nav.plist */; };
 		CE7B93E42EF844F800A74073 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B93E32EF844F800A74073 /* WelcomeViewController.swift */; };
 		CE7D99D62EF99C0300F36BE2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CE7D99D52EF99C0300F36BE2 /* FirebaseAuth */; };
 		CE7D99D82EF99C0300F36BE2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE7D99D72EF99C0300F36BE2 /* FirebaseFirestore */; };
@@ -58,6 +57,7 @@
 		63684A6D2EE9E42800B1DCD8 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		63CDC04D2EE9928B0016927C /* ColorFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFile.swift; sourceTree = "<group>"; };
 		63CDC0542EE996180016927C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AC27A4CC2F5AD0AC00C19D5F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_semester_content.swift; sourceTree = "<group>"; };
 		AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_subjects_content.swift; sourceTree = "<group>"; };
 		AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_main_structure.swift; sourceTree = "<group>"; };
@@ -81,13 +81,11 @@
 		CE2A3E002ED8DCB500C09F87 /* ThreeBlueLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeBlueLinks.swift; sourceTree = "<group>"; };
 		CE2A3E022ED8DCC400C09F87 /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
 		CE2A3E042ED8DEC400C09F87 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		CE37A9212F047ED3001CD754 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE37A9232F0480FB001CD754 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		CE37A9262F0482EE001CD754 /* NewsCarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCarouselViewModel.swift; sourceTree = "<group>"; };
 		CE37A9292F048333001CD754 /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
 		CE37A92C2F054CCB001CD754 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		CE37A92E2F054CE0001CD754 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
-		CE37A9302F0ABFFE001CD754 /* GoogleService-Info-Nav.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Nav.plist"; sourceTree = "<group>"; };
 		CE7B93E32EF844F800A74073 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		CEA6A6272EFABED600A13550 /* ServiceGrades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceGrades.swift; sourceTree = "<group>"; };
 		CEA6A62C2EFAC11B00A13550 /* Semester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semester.swift; sourceTree = "<group>"; };
@@ -237,8 +235,7 @@
 			children = (
 				CE37A9282F048319001CD754 /* Services */,
 				CE37A9252F04826F001CD754 /* ViewModels */,
-				CE37A9212F047ED3001CD754 /* GoogleService-Info.plist */,
-				CE37A9302F0ABFFE001CD754 /* GoogleService-Info-Nav.plist */,
+				AC27A4CC2F5AD0AC00C19D5F /* GoogleService-Info.plist */,
 				63CDC04F2EE9935F0016927C /* Application */,
 				63CDC04C2EE992750016927C /* Design System */,
 				CE2A3DF72ED8C96000C09F87 /* Models */,
@@ -372,9 +369,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE37A9312F0ABFFE001CD754 /* GoogleService-Info-Nav.plist in Resources */,
+				AC27A4CD2F5AD0AC00C19D5F /* GoogleService-Info.plist in Resources */,
 				CE2A3DE82ED85A7D00C09F87 /* Preview Assets.xcassets in Resources */,
-				CE37A9222F047ED4001CD754 /* GoogleService-Info.plist in Resources */,
 				CE2A3DE52ED85A7D00C09F87 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,9 +542,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BaumanCore/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Нам нужен доступ к фото, чтобы установить вашу аватарку";
@@ -564,6 +561,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.BaumanCore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -575,9 +573,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BaumanCore/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Нам нужен доступ к фото, чтобы установить вашу аватарку";
@@ -593,6 +592,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.BaumanCore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
