@@ -33,7 +33,7 @@ struct Grades: View {
             }
             
             Rectangle()
-                .fill(Color.white)
+                .fill(Colors.sistema)
                 .frame(height: 120)
                 .ignoresSafeArea(edges: .top)
             
@@ -46,7 +46,7 @@ struct Grades: View {
                     .zIndex(1)  */
 
             GradesHatView(selectedTab: $selectedTab)
-                .background(Color.white)
+                .background(Colors.sistema)
                 .clipShape(HorizontalInsetShape(insetX: 16))
                 .zIndex(1)
         }
