@@ -22,7 +22,7 @@ class WelcomeViewController: UIViewController {
         let label = UILabel()
         label.text = "Добро пожаловать!"
         label.font = UIFont.systemFont(ofSize: 33, weight: .semibold)
-        label.textColor = UIColor(AppColor.mainColor)
+        label.textColor = UIColor(Colors.MainColor)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -33,7 +33,7 @@ class WelcomeViewController: UIViewController {
         button.setTitle("Продолжить", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = UIColor(AppColor.mainColor)
+        button.backgroundColor = UIColor(Colors.MainColor)
         button.layer.cornerRadius = 13
         button.addTarget(self, action: #selector(continueTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false

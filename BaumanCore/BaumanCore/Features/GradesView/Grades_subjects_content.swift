@@ -36,13 +36,13 @@ struct SubjectRowView: View {
         HStack(alignment: .center) {
             Text(subject.name)
                 .font(.title2)
-                .foregroundColor(.black)
+                .foregroundColor(Colors.black)
                 .multilineTextAlignment(.leading)
 
             
             Text(subject.progress)
                 .font(.subheadline)
-                .foregroundColor(.black.opacity(0.5))
+                .foregroundColor(Colors.black.opacity(0.5))
                 .padding(.leading, 4)
                 .padding(.top, 4)
             

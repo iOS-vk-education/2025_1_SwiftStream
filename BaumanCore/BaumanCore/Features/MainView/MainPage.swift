@@ -56,10 +56,10 @@ struct MainPage: View {
             Button(action: action) {
                 RoundedRectangle(cornerRadius: 14)
                     .frame(height: 56)
-                    .foregroundColor(AppColor.mainColor)
+                    .foregroundColor(Colors.MainColor)
                     .overlay(
                         Text("Пропуск")
-                            .foregroundColor(AppColor.white)
+                            .foregroundColor(Colors.white)
                             .font(.system(size: 17, weight: .semibold))
                     )
             }
@@ -92,5 +92,13 @@ struct MainPage: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 16)
         }
+    }
+}
+
+struct MainPage_Previews: PreviewProvider {
+    static var previews: some View {
+        let appState = AppState()
+        return BottomBarView(selectedTab: 1)
+            .environmentObject(appState)
     }
 }

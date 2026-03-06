@@ -15,7 +15,7 @@ struct SemesterSection: View {
                 HStack {
                     Text(title)
                         .font(.title2)
-                        .foregroundColor(.black)
+                        .foregroundColor(Colors.black)
 
                     Spacer()
 
@@ -39,7 +39,7 @@ struct SemesterSection: View {
                         ForEach(subjects, id: \.0) { subject in
                             HStack(alignment: .center) {
                                 Text(subject.0)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(Colors.black)
                                     .multilineTextAlignment(.leading)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .lineLimit(nil)

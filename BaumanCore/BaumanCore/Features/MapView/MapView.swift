@@ -41,10 +41,10 @@ struct MapView: View {
                             }) {
                                 Text(floor)
                                     .font(.system(size: 16, weight: .medium))
-                                    .foregroundColor(selectedFloor == floor ? .white : .primary)
+                                    .foregroundColor(selectedFloor == floor ? Colors.white : Colors.black)
                                     .frame(height: 32)
                                     .frame(maxWidth: .infinity)
-                                    .background(selectedFloor == floor ? Color.blue : Color.gray.opacity(0.1))
+                                    .background(selectedFloor == floor ? Colors.MainColor : Color.gray.opacity(0.1))
                                     .cornerRadius(8)
                             }
 
@@ -66,16 +66,16 @@ struct MapView: View {
                         }) {
                             Image(systemName: showingLowerFloors ? "chevron.down" : "chevron.up")
                                 .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(.blue)
+                                .foregroundColor(Colors.MainColor)
                                 .frame(width: 32, height: 32)
-                                .background(Color.blue.opacity(0.1))
+                                .background(Colors.MainColor.opacity(0.1))
                                 .cornerRadius(8)
                         }
                     }
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
-                .background(Color.white)
+                .background(Colors.white)
                 .cornerRadius(12)
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
@@ -192,12 +192,12 @@ struct MapView: View {
                 if let nextFloorInfo = viewModel.nextFloorInfo {
                     HStack {
                         Image(systemName: "arrow.up.right")
-                            .foregroundColor(.blue)
+                            .foregroundColor(Colors.MainColor)
                             .font(.system(size: 14))
 
                         Text("Продолжение маршрута на \(nextFloorInfo.floor) этаже")
                             .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(.blue)
+                            .foregroundColor(Colors.MainColor)
 
                         Spacer()
 
@@ -210,15 +210,15 @@ struct MapView: View {
                             }
                         }
                         .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(.white)
+                        .foregroundColor(Colors.white)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 4)
-                        .background(Color.blue)
+                        .background(Colors.MainColor)
                         .cornerRadius(8)
                     }
                     .padding(.horizontal, 16)
                     .padding(.vertical, 10)
-                    .background(Color.blue.opacity(0.1))
+                    .background(Colors.MainColor.opacity(0.1))
                     .cornerRadius(10)
                     .padding(.horizontal, 20)
                     .padding(.bottom, 10)
@@ -270,10 +270,10 @@ struct MapView: View {
                 }) {
                     Text("Построить маршрут")
                         .font(.system(size: 17, weight: .semibold))
-                        .foregroundColor(.white)
+                        .foregroundColor(Colors.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 50)
-                        .background(Color.blue)
+                        .background(Colors.MainColor)
                         .cornerRadius(10)
                 }
                 .padding(.horizontal, 20)
@@ -284,7 +284,7 @@ struct MapView: View {
                 if viewModel.isLoading {
                     Text("Загрузка данных...")
                         .font(.caption)
-                        .foregroundColor(.blue)
+                        .foregroundColor(Colors.MainColor)
                         .padding(.bottom, 10)
                 }
 
@@ -339,7 +339,7 @@ struct MapView: View {
         } else if isLastInRoute {
             return Color.black
         } else if isElevator {
-            return Color.blue
+            return Colors.MainColor
         } else {
             return Color.clear
         }

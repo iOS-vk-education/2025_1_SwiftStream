@@ -9,9 +9,8 @@ struct GradesHatView: View {
         VStack(spacing: 24) {
             HStack {
                 Text("Успеваемость")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(.black)
+                    .fontWeight(.bold)
+                    .font(.system(size: 30))
                 Spacer()
             }
             
@@ -25,24 +24,24 @@ struct GradesHatView: View {
             }
         }
         .padding()
+        .padding(.top, 20)
         .frame(maxWidth: .infinity)
     }
     
     // анимация кнопок вкладок
-    
     private func gradesTabButton(title: String, isActive: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(title)
                 .font(.headline)
-                .foregroundColor(isActive ? .white : .black)
+                .foregroundColor(isActive ? Colors.white : Colors.black)
                 .padding(.vertical, 8)
                 .padding(.horizontal, 16)
                 .background(
                     Capsule()
-                        .fill(isActive ? AppColor.mainColor : .white)
+                        .fill(isActive ? Colors.MainColor : Colors.white)
                         .overlay(
                             Capsule()
-                                .stroke(Color.black.opacity(isActive ? 0 : 0.5), lineWidth: 1)
+                                .stroke(Colors.black.opacity(isActive ? 0 : 0.5), lineWidth: 1)
                         )
                 )
         }
@@ -50,7 +49,6 @@ struct GradesHatView: View {
 }
 
 // маска (для шапки)
-
 struct HorizontalInsetShape: Shape {
     var insetX: CGFloat
 
@@ -64,5 +62,16 @@ struct HorizontalInsetShape: Shape {
         var path = Path()
         path.addRect(frame)
         return path
+    }
+}
+
+
+
+
+struct Grades_header_Previews: PreviewProvider {
+    static var previews: some View {
+        let appState = AppState()
+        return BottomBarView(selectedTab: 3)
+            .environmentObject(appState)
     }
 }

@@ -11,30 +11,6 @@ struct ThreeBlueLinks: View {
     private func openMailComposer() {
         guard let url = URL(string: "https://student.bmstu.ru/?Skin=hPronto-&altLanguage=russian") else { return }
         UIApplication.shared.open(url)
-        
-    
-//        let to = "support@yourdomain.com"
-//        let subject = "Вопрос"
-//        let body = "Здравствуйте!\n\nМоя почта: \(email)\n\nСообщение:\n"
-//
-//        var c = URLComponents()
-//        c.scheme = "mailto"
-//        c.path = to
-//        c.queryItems = [
-//            .init(name: "subject", value: subject),
-//            .init(name: "body", value: body)
-//        ]
-//
-//        guard let url = c.url else { return }
-//
-//        if UIApplication.shared.canOpenURL(url) {
-//            UIApplication.shared.open(url)
-//        } else {
-//            UIPasteboard.general.string = "Кому: \(to)\nТема: \(subject)\n\n\(body)"
-//            mailAlertTitle = "Почта не настроена"
-//            mailAlertMessage = "Адрес и текст письма скопированы в буфер обмена."
-//            showMailAlert = true
-//        }
     }
 
     private func openFacultySite() {
@@ -73,7 +49,7 @@ struct ThreeBlueLinks: View {
     private func tileButton(imageName: String, size: CGFloat, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(AppColor.mainColor)
+                .foregroundColor(Colors.MainColor)
                 .frame(width: size, height: size)
                 .overlay(
                     Image(imageName)

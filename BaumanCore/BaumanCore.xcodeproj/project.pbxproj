@@ -18,6 +18,8 @@
 		AC7C34832EF811C2000F47D5 /* Grades_main_structure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */; };
 		AC8012752EE8F159003B6419 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8012742EE8F159003B6419 /* Subject.swift */; };
 		AC8012772EE8F166003B6419 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8012762EE8F166003B6419 /* Lesson.swift */; };
+		CE1C46092F52DB36008EB09C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C46082F52DB36008EB09C /* ImagePicker.swift */; };
+		CE1C460B2F52DB51008EB09C /* AvatarStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C460A2F52DB51008EB09C /* AvatarStorage.swift */; };
 		CE1F70392EF1E9EF00E42C47 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F70382EF1E9EF00E42C47 /* DateManager.swift */; };
 		CE1F703B2EF1EA6A00E42C47 /* Lesson_sched.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F703A2EF1EA6A00E42C47 /* Lesson_sched.swift */; };
 		CE2A3DE12ED85A7B00C09F87 /* BaumanCoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A3DE02ED85A7B00C09F87 /* BaumanCoreApp.swift */; };
@@ -61,6 +63,8 @@
 		AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_main_structure.swift; sourceTree = "<group>"; };
 		AC8012742EE8F159003B6419 /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		AC8012762EE8F166003B6419 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
+		CE1C46082F52DB36008EB09C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		CE1C460A2F52DB51008EB09C /* AvatarStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarStorage.swift; sourceTree = "<group>"; };
 		CE1F70382EF1E9EF00E42C47 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		CE1F703A2EF1EA6A00E42C47 /* Lesson_sched.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson_sched.swift; sourceTree = "<group>"; };
 		CE2A3DDD2ED85A7B00C09F87 /* BaumanCore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaumanCore.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,6 +201,8 @@
 			children = (
 				CE2A3DEE2ED85B7000C09F87 /* BottomBar.swift */,
 				CE1F70382EF1E9EF00E42C47 /* DateManager.swift */,
+				CE1C46082F52DB36008EB09C /* ImagePicker.swift */,
+				CE1C460A2F52DB51008EB09C /* AvatarStorage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -383,6 +389,7 @@
 				AC8012772EE8F166003B6419 /* Lesson.swift in Sources */,
 				CEA6A62D2EFAC11B00A13550 /* Semester.swift in Sources */,
 				CE2A3DF62ED8C92700C09F87 /* Profile.swift in Sources */,
+				CE1C46092F52DB36008EB09C /* ImagePicker.swift in Sources */,
 				CE37A92F2F054CE0001CD754 /* Navigation.swift in Sources */,
 				63CDC0552EE996180016927C /* ContentView.swift in Sources */,
 				63684A6B2EE9CFC000B1DCD8 /* FontFile.swift in Sources */,
@@ -391,6 +398,7 @@
 				AC7C34832EF811C2000F47D5 /* Grades_main_structure.swift in Sources */,
 				CE2A3E052ED8DEC400C09F87 /* MapView.swift in Sources */,
 				CE2A3E032ED8DCC400C09F87 /* QRView.swift in Sources */,
+				CE1C460B2F52DB51008EB09C /* AvatarStorage.swift in Sources */,
 				CE1F70392EF1E9EF00E42C47 /* DateManager.swift in Sources */,
 				CE2A3DFD2ED8DC7000C09F87 /* MainPage.swift in Sources */,
 				CE2A3DE12ED85A7B00C09F87 /* BaumanCoreApp.swift in Sources */,
@@ -543,6 +551,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"BaumanCore/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Нам нужен доступ к фото, чтобы установить вашу аватарку";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -571,6 +580,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"BaumanCore/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Нам нужен доступ к фото, чтобы установить вашу аватарку";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

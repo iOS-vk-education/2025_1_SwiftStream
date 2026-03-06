@@ -16,37 +16,62 @@ extension Color {
     }
 }
 
-enum AppColor {
-    static let black = Color(hex: "#000000")
-    static let darkGrey = Color(hex: "#4B4A4A")
-    static let lightGrey = Color(hex: "#6A6A6A")
-    static let lightlightGrey = Color(hex: "#C4C4C4")
-    static let white = Color(hex: "#FFFFFF")
+
+enum Colors {
+    static var MainColor: Color {
+        Color("MainColor") // имя цвета в Assets
+    }
     
+    static var black: Color {
+        Color("black")
+    }
     
-    static let mainColor = Color(hex: "#2932D9")
+    static var white: Color {
+        Color("white")
+    }
+    
+    static var systemblue: Color {
+        Color("systemblue")
+    }
+    
+    static var excellentmark: Color {
+        Color("excellentmark")
+    }
+    
+    static var badmark: Color {
+        Color("badmark")
+    }
+    
+    static var goodmark: Color {
+        Color("goodmark")
+    }
+    
+    static var LightGray: Color {
+        Color("LightGray")
+    }
+    
+    static var LightLightGray: Color {
+        Color("LightLightGray")
+    }
+    
+    static var mediummark: Color {
+        Color("mediummark")
+    }
+    
+    static var nomark: Color {
+        Color("nomark")
+    }
 }
-
-
-
-enum MarksColor {
-    static let excellentmark = Color(hex: "#388E3C")
-    static let goodmark = Color(hex: "#81C784")
-    static let mediummark = Color(hex: "#DAA520")
-    static let badmark = Color(hex: "#E57373")
-    static let nomark = Color(hex: "#808080")
-}
-
 
 // оценки уроков
 extension Lesson {
     var statusColor: Color {
         switch status {
-        case "Посещено", "Сдано", "Отлично": return MarksColor.excellentmark
-        case "Не сдано", "Не посещено", "Неуд": return MarksColor.badmark
-        case "Удов", "Защищено с опозданием": return MarksColor.mediummark
-        case "Хорошо": return MarksColor.goodmark
-        default: return MarksColor.nomark
+        case "Посещено", "Сдано", "Отлично": return Colors.excellentmark
+        case "Не сдано", "Не посещено", "Неуд": return Colors.badmark
+        case "Удов", "Защищено с опозданием": return Colors.mediummark
+        case "Хорошо": return Colors.goodmark
+        default: return Colors.nomark
         }
     }
 }
@@ -56,14 +81,14 @@ extension Lesson {
 func colorForGrade(_ grade: String) -> Color {
     switch grade {
     case "Отлично":
-        return MarksColor.excellentmark
+        return Colors.excellentmark
     case "Хорошо":
-        return MarksColor.goodmark
+        return Colors.goodmark
     case "Удов":
-        return MarksColor.mediummark
+        return Colors.mediummark
     case "Неуд":
-        return MarksColor.badmark
+        return Colors.badmark
     default:
-        return MarksColor.nomark
+        return Colors.nomark
     }
 }

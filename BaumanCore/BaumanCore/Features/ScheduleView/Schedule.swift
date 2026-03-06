@@ -64,7 +64,7 @@ struct Schedule: View {
                         .frame(width: 50, height: 50)
                         .background(
                             currentSelectedDay == day.id
-                            ? AppColor.mainColor
+                            ? Colors.MainColor
                             : (
                                 dateManager.currentDayIndex == day.id &&
                                 dateManager.currentWeek == lastSelectedWeek &&
@@ -73,11 +73,11 @@ struct Schedule: View {
                                 : Color.clear
                             )
                         )
-                        .foregroundColor(currentSelectedDay == day.id ? .white : .black)
+                        .foregroundColor(currentSelectedDay == day.id ? .white : Colors.black)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
                                 .stroke(
-                                    Color.gray.opacity(0.4),
+                                    Color.gray.opacity(0.8),
                                     lineWidth: 2
                                 )
                         )
