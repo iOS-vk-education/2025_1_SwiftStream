@@ -42,9 +42,14 @@
 		CE37A92A2F048333001CD754 /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37A9292F048333001CD754 /* NewsService.swift */; };
 		CE37A92D2F054CCB001CD754 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37A92C2F054CCB001CD754 /* NavigationViewModel.swift */; };
 		CE37A92F2F054CE0001CD754 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37A92E2F054CE0001CD754 /* Navigation.swift */; };
+		CE37A9332F0AC045001CD754 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE37A9322F0AC045001CD754 /* FirebaseFirestoreSwift */; };
+		CE561DCF2F72C2E400EEA2FD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE561DCE2F72C2E400EEA2FD /* ProfileViewModel.swift */; };
+		CE561DD12F72C77800EEA2FD /* MainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE561DD02F72C77800EEA2FD /* MainPageViewModel.swift */; };
 		CE7B93E42EF844F800A74073 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B93E32EF844F800A74073 /* WelcomeViewController.swift */; };
 		CE7D99D62EF99C0300F36BE2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CE7D99D52EF99C0300F36BE2 /* FirebaseAuth */; };
 		CE7D99D82EF99C0300F36BE2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE7D99D72EF99C0300F36BE2 /* FirebaseFirestore */; };
+		CE9785352F5B236E00586044 /* StudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9785342F5B236E00586044 /* StudentViewModel.swift */; };
+		CE9785372F5B267A00586044 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE9785362F5B267A00586044 /* GoogleService-Info.plist */; };
 		CEA6A6282EFABED600A13550 /* ServiceGrades.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6A6272EFABED600A13550 /* ServiceGrades.swift */; };
 		CEA6A62B2EFAC05400A13550 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CEA6A62A2EFAC05400A13550 /* FirebaseDatabase */; };
 		CEA6A62D2EFAC11B00A13550 /* Semester.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6A62C2EFAC11B00A13550 /* Semester.swift */; };
@@ -88,7 +93,11 @@
 		CE37A9292F048333001CD754 /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
 		CE37A92C2F054CCB001CD754 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		CE37A92E2F054CE0001CD754 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		CE561DCE2F72C2E400EEA2FD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		CE561DD02F72C77800EEA2FD /* MainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewModel.swift; sourceTree = "<group>"; };
 		CE7B93E32EF844F800A74073 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		CE9785342F5B236E00586044 /* StudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewModel.swift; sourceTree = "<group>"; };
+		CE9785362F5B267A00586044 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEA6A6272EFABED600A13550 /* ServiceGrades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceGrades.swift; sourceTree = "<group>"; };
 		CEA6A62C2EFAC11B00A13550 /* Semester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semester.swift; sourceTree = "<group>"; };
 		CEC878E02EF9F354000863DF /* ForgotPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassView.swift; sourceTree = "<group>"; };
@@ -183,6 +192,7 @@
 				AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */,
 				AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */,
 				CE2A3DFA2ED8CACC00C09F87 /* Grades_header.swift */,
+				CE9785342F5B236E00586044 /* StudentViewModel.swift */,
 			);
 			path = GradesView;
 			sourceTree = "<group>";
@@ -236,9 +246,9 @@
 		CE2A3DDF2ED85A7B00C09F87 /* BaumanCore */ = {
 			isa = PBXGroup;
 			children = (
+				CE9785362F5B267A00586044 /* GoogleService-Info.plist */,
 				CE37A9282F048319001CD754 /* Services */,
 				CE37A9252F04826F001CD754 /* ViewModels */,
-				AC27A4CC2F5AD0AC00C19D5F /* GoogleService-Info.plist */,
 				63CDC04F2EE9935F0016927C /* Application */,
 				63CDC04C2EE992750016927C /* Design System */,
 				CE2A3DF72ED8C96000C09F87 /* Models */,
@@ -286,6 +296,8 @@
 			isa = PBXGroup;
 			children = (
 				CE37A9262F0482EE001CD754 /* NewsCarouselViewModel.swift */,
+				CE561DCE2F72C2E400EEA2FD /* ProfileViewModel.swift */,
+				CE561DD02F72C77800EEA2FD /* MainPageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -372,8 +384,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC27A4CD2F5AD0AC00C19D5F /* GoogleService-Info.plist in Resources */,
 				CE2A3DE82ED85A7D00C09F87 /* Preview Assets.xcassets in Resources */,
+				CE9785372F5B267A00586044 /* GoogleService-Info.plist in Resources */,
 				CE2A3DE52ED85A7D00C09F87 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,6 +397,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE9785352F5B236E00586044 /* StudentViewModel.swift in Sources */,
 				AC8012772EE8F166003B6419 /* Lesson.swift in Sources */,
 				CEA6A62D2EFAC11B00A13550 /* Semester.swift in Sources */,
 				CE2A3DF62ED8C92700C09F87 /* Profile.swift in Sources */,
@@ -392,6 +405,7 @@
 				CE37A92F2F054CE0001CD754 /* Navigation.swift in Sources */,
 				63CDC0552EE996180016927C /* ContentView.swift in Sources */,
 				63684A6B2EE9CFC000B1DCD8 /* FontFile.swift in Sources */,
+				CE561DD12F72C77800EEA2FD /* MainPageViewModel.swift in Sources */,
 				CE1F703B2EF1EA6A00E42C47 /* Lesson_sched.swift in Sources */,
 				CEA6A6282EFABED600A13550 /* ServiceGrades.swift in Sources */,
 				AC7C34832EF811C2000F47D5 /* Grades_main_structure.swift in Sources */,
@@ -410,6 +424,7 @@
 				CE2A3DF22ED8C35100C09F87 /* Schedule.swift in Sources */,
 				63684A662EE9AB8100B1DCD8 /* LoginView.swift in Sources */,
 				63CDC04E2EE992930016927C /* ColorFile.swift in Sources */,
+				CE561DCF2F72C2E400EEA2FD /* ProfileViewModel.swift in Sources */,
 				CE7B93E42EF844F800A74073 /* WelcomeViewController.swift in Sources */,
 				CE37A9242F0480FB001CD754 /* News.swift in Sources */,
 				AC7C34812EF811A6000F47D5 /* Grades_subjects_content.swift in Sources */,

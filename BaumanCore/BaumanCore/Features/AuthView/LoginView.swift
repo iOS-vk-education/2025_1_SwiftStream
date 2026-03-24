@@ -70,6 +70,9 @@ struct LoginView: View {
                                     .font(.SFPro(17))
                                     .foregroundColor(Colors.LightLightGray)
                             )
+                            .textInputAutocapitalization(.never)
+                            .disableAutocorrection(true)
+                            .textContentType(.password)
                         } else {
                             SecureField(
                                 "",
@@ -78,6 +81,7 @@ struct LoginView: View {
                                     .font(.SFPro(17))
                                     .foregroundColor(Colors.LightLightGray)
                             )
+                            .textContentType(.password)
                         }
 
                         Button {
@@ -115,13 +119,15 @@ struct LoginView: View {
                     if isLoading {
                         ProgressView()
                             .scaleEffect(1.2)
+                            .padding(.leading, 15)
                     }
                     Text(isLoading ? "Вход..." : "Войти в аккаунт →")
                         .font(.SFPro(17, weight: .semibold))
                         .foregroundColor(Colors.white)
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
-            }
+                .frame(maxWidth: .infinity)
+            }            
             .disabled(isLoading)
             .frame(height: 56)
             .background(isLoading ? Colors.MainColor.opacity(0.7) : Colors.MainColor)

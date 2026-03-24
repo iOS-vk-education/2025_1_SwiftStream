@@ -18,14 +18,12 @@ class NavigationViewModel: ObservableObject {
     private let db: Firestore
 
     init() {
-        guard let navApp = FirebaseApp.app(name: "navigation") else {
-            fatalError("Firebase-аппликация 'navigation' не найдена")
+        guard FirebaseApp.app() != nil else {
+            fatalError("Firebase не инициализирован. Проверьте FirebaseApp.configure()")
         }
-        self.db = Firestore.firestore(app: navApp)
-
+        self.db = Firestore.firestore()
         loadFloors()
     }
-    
     
 
     func loadFloors() {
@@ -317,18 +315,24 @@ class NavigationViewModel: ObservableObject {
     }
 
     private func extractFloor(from number: String) -> String? {
-        if number == "elevator" {
-            for (floor, classrooms) in classroomsWithFloorCache {
-                if classrooms.contains(where: { $0.classroom.number == "elevator" }) {
-                    return floor
+            if number == "elevator" {
+                for (floor, classrooms) in classroomsWithFloorCache {
+                    if classrooms.contains(where: { $0.classroom.number == "elevator" }) {
+                        return floor
+                    }
                 }
+                return nil
             }
-            return nil
+            
+            let digits = number.filter { $0.isNumber }
+            
+            switch digits.count {
+            case 3:
+                return String(digits.prefix(1))
+            case 4:
+                return String(digits.prefix(2))
+            default:
+                return digits.isEmpty ? nil : String(digits.prefix(1))
+            }
         }
-
-        guard let firstChar = number.first, firstChar.isNumber else {
-            return nil
-        }
-        return String(firstChar)
-    }
 }

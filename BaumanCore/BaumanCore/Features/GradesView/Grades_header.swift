@@ -26,6 +26,9 @@ struct GradesHatView: View {
         .padding()
         .padding(.top, 20)
         .frame(maxWidth: .infinity)
+        
+        
+        
     }
     
     // анимация кнопок вкладок

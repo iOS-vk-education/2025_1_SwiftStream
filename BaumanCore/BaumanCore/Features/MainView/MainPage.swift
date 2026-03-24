@@ -1,22 +1,27 @@
 import SwiftUI
+import FirebaseAuth
 
 struct MainPage: View {
     @State private var showQR = false
-    @State private var student: Student? = nil
     @EnvironmentObject var appState: AppState
+    @StateObject private var vm = MainPageViewModel()
 
     var body: some View {
         VStack(spacing: 0) {
             ImageCarousel()
                 .padding(.top, 8)
 
-            if let email = appState.student?.email, !email.isEmpty {
-                ThreeBlueLinks(email: email)
-                    .padding(.top, 20)
+            ThreeBlueLinks()
+                .padding(.top, 20)
+            
+            if let name = appState.student?.name, !name.isEmpty {
+                HeaderView(studentName: studentName())
+                    .padding(.top, 40)
+                    .transition(.opacity)
+            } else {
+                Color.clear
+                    .frame(height: 120)
             }
-
-            HeaderView(studentName: studentName())
-                .padding(.top, 40)
 
             Spacer()
 
@@ -30,24 +35,24 @@ struct MainPage: View {
             QRView()
         }
         .onAppear {
-            FirebaseService().fetchStudent { fetchedStudent in
-                if let fetchedStudent = fetchedStudent {
-                    self.student = fetchedStudent
-                    self.appState.student = fetchedStudent
-                    }
-                }
-            }
+            // ✅ Загружаем данные ТОЛЬКО один раз за сессию
+            vm.loadIfNeeded(appState: appState)
         }
+    }
     
     private func studentName() -> String {
-            guard let fullName = student?.name else { return "" }
-            let parts = fullName.split(separator: " ")
-            if parts.count >= 2 {
-                return String(parts[1])
-            } else {
-                return fullName
-            }
+        guard let fullName = appState.student?.name, !fullName.isEmpty else {
+            return ""
         }
+        
+        let parts = fullName.split(separator: " ")
+        
+        if parts.count > 1 {
+            return String(parts[1])
+        } else {
+            return fullName
+        }
+    }
 
     struct PassButton: View {
         let action: () -> Void

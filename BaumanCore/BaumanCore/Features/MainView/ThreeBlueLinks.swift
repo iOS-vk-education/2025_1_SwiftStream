@@ -1,64 +1,61 @@
 import SwiftUI
-import UIKit
 
 struct ThreeBlueLinks: View {
-    let email: String
-
-    @State private var showMailAlert = false
-    @State private var mailAlertTitle = ""
-    @State private var mailAlertMessage = ""
-
-    private func openMailComposer() {
-        guard let url = URL(string: "https://student.bmstu.ru/?Skin=hPronto-&altLanguage=russian") else { return }
-        UIApplication.shared.open(url)
-    }
-
-    private func openFacultySite() {
-        guard let url = URL(string: "https://fv.bmstu.ru/") else { return }
-        UIApplication.shared.open(url)
-    }
-
-    private func openSportSite() {
-        guard let url = URL(string: "https://sport.bmstu.ru/") else { return }
-        UIApplication.shared.open(url)
-    }
+    
+    private let studentURL = URL(string: "https://student.bmstu.ru/?Skin=hPronto-&altLanguage=russian")
+    private let facultyURL = URL(string: "https://fv.bmstu.ru/")
+    private let sportURL = URL(string: "https://sport.bmstu.ru/")
 
     var body: some View {
-        GeometryReader { geo in
-            let horizontalPadding: CGFloat = 16
-            let spacing: CGFloat = 24
-            let totalSpacing = spacing * 2
-            let available = geo.size.width - (horizontalPadding * 2) - totalSpacing
-            let tile = max(72, min(120, available / 3))
-
-            HStack(spacing: spacing) {
-                tileButton(imageName: "mail", size: tile, action: openMailComposer)
-                tileButton(imageName: "faculty", size: tile, action: openFacultySite)
-                tileButton(imageName: "sport", size: tile, action: openSportSite)
+        Grid(horizontalSpacing: 16) {
+            GridRow {
+                LinkButton(
+                    imageName: "mail",
+                    url: studentURL,
+                    accessibilityLabel: "Студенческий портал"
+                )
+                LinkButton(
+                    imageName: "faculty",
+                    url: facultyURL,
+                    accessibilityLabel: "Сайт факультета"
+                )
+                LinkButton(
+                    imageName: "sport",
+                    url: sportURL,
+                    accessibilityLabel: "Спортивный сайт"
+                )
             }
-            .padding(.horizontal, horizontalPadding)
         }
-        .frame(height: 120)
-        .alert(mailAlertTitle, isPresented: $showMailAlert) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text(mailAlertMessage)
-        }
+        .padding(.horizontal, 16)
+        .frame(height: 100)
     }
+}
 
-    private func tileButton(imageName: String, size: CGFloat, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+// Вспомогательный компонент для одной кнопки
+private struct LinkButton: View {
+    let imageName: String
+    let url: URL?
+    let accessibilityLabel: String
+    
+    var body: some View {
+        Button {
+            // Открываем ссылку, если она валидна
+            if let url = url {
+                UIApplication.shared.open(url)
+            }
+        } label: {
             RoundedRectangle(cornerRadius: 10)
                 .foregroundColor(Colors.MainColor)
-                .frame(width: size, height: size)
+                .frame(maxWidth: .infinity)
+                .aspectRatio(1, contentMode: .fit)
                 .overlay(
                     Image(imageName)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: size * 0.65, height: size * 0.65)
-                        .padding(.leading, size * 0.16),
-                    alignment: .leading
+                        .frame(width: 60, height: 60),
+                    alignment: .center
                 )
         }
+        .accessibilityLabel(accessibilityLabel) 
     }
 }
