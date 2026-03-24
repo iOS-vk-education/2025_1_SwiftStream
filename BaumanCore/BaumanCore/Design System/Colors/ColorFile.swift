@@ -67,10 +67,9 @@ enum Colors {
 extension Lesson {
     var statusColor: Color {
         switch status {
-        case "Посещено", "Сдано", "Отлично": return Colors.excellentmark
-        case "Не сдано", "Не посещено", "Неуд": return Colors.badmark
-        case "Удов", "Защищено с опозданием": return Colors.mediummark
-        case "Хорошо": return Colors.goodmark
+        case "Посещено", "Сдано", "Защищено вовремя": return Colors.excellentmark
+        case "Не сдано", "Не посещено": return Colors.badmark
+        case "Защищено с опозданием": return Colors.mediummark
         default: return Colors.nomark
         }
     }
@@ -80,13 +79,13 @@ extension Lesson {
 // оценки дисциплин семестра
 func colorForGrade(_ grade: String) -> Color {
     switch grade {
-    case "Отлично":
+    case "Отлично", "Зачтено":
         return Colors.excellentmark
     case "Хорошо":
         return Colors.goodmark
     case "Удов":
         return Colors.mediummark
-    case "Неуд":
+    case "Неуд", "Не зачтено":
         return Colors.badmark
     default:
         return Colors.nomark
