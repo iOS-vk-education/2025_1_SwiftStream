@@ -4,6 +4,7 @@ import FirebaseAuth
 struct MainPage: View {
     @State private var showQR = false
     @EnvironmentObject var appState: AppState
+    @StateObject private var vm = MainPageViewModel()
 
     var body: some View {
         VStack(spacing: 0) {
@@ -34,16 +35,8 @@ struct MainPage: View {
             QRView()
         }
         .onAppear {
-            //  Загружаем данные КАЖДЫЙ раз при появлении страницы
-            FirebaseService().fetchStudent { fetchedStudent in
-                DispatchQueue.main.async {
-                    if let fetchedStudent = fetchedStudent {
-                        withAnimation(.easeIn(duration: 0.3)) {
-                            self.appState.student = fetchedStudent
-                        }
-                    }
-                }
-            }
+            // ✅ Загружаем данные ТОЛЬКО один раз за сессию
+            vm.loadIfNeeded(appState: appState)
         }
     }
     

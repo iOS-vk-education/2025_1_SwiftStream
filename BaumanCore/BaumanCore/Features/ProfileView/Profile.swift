@@ -4,19 +4,9 @@ struct Profile: View {
     @EnvironmentObject var appState: AppState
     @Environment(\.openURL) private var openURL
     @AppStorage("userSelectedTheme") private var selectedThemeRawValue = 0
-    @State private var selectedImage: UIImage?
+    @StateObject private var vm = ProfileViewModel()
     @State private var showImagePicker = false
     @State private var showDeleteAlert = false
-
-    @State private var student = Student(
-        name: "",
-        faculty: "",
-        group: "",
-        studentID: "",
-        email: "",
-        subjects: [],
-        semesters: []
-    )
 
     var body: some View {
         ScrollView {
@@ -31,7 +21,7 @@ struct Profile: View {
                 HStack(spacing: 15) {
                     ZStack(alignment: .bottomTrailing) {
                         Group {
-                            if let image = selectedImage {
+                            if let image = vm.avatar {
                                 Image(uiImage: image)
                                     .resizable()
                                     .scaledToFill()
@@ -55,24 +45,24 @@ struct Profile: View {
                     }
                     .onTapGesture { showImagePicker = true }
                     .onLongPressGesture {
-                        if selectedImage != nil {
+                        if vm.avatar != nil {
                             showDeleteAlert = true
                         }
                     }
                     .alert("Удалить аватарку?", isPresented: $showDeleteAlert) {
                         Button("Отмена", role: .cancel) { }
                         Button("Удалить", role: .destructive) {
-                            deleteAvatar()
+                            vm.deleteAvatar()
                         }
                     } message: {
                         Text("Вы действительно хотите удалить фото профиля?")
                     }
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(student.name)
+                        Text(vm.student?.name ?? "Загрузка...")
                             .font(.SFPro(21))
                             .foregroundColor(Colors.black)
-                        Text(student.email)
+                        Text(vm.student?.email ?? "")
                             .font(.SFPro(14))
                             .foregroundColor(Colors.LightGray)
                     }
@@ -86,8 +76,8 @@ struct Profile: View {
                 .padding(.horizontal, 17)
                 .sheet(isPresented: $showImagePicker) {
                     ImagePicker(
-                        image: $selectedImage,
-                        userID: student.studentID.isEmpty ? "anonymous" : student.studentID
+                        image: $vm.avatar,
+                        userID: vm.student?.studentID.isEmpty ?? true ? "anonymous" : vm.student?.studentID ?? "anonymous"
                     )
                 }
     
@@ -97,7 +87,7 @@ struct Profile: View {
                         .foregroundColor(Colors.black)
                     Spacer()
 
-                    Text(student.group)
+                    Text(vm.student?.group ?? "")
                         .font(.SFPro(15))
                         .foregroundColor(Colors.black)
                 }
@@ -115,7 +105,7 @@ struct Profile: View {
 
                     Spacer()
 
-                    Text(student.studentID)
+                    Text(vm.student?.studentID ?? "")
                         .font(.SFPro(15))
                         .foregroundColor(Colors.black)
                 }
@@ -178,30 +168,11 @@ struct Profile: View {
         
         .onAppear {
             updateTheme()
-            FirebaseService().fetchStudent { fetchedStudent in
-                if let fetchedStudent = fetchedStudent {
-                    Task {
-                        await MainActor.run {
-                            self.student = fetchedStudent
-                        }
-                        let userID = fetchedStudent.studentID.isEmpty ? "anonymous" : fetchedStudent.studentID
-                        let avatar = await AvatarStorage.load(userID: userID)
-                        await MainActor.run {
-                            self.selectedImage = avatar
-                        }
-                    }
-                }
-            }
+            vm.loadIfNeeded()  
         }
     }
 
     private let themeOptions = ["Системная", "Светлая", "Темная"]
-
-    private func deleteAvatar() {
-        selectedImage = nil
-        let userID = student.studentID.isEmpty ? "anonymous" : student.studentID
-        AvatarStorage.delete(userID: userID)
-    }
     
     private func updateTheme() {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
