@@ -14,7 +14,7 @@ struct LoginView: View {
     var body: some View {
         VStack(spacing: 0) {
             Text("Вход в аккаунт")
-                .font(.SFPro(33))
+                .font(.system(size: 30, weight: .bold))
                 .foregroundColor(Colors.MainColor)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 60)

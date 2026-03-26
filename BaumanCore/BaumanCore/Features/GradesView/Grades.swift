@@ -1,3 +1,11 @@
+//
+//  Grades.swift
+//  BaumanCore
+//
+//  Created by Иван Агошков on 26.03.2026.
+//
+
+
 import SwiftUI
 import Combine
 import FirebaseAuth
@@ -68,7 +76,7 @@ struct SessionTabView: View {
     @State private var expandedSemester: String? = nil
 
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 16) {
             ForEach(semesters, id: \.id) { semester in
                 SemesterSection(
                     title: semester.title,
@@ -78,7 +86,6 @@ struct SessionTabView: View {
                 )
             }
         }
-        .padding(.top, -0.5)
         .padding(.bottom, 30)
     }
 

@@ -4,14 +4,22 @@ import SwiftUI
 
 struct SubjectRowView: View {
     let subject: SubjectData
-    @State private var isExpanded = false
+    @Binding var expandedSubjectId: String?
+    
+    private var isExpanded: Bool {
+        expandedSubjectId == subject.id
+    }
     
     var body: some View {
         VStack(spacing: 0) {
             header
                 .onTapGesture {
                     withAnimation(.easeInOut(duration: 0.5)) {
-                        isExpanded.toggle()
+                        if isExpanded {
+                            expandedSubjectId = nil
+                        } else {
+                            expandedSubjectId = subject.id
+                        }
                     }
                 }
             
@@ -71,7 +79,7 @@ struct SubjectRowView: View {
         return VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text(lesson.title)
-                    .fontWeight(special ? .semibold : .regular) // bold
+                    .fontWeight(special ? .semibold : .regular)
                     .lineLimit(nil)
                 
                 Spacer()

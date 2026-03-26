@@ -12,11 +12,11 @@ struct Profile: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 Text("Профиль")
-                    .font(.SFPro(33, weight: .regular))
-                    .foregroundColor(Colors.black)
+                    .fontWeight(.bold)
+                    .font(.system(size: 30))
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 60)
-                    .padding(.horizontal, 24)
+                    .padding(.top, 35)
+                    .padding(.horizontal, 16)
                 
                 HStack(spacing: 15) {
                     ZStack(alignment: .bottomTrailing) {

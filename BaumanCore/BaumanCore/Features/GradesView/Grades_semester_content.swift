@@ -2,6 +2,10 @@ import SwiftUI
 
 // контент внутри семестров
 
+import SwiftUI
+
+// контент внутри семестров
+
 struct SemesterSection: View {
     let title: String
     let isExpanded: Bool
@@ -9,29 +13,26 @@ struct SemesterSection: View {
     let subjects: [(String, String, Color)]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Text(title)
+                    .font(.title2)
+                    .foregroundColor(Colors.black)
 
+                Spacer()
 
-                HStack {
-                    Text(title)
-                        .font(.title2)
-                        .foregroundColor(Colors.black)
-
-                    Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .font(.title2)
-                        .rotationEffect(.degrees(isExpanded ? 90 : 0))
-                        .foregroundColor(.gray)
-                }
-                .padding(.vertical, 8)
-                .contentShape(Rectangle()) // делает весь HStack "кликабельным"
-                .onTapGesture {
-                    withAnimation(.easeInOut(duration: 0.5)) {
-                        onToggle()
-                    }
+                Image(systemName: "chevron.right")
+                    .font(.title2)
+                    .rotationEffect(.degrees(isExpanded ? 90 : 0))
+                    .foregroundColor(.gray)
             }
-
+            .padding(.vertical, 10)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    onToggle()
+                }
+            }
 
             ZStack {
                 if isExpanded {
@@ -53,7 +54,6 @@ struct SemesterSection: View {
                             }
                         }
                     }
-                   
                     .padding(.top, 4)
                     .transition(.move(edge: .top).combined(with: .opacity))
                 }

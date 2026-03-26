@@ -13,7 +13,6 @@
 		63684A6E2EE9E42B00B1DCD8 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63684A6D2EE9E42800B1DCD8 /* AppState.swift */; };
 		63CDC04E2EE992930016927C /* ColorFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC04D2EE9928B0016927C /* ColorFile.swift */; };
 		63CDC0552EE996180016927C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC0542EE996180016927C /* ContentView.swift */; };
-		AC27A4CD2F5AD0AC00C19D5F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC27A4CC2F5AD0AC00C19D5F /* GoogleService-Info.plist */; };
 		AC27A4CF2F5ADC0800C19D5F /* StudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC27A4CE2F5ADC0500C19D5F /* StudentViewModel.swift */; };
 		AC7C347F2EF8117D000F47D5 /* Grades_semester_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */; };
 		AC7C34812EF811A6000F47D5 /* Grades_subjects_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */; };
@@ -42,7 +41,6 @@
 		CE37A92A2F048333001CD754 /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37A9292F048333001CD754 /* NewsService.swift */; };
 		CE37A92D2F054CCB001CD754 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37A92C2F054CCB001CD754 /* NavigationViewModel.swift */; };
 		CE37A92F2F054CE0001CD754 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37A92E2F054CE0001CD754 /* Navigation.swift */; };
-		CE37A9332F0AC045001CD754 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE37A9322F0AC045001CD754 /* FirebaseFirestoreSwift */; };
 		CE561DCF2F72C2E400EEA2FD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE561DCE2F72C2E400EEA2FD /* ProfileViewModel.swift */; };
 		CE561DD12F72C77800EEA2FD /* MainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE561DD02F72C77800EEA2FD /* MainPageViewModel.swift */; };
 		CE7B93E42EF844F800A74073 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B93E32EF844F800A74073 /* WelcomeViewController.swift */; };
@@ -63,7 +61,6 @@
 		63684A6D2EE9E42800B1DCD8 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		63CDC04D2EE9928B0016927C /* ColorFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFile.swift; sourceTree = "<group>"; };
 		63CDC0542EE996180016927C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		AC27A4CC2F5AD0AC00C19D5F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AC27A4CE2F5ADC0500C19D5F /* StudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewModel.swift; sourceTree = "<group>"; };
 		AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_semester_content.swift; sourceTree = "<group>"; };
 		AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_subjects_content.swift; sourceTree = "<group>"; };

@@ -29,6 +29,9 @@ enum Colors {
     static var white: Color {
         Color("white")
     }
+    static var sistema: Color {
+        Color("sistema")
+    }
     
     static var systemblue: Color {
         Color("systemblue")
