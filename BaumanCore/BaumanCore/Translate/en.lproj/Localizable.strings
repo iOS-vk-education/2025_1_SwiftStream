@@ -1,0 +1,24 @@
+"profile.title" = "Profile";
+"profile.group" = "Group:";
+"profile.student_id" = "Student ID:";
+"profile.theme" = "App theme:";
+"profile.language" = "App language:";
+"profile.logout" = "Log out";
+"profile.support" = "University support service:";
+"profile.phone" = "Phone:";
+"profile.email" = "Email:";
+"profile.delete_avatar_title" = "Delete avatar?";
+"profile.delete_avatar_message" = "Are you sure you want to delete the profile photo?";
+
+"common.cancel" = "Cancel";
+"common.delete" = "Delete";
+
+"theme.system" = "System";
+"theme.light" = "Light";
+"theme.dark" = "Dark";
+
+"language.russian" = "Russian";
+"language.english" = "English";
+"language.chinese" = "Chinese";
+
+"profile.loading" = "Loading...";

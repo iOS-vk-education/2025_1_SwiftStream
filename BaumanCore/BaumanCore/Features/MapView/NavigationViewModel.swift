@@ -2,6 +2,7 @@ import Foundation
 import FirebaseFirestore
 import Combine
 import FirebaseCore
+import FirebaseFirestoreSwift
 
 class NavigationViewModel: ObservableObject {
     @Published var classrooms: [Classroom] = []

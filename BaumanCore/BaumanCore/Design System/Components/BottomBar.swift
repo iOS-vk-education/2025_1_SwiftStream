@@ -10,7 +10,7 @@ struct BottomBarView: View {
             }
             .tabItem {
                 Image("tab_route").renderingMode(.template)
-                Text("Маршрут")
+                Text("tab_route_title")
             }
             .tag(0)
             
@@ -19,7 +19,7 @@ struct BottomBarView: View {
             }
             .tabItem {
                 Image("tab_home").renderingMode(.template)
-                Text("Главная")
+                Text("tab_home_title")
             }
             .tag(1)
             
@@ -28,7 +28,7 @@ struct BottomBarView: View {
             }
             .tabItem {
                 Image("tab_calendar").renderingMode(.template)
-                Text("Расписание")
+                Text("tab_schedule_title")
             }
             .tag(2)
             
@@ -37,7 +37,7 @@ struct BottomBarView: View {
             }
             .tabItem {
                 Image("tab_grades").renderingMode(.template)
-                Text("Успеваемость")
+                Text("tab_grades_title")
             }
             .tag(3)
             
@@ -46,7 +46,7 @@ struct BottomBarView: View {
             }
             .tabItem {
                 Image("tab_profile").renderingMode(.template)
-                Text("Аккаунт")
+                Text("tab_account_title")
             }
             .tag(4)
         }
@@ -56,8 +56,21 @@ struct BottomBarView: View {
 
 struct BottomBarView_Previews: PreviewProvider {
     static var previews: some View {
-        let appState = AppState()
-        return BottomBarView(selectedTab: 4)
-            .environmentObject(appState)
+        Group {
+            BottomBarView(selectedTab: 4)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "ru"))
+                .previewDisplayName("Russian")
+            
+            BottomBarView(selectedTab: 4)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "en"))
+                .previewDisplayName("English")
+            
+            BottomBarView(selectedTab: 4)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "zh-Hans"))
+                .previewDisplayName("Chinese")
+        }
     }
 }

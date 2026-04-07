@@ -12,7 +12,7 @@ struct MapView: View {
     let upperFloors = ["7", "8", "9", "10", "11", "12"]
 
     var currentFloors: [String] {
-        return showingLowerFloors ? lowerFloors : upperFloors
+        showingLowerFloors ? lowerFloors : upperFloors
     }
 
     @State private var scale: CGFloat = 1.0
@@ -23,7 +23,7 @@ struct MapView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                Text("Навигатор")
+                Text("map_title")
                     .font(.system(size: 34, weight: .bold))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
@@ -117,8 +117,6 @@ struct MapView: View {
                             .stroke(Color.red, lineWidth: 3)
 
                             ForEach(viewModel.currentFloorSegment, id: \.classroom.number) { classroomWithFloor in
-
-
                                 let isFirstInRoute = viewModel.route.first?.classroom.number == classroomWithFloor.classroom.number
                                 let isLastInRoute = viewModel.route.last?.classroom.number == classroomWithFloor.classroom.number
                                 let isElevator = classroomWithFloor.classroom.number == "elevator"
@@ -195,13 +193,13 @@ struct MapView: View {
                             .foregroundColor(Colors.MainColor)
                             .font(.system(size: 14))
 
-                        Text("Продолжение маршрута на \(nextFloorInfo.floor) этаже")
+                        Text(routeContinuesText(for: nextFloorInfo.floor))
                             .font(.system(size: 14, weight: .medium))
                             .foregroundColor(Colors.MainColor)
 
                         Spacer()
 
-                        Button("Перейти") {
+                        Button("map_go_button") {
                             withAnimation {
                                 selectedFloor = nextFloorInfo.floor
                                 resetZoomAndScroll()
@@ -236,7 +234,7 @@ struct MapView: View {
                             )
 
                         if fromLocation.isEmpty {
-                            Text("Откуда")
+                            Text("map_from_placeholder")
                                 .foregroundColor(.gray)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 16)
@@ -254,7 +252,7 @@ struct MapView: View {
                             )
 
                         if toLocation.isEmpty {
-                            Text("Куда")
+                            Text("map_to_placeholder")
                                 .foregroundColor(.gray)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 16)
@@ -268,7 +266,7 @@ struct MapView: View {
                 Button(action: {
                     findRoute()
                 }) {
-                    Text("Построить маршрут")
+                    Text("map_build_route_button")
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundColor(Colors.white)
                         .frame(maxWidth: .infinity)
@@ -282,7 +280,7 @@ struct MapView: View {
                 .opacity(fromLocation.isEmpty || toLocation.isEmpty ? 0.6 : 1.0)
 
                 if viewModel.isLoading {
-                    Text("Загрузка данных...")
+                    Text("map_loading_data")
                         .font(.caption)
                         .foregroundColor(Colors.MainColor)
                         .padding(.bottom, 10)
@@ -313,6 +311,11 @@ struct MapView: View {
             }
         }
     }
+    
+    private func routeContinuesText(for floor: String) -> String {
+        let format = NSLocalizedString("map_route_continues_format", comment: "")
+        return String(format: format, floor)
+    }
 
     private func findRoute() {
         guard !fromLocation.isEmpty, !toLocation.isEmpty else { return }
@@ -335,13 +338,13 @@ struct MapView: View {
 
     private func getPointColor(isFirstInRoute: Bool, isLastInRoute: Bool, isElevator: Bool) -> Color {
         if isFirstInRoute {
-            return Color.red
+            return .red
         } else if isLastInRoute {
-            return Color.black
+            return .black
         } else if isElevator {
             return Colors.MainColor
         } else {
-            return Color.clear
+            return .clear
         }
     }
 
@@ -364,6 +367,21 @@ struct MapView: View {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        BottomBarView(selectedTab: 0)
+        Group {
+            BottomBarView(selectedTab: 0)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "ru"))
+                .previewDisplayName("Russian")
+
+            BottomBarView(selectedTab: 0)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "en"))
+                .previewDisplayName("English")
+
+            BottomBarView(selectedTab: 0)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "zh-Hans"))
+                .previewDisplayName("Chinese")
+        }
     }
 }

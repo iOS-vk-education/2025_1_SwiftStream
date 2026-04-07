@@ -1,0 +1,97 @@
+//экран профиля
+"profile_title" = "Profile";
+"loading" = "Loading...";
+"group" = "Group:";
+"personal_number" = "Personal number:";
+"app_theme" = "App theme:";
+"app_language" = "App language:";
+"logout" = "Log out";
+
+"support_service" = "University support service:";
+"phone" = "Phone:";
+"email" = "E-mail:";
+
+"delete_avatar_title" = "Delete avatar?";
+"cancel" = "Cancel";
+"delete" = "Delete";
+"delete_avatar_message" = "Are you sure you want to delete the profile photo?";
+
+"theme_system" = "System";
+"theme_light" = "Light";
+"theme_dark" = "Dark";
+
+"language_russian" = "Russian";
+"language_english" = "English";
+"language_chinese" = "Chinese";
+
+//экран логина
+"login_title" = "Sign in";
+
+"login_email_label" = "Email";
+"login_email_placeholder" = "Enter email";
+
+"login_password_label" = "Password";
+"login_password_placeholder" = "Enter password";
+
+"login_forgot_password" = "Forgot password?";
+
+"login_button" = "Sign in →";
+"login_button_loading" = "Signing in...";
+
+"login_no_account" = "Don't have an account?";
+"login_create_account" = "Create";
+
+"login_error_invalid_email" = "Please enter a valid email.";
+"login_error_password_length" = "Password must contain at least 6 characters.";
+"login_error_invalid_credentials" = "Incorrect email or password. Please check your credentials.";
+"login_error_network" = "Network error. Please check your internet connection.";
+
+//экран приветствия
+"welcome_title" = "Welcome!";
+"welcome_continue_button" = "Continue";
+
+//экран регистрации
+"register_title" = "Create an account";
+"register_description" = "To receive a personal login and password, you need to contact your faculty dean's office or send an email to support@bmstu.ru";
+"register_back_button" = "Go back";
+
+//экран восстановления пароля
+"forgot_password_title" = "Password recovery";
+"forgot_password_description" = "To recover your password, you need to contact your faculty dean's office or send an email to support@bmstu.ru";
+"forgot_password_back_button" = "Go back";
+
+//bottombar
+"tab_route_title" = "Route";
+"tab_home_title" = "Home";
+"tab_schedule_title" = "Schedule";
+"tab_grades_title" = "Grades";
+"tab_account_title" = "Account";
+
+//экран навигации
+"map_title" = "Navigator";
+"map_route_continues_format" = "Route continues on floor %@";
+"map_go_button" = "Go";
+"map_from_placeholder" = "From";
+"map_to_placeholder" = "To";
+"map_build_route_button" = "Build route";
+"map_loading_data" = "Loading data...";
+
+//экран успеваемости
+"grades_title" = "Grades";
+"grades_current_tab" = "Current";
+"grades_session_tab" = "Session";
+
+//экран расписания
+"schedule_title" = "Schedule";
+"schedule_group_label" = "Group";
+
+"schedule_day_mon" = "MON";
+"schedule_day_tue" = "TUE";
+"schedule_day_wed" = "WED";
+"schedule_day_thu" = "THU";
+"schedule_day_fri" = "FRI";
+"schedule_day_sat" = "SAT";
+
+"lesson_type_lecture" = "Lecture";
+"lesson_type_seminar" = "Seminar";
+"lesson_type_lab" = "Laboratory";

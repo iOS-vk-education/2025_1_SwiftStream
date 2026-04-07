@@ -1,0 +1,100 @@
+//экран профиля
+"profile_title" = "个人资料";
+"loading" = "加载中...";
+"group" = "组:";
+"personal_number" = "个人编号:";
+"app_theme" = "应用主题:";
+"app_language" = "应用语言:";
+"logout" = "退出账号";
+
+"support_service" = "大学支持服务:";
+"phone" = "电话:";
+"email" = "电子邮件:";
+
+"delete_avatar_title" = "删除头像？";
+"cancel" = "取消";
+"delete" = "删除";
+"delete_avatar_message" = "您确定要删除个人头像吗？";
+
+"theme_system" = "系统";
+"theme_light" = "浅色";
+"theme_dark" = "深色";
+
+"language_russian" = "俄语";
+"language_english" = "英语";
+"language_chinese" = "中文";
+
+
+//экран логина
+"login_title" = "登录账户";
+
+"login_email_label" = "电子邮箱";
+"login_email_placeholder" = "输入邮箱";
+
+"login_password_label" = "密码";
+"login_password_placeholder" = "输入密码";
+
+"login_forgot_password" = "忘记密码？";
+
+"login_button" = "登录 →";
+"login_button_loading" = "登录中...";
+
+"login_no_account" = "没有账号？";
+"login_create_account" = "创建";
+
+"login_error_invalid_email" = "请输入有效的邮箱地址。";
+"login_error_password_length" = "密码至少需要6个字符。";
+"login_error_invalid_credentials" = "邮箱或密码错误，请检查输入。";
+"login_error_network" = "网络错误，请检查网络连接。";
+
+
+//экран приветствия
+"welcome_title" = "欢迎！";
+"welcome_continue_button" = "继续";
+
+
+//экран регистрации
+"register_title" = "创建账号";
+"register_description" = "如需获取个人登录名和密码，请联系您所在学院的教务办公室，或发送邮件至 support@bmstu.ru";
+"register_back_button" = "返回";
+
+//экран восстановления пароля
+"forgot_password_title" = "找回密码";
+"forgot_password_description" = "如需找回密码，请联系您所在学院的教务办公室，或发送邮件至 support@bmstu.ru";
+"forgot_password_back_button" = "返回";
+
+//bottombar
+"tab_route_title" = "路线";
+"tab_home_title" = "主页";
+"tab_schedule_title" = "课表";
+"tab_grades_title" = "成绩";
+"tab_account_title" = "账户";
+
+//экран навигации
+"map_title" = "导航";
+"map_route_continues_format" = "路线继续到第%@层";
+"map_go_button" = "前往";
+"map_from_placeholder" = "从哪里";
+"map_to_placeholder" = "到哪里";
+"map_build_route_button" = "规划路线";
+"map_loading_data" = "正在加载数据...";
+
+//экран успеваемости
+"grades_title" = "成绩";
+"grades_current_tab" = "当前";
+"grades_session_tab" = "考试";
+
+//экран расписания
+"schedule_title" = "课表";
+"schedule_group_label" = "班级";
+
+"schedule_day_mon" = "周一";
+"schedule_day_tue" = "周二";
+"schedule_day_wed" = "周三";
+"schedule_day_thu" = "周四";
+"schedule_day_fri" = "周五";
+"schedule_day_sat" = "周六";
+
+"lesson_type_lecture" = "讲座";
+"lesson_type_seminar" = "研讨课";
+"lesson_type_lab" = "实验课";

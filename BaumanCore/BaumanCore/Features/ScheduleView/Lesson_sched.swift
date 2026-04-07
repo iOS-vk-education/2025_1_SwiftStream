@@ -1,17 +1,30 @@
 import Foundation
 import SwiftUI
 
-
-enum LessonType: String {
-    case lecture = "Лекция"
-    case seminar = "Семинар"
-    case lab = "Лабораторная"
+enum LessonType {
+    case lecture
+    case seminar
+    case lab
 
     var color: Color {
         switch self {
-        case .lecture: return Color.blue.opacity(0.4)
-        case .seminar: return Color.mint.opacity(0.4)
-        case .lab:     return Color.purple.opacity(0.4)
+        case .lecture:
+            return Color.blue.opacity(0.4)
+        case .seminar:
+            return Color.mint.opacity(0.4)
+        case .lab:
+            return Color.purple.opacity(0.4)
+        }
+    }
+
+    var titleKey: String {
+        switch self {
+        case .lecture:
+            return "lesson_type_lecture"
+        case .seminar:
+            return "lesson_type_seminar"
+        case .lab:
+            return "lesson_type_lab"
         }
     }
 }
@@ -26,7 +39,7 @@ struct LessonCardView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Text(type.rawValue)
+            Text(LocalizedStringKey(type.titleKey))
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -63,4 +76,3 @@ struct LessonCardView: View {
         .padding(.horizontal)
     }
 }
-

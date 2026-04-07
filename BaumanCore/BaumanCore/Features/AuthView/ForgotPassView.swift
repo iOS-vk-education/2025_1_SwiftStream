@@ -6,7 +6,7 @@ struct ForgotPassView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Text("Восстановление пароля")
+            Text("forgot_password_title")
                 .font(.SFPro(29, weight: .semibold))
                 .foregroundColor(Colors.MainColor)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -15,7 +15,7 @@ struct ForgotPassView: View {
             
             Spacer()
             
-            Text("Для восстановления пароля необходимо обратиться в деканат Вашего факультета или отправить письмо на почту support@bmstu.ru")
+            Text("forgot_password_description")
                 .font(.SFPro(17))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 24)
@@ -25,7 +25,7 @@ struct ForgotPassView: View {
             Button {
                 dismiss()
             } label: {
-                Text("Вернуться")
+                Text("forgot_password_back_button")
                     .font(.SFPro(17))
                     .foregroundColor(Colors.white)
                     .frame(maxWidth: .infinity)
@@ -42,9 +42,27 @@ struct ForgotPassView: View {
 
 struct ForgotPassView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            ForgotPassView()
-                .tint(Colors.MainColor)
+        Group {
+            NavigationStack {
+                ForgotPassView()
+                    .tint(Colors.MainColor)
+                    .environment(\.locale, Locale(identifier: "ru"))
+            }
+            .previewDisplayName("Russian")
+            
+            NavigationStack {
+                ForgotPassView()
+                    .tint(Colors.MainColor)
+                    .environment(\.locale, Locale(identifier: "en"))
+            }
+            .previewDisplayName("English")
+            
+            NavigationStack {
+                ForgotPassView()
+                    .tint(Colors.MainColor)
+                    .environment(\.locale, Locale(identifier: "zh-Hans"))
+            }
+            .previewDisplayName("Chinese")
         }
     }
 }

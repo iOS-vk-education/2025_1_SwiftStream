@@ -4,20 +4,24 @@ struct Profile: View {
     @EnvironmentObject var appState: AppState
     @Environment(\.openURL) private var openURL
     @AppStorage("userSelectedTheme") private var selectedThemeRawValue = 0
+    @AppStorage("userSelectedLanguage") private var selectedLanguageRawValue = 0
     @StateObject private var vm = ProfileViewModel()
     @State private var showImagePicker = false
     @State private var showDeleteAlert = false
 
+    private let themeOptions = ["theme_system", "theme_light", "theme_dark"]
+    private let languageOptions = ["language_russian", "language_english", "language_chinese"]
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                Text("Профиль")
+                Text("profile_title")
                     .font(.SFPro(33, weight: .regular))
                     .foregroundColor(Colors.black)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 60)
                     .padding(.horizontal, 24)
-                
+
                 HStack(spacing: 15) {
                     ZStack(alignment: .bottomTrailing) {
                         Group {
@@ -34,8 +38,10 @@ struct Profile: View {
                         }
                         .frame(width: 80, height: 80)
                         .clipShape(Circle())
-                        
-                        Button { showImagePicker = true } label: {
+
+                        Button {
+                            showImagePicker = true
+                        } label: {
                             Image(systemName: "camera.circle.fill")
                                 .resizable()
                                 .frame(width: 24, height: 24)
@@ -43,29 +49,33 @@ struct Profile: View {
                                 .background(Circle().fill(Colors.MainColor))
                         }
                     }
-                    .onTapGesture { showImagePicker = true }
+                    .onTapGesture {
+                        showImagePicker = true
+                    }
                     .onLongPressGesture {
                         if vm.avatar != nil {
                             showDeleteAlert = true
                         }
                     }
-                    .alert("Удалить аватарку?", isPresented: $showDeleteAlert) {
-                        Button("Отмена", role: .cancel) { }
-                        Button("Удалить", role: .destructive) {
+                    .alert("delete_avatar_title", isPresented: $showDeleteAlert) {
+                        Button("cancel", role: .cancel) { }
+                        Button("delete", role: .destructive) {
                             vm.deleteAvatar()
                         }
                     } message: {
-                        Text("Вы действительно хотите удалить фото профиля?")
+                        Text("delete_avatar_message")
                     }
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(vm.student?.name ?? "Загрузка...")
+                        Text(vm.student?.name ?? String(localized: "loading"))
                             .font(.SFPro(21))
                             .foregroundColor(Colors.black)
+
                         Text(vm.student?.email ?? "")
                             .font(.SFPro(14))
                             .foregroundColor(Colors.LightGray)
                     }
+
                     Spacer()
                 }
                 .padding(10)
@@ -77,14 +87,17 @@ struct Profile: View {
                 .sheet(isPresented: $showImagePicker) {
                     ImagePicker(
                         image: $vm.avatar,
-                        userID: vm.student?.studentID.isEmpty ?? true ? "anonymous" : vm.student?.studentID ?? "anonymous"
+                        userID: vm.student?.studentID.isEmpty ?? true
+                            ? "anonymous"
+                            : vm.student?.studentID ?? "anonymous"
                     )
                 }
-    
+
                 HStack {
-                    Text("Группа:")
+                    Text("group")
                         .font(.SFPro(15, weight: .semibold))
                         .foregroundColor(Colors.black)
+
                     Spacer()
 
                     Text(vm.student?.group ?? "")
@@ -99,7 +112,7 @@ struct Profile: View {
                 .padding(.horizontal, 17)
 
                 HStack {
-                    Text("Личный номер:")
+                    Text("personal_number")
                         .font(.SFPro(15, weight: .semibold))
                         .foregroundColor(Colors.black)
 
@@ -117,15 +130,39 @@ struct Profile: View {
                 .padding(.horizontal, 17)
 
                 HStack {
-                    Text("Тема приложения:")
+                    Text("app_theme")
                         .font(.SFPro(15, weight: .semibold))
                         .foregroundColor(Colors.black)
 
                     Spacer()
 
                     Picker("", selection: $selectedThemeRawValue) {
-                        ForEach(0..<3) { index in
-                            Text(self.themeOptions[index])
+                        ForEach(0..<themeOptions.count, id: \.self) { index in
+                            Text(LocalizedStringKey(themeOptions[index]))
+                                .tag(index)
+                        }
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                    .font(.SFPro(15))
+                    .labelsHidden()
+                }
+                .padding(10)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Colors.MainColor, lineWidth: 0.7)
+                )
+                .padding(.horizontal, 17)
+
+                HStack {
+                    Text("app_language")
+                        .font(.SFPro(15, weight: .semibold))
+                        .foregroundColor(Colors.black)
+
+                    Spacer()
+
+                    Picker("", selection: $selectedLanguageRawValue) {
+                        ForEach(0..<languageOptions.count, id: \.self) { index in
+                            Text(LocalizedStringKey(languageOptions[index]))
                                 .tag(index)
                         }
                     }
@@ -149,9 +186,9 @@ struct Profile: View {
                     .padding(.horizontal, 17)
 
                 Button {
-                    appState.isLoggedIn = false
+                    appState.logout()
                 } label: {
-                    Text("Выйти из аккаунта")
+                    Text("logout")
                         .font(.SFPro(15, weight: .semibold))
                         .foregroundColor(Colors.MainColor)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -165,15 +202,12 @@ struct Profile: View {
         .onChange(of: selectedThemeRawValue) { _ in
             updateTheme()
         }
-        
         .onAppear {
             updateTheme()
-            vm.loadIfNeeded()  
+            vm.loadIfNeeded()
         }
     }
 
-    private let themeOptions = ["Системная", "Светлая", "Темная"]
-    
     private func updateTheme() {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else { return }
@@ -200,12 +234,12 @@ private struct SupportBlock: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Служба поддержки университета:")
+            Text("support_service")
                 .font(.SFPro(15, weight: .semibold))
                 .foregroundColor(Colors.black)
 
             HStack {
-                Text("Телефон:")
+                Text("phone")
                     .font(.SFPro(15))
                     .foregroundColor(Colors.black)
 
@@ -224,7 +258,7 @@ private struct SupportBlock: View {
             }
 
             HStack {
-                Text("E-mail:")
+                Text("email")
                     .font(.SFPro(15))
                     .foregroundColor(Colors.black)
 
@@ -247,8 +281,21 @@ private struct SupportBlock: View {
 
 struct Profile_Previews: PreviewProvider {
     static var previews: some View {
-        let appState = AppState()
-        return BottomBarView(selectedTab: 4)
-            .environmentObject(appState)
+        Group {
+            BottomBarView(selectedTab: 4)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "ru"))
+                .previewDisplayName("Russian")
+
+            BottomBarView(selectedTab: 4)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "en"))
+                .previewDisplayName("English")
+
+            BottomBarView(selectedTab: 4)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "zh-Hans"))
+                .previewDisplayName("Chinese")
+        }
     }
 }

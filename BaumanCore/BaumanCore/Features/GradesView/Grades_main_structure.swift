@@ -38,8 +38,6 @@ struct Grades: View {
                 .ignoresSafeArea(edges: .top)
             
             // эффект стекла
-            
-        
             /*GradesHatView(selectedTab: $selectedTab)
                     .glassEffect(.clear, in: .rect(cornerRadius: 0, style: .continuous))
                     .clipShape(HorizontalInsetShape(insetX: 16))
