@@ -30,7 +30,6 @@ struct Profile: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 60)
                     .padding(.horizontal, 24)
-
                 HStack(spacing: 15) {
                     ZStack(alignment: .bottomTrailing) {
                         Group {
