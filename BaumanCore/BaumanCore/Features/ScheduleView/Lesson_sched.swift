@@ -17,14 +17,14 @@ enum LessonType {
         }
     }
 
-    var titleKey: String {
+    var title: LocalizedStringKey {
         switch self {
         case .lecture:
-            return "lesson_type_lecture"
+            return Translation.LessonType.lecture
         case .seminar:
-            return "lesson_type_seminar"
+            return Translation.LessonType.seminar
         case .lab:
-            return "lesson_type_lab"
+            return Translation.LessonType.lab
         }
     }
 }
@@ -39,7 +39,7 @@ struct LessonCardView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Text(LocalizedStringKey(type.titleKey))
+            Text(type.title)
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -51,6 +51,7 @@ struct LessonCardView: View {
                 VStack(alignment: .leading) {
                     Text(timeStart)
                         .font(.system(size: 17, weight: .bold))
+
                     Text(timeEnd)
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
@@ -59,9 +60,11 @@ struct LessonCardView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(subject)
                         .font(.system(size: 16, weight: .semibold))
+
                     Text(teacher)
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
+
                     Text("ауд. \(classroom)")
                         .font(.system(size: 14))
                         .foregroundColor(.gray)

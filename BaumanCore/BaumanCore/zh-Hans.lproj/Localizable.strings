@@ -98,3 +98,5 @@
 "lesson_type_lecture" = "讲座";
 "lesson_type_seminar" = "研讨课";
 "lesson_type_lab" = "实验课";
+
+"schedule_no_lessons_sunday" = "今天是星期日，所以没有课程";

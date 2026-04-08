@@ -6,14 +6,14 @@ struct Schedule: View {
     @State private var lastSelectedWeek: Int = 1
     @State private var lastSelectedDay: Int = 1
 
-    var days: [(id: Int, nameKey: String, dayNumber: String)] {
+    var days: [(id: Int, nameKey: LocalizedStringKey, dayNumber: String)] {
         [
-            (1, "schedule_day_mon", dateManager.getDayNumberForDay(dayIndex: 1)),
-            (2, "schedule_day_tue", dateManager.getDayNumberForDay(dayIndex: 2)),
-            (3, "schedule_day_wed", dateManager.getDayNumberForDay(dayIndex: 3)),
-            (4, "schedule_day_thu", dateManager.getDayNumberForDay(dayIndex: 4)),
-            (5, "schedule_day_fri", dateManager.getDayNumberForDay(dayIndex: 5)),
-            (6, "schedule_day_sat", dateManager.getDayNumberForDay(dayIndex: 6))
+            (1, Translation.Schedule.monday, dateManager.getDayNumberForDay(dayIndex: 1)),
+            (2, Translation.Schedule.tuesday, dateManager.getDayNumberForDay(dayIndex: 2)),
+            (3, Translation.Schedule.wednesday, dateManager.getDayNumberForDay(dayIndex: 3)),
+            (4, Translation.Schedule.thursday, dateManager.getDayNumberForDay(dayIndex: 4)),
+            (5, Translation.Schedule.friday, dateManager.getDayNumberForDay(dayIndex: 5)),
+            (6, Translation.Schedule.saturday, dateManager.getDayNumberForDay(dayIndex: 6))
         ]
     }
     
@@ -24,7 +24,7 @@ struct Schedule: View {
         return nil
     }
     
-    var LessonsCount: Int {
+    var lessonsCount: Int {
         if lastSelectedDay == 0 {
             return 0
         }
@@ -35,17 +35,17 @@ struct Schedule: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                Text("schedule_title")
+                Text(Translation.Schedule.title)
                     .fontWeight(.bold)
                     .font(.system(size: 30))
                     .padding(.bottom, 5)
 
                 VStack(alignment: .leading, spacing: 2) {
                     (
-                        Text("schedule_group_label") +
+                        Text(Translation.Schedule.group) +
                         Text(": ФН12-71Б")
-                        
                     )
+
                     Text(dateManager.weekTitle)
                 }
                 .foregroundColor(.gray)
@@ -59,8 +59,9 @@ struct Schedule: View {
                         lastSelectedDay = day.id
                     }) {
                         VStack(spacing: 4) {
-                            Text(LocalizedStringKey(day.nameKey))
+                            Text(day.nameKey)
                                 .font(.system(size: 14, weight: .medium))
+
                             Text(day.dayNumber)
                                 .font(.system(size: 18, weight: .bold))
                         }
@@ -90,7 +91,7 @@ struct Schedule: View {
                     .offset(y: dateManager.animateDayButtons ? 15 : 0)
                     .animation(
                         .easeOut(duration: 0.4)
-                        .delay(Double(index) * 0.05),
+                            .delay(Double(index) * 0.05),
                         value: dateManager.animateDayButtons
                     )
                 }
@@ -107,14 +108,14 @@ struct Schedule: View {
             )
 
             VStack(spacing: 16) {
-                if LessonsCount == 0 {
-                    Text("Сегодня воскресенье, поэтому пар нет")
+                if lessonsCount == 0 {
+                    Text(Translation.Schedule.noLessonsSunday)
                         .font(.title2)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
-                    ForEach(0..<LessonsCount, id: \.self) { index in
+                    ForEach(0..<lessonsCount, id: \.self) { index in
                         let type: LessonType = {
                             switch index % 3 {
                             case 0: return .lecture

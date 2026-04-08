@@ -6,7 +6,7 @@ struct RegisterView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Text("register_title")
+            Text(Translation.Register.title)
                 .font(.SFPro(33, weight: .semibold))
                 .foregroundColor(Colors.MainColor)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -15,7 +15,7 @@ struct RegisterView: View {
             
             Spacer()
             
-            Text("register_description")
+            Text(Translation.Register.description)
                 .font(.SFPro(17))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 24)
@@ -25,7 +25,7 @@ struct RegisterView: View {
             Button {
                 dismiss()
             } label: {
-                Text("register_back_button")
+                Text(Translation.Register.backButton)
                     .font(.SFPro(17))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)

@@ -8,24 +8,23 @@ struct LoginView: View {
     @State private var login: String = ""
     @State private var password: String = ""
     @State private var isPasswordVisible = false
-    @State private var errorMessageKey: String = ""
+    @State private var errorMessage: LocalizedStringKey? = nil
     @State private var isLoading: Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
-            Text("login_title")
+            Text(Translation.Login.title)
                 .font(.SFPro(33))
                 .foregroundColor(Colors.MainColor)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 60)
                 .padding(.horizontal, 24)
 
-            
             Group {
-                if errorMessageKey.isEmpty {
-                    Text(" ")
+                if let errorMessage {
+                    Text(errorMessage)
                 } else {
-                    Text(LocalizedStringKey(errorMessageKey))
+                    Text(" ")
                 }
             }
             .foregroundColor(.red)
@@ -35,19 +34,18 @@ struct LoginView: View {
             .padding(.horizontal, 24)
             .padding(.top, 8)
 
-
             Spacer()
 
             VStack(alignment: .leading, spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("login_email_label")
+                    Text(Translation.Login.emailLabel)
                         .font(.SFPro(17))
                         .foregroundColor(Colors.black)
 
                     TextField(
                         "",
                         text: $login,
-                        prompt: Text("login_email_placeholder")
+                        prompt: Text(Translation.Login.emailPlaceholder)
                             .font(.SFPro(17))
                             .foregroundColor(Colors.LightLightGray)
                     )
@@ -63,7 +61,7 @@ struct LoginView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("login_password_label")
+                    Text(Translation.Login.passwordLabel)
                         .font(.SFPro(17))
                         .foregroundColor(Colors.black)
 
@@ -72,7 +70,7 @@ struct LoginView: View {
                             TextField(
                                 "",
                                 text: $password,
-                                prompt: Text("login_password_placeholder")
+                                prompt: Text(Translation.Login.passwordPlaceholder)
                                     .font(.SFPro(17))
                                     .foregroundColor(Colors.LightLightGray)
                             )
@@ -83,7 +81,7 @@ struct LoginView: View {
                             SecureField(
                                 "",
                                 text: $password,
-                                prompt: Text("login_password_placeholder")
+                                prompt: Text(Translation.Login.passwordPlaceholder)
                                     .font(.SFPro(17))
                                     .foregroundColor(Colors.LightLightGray)
                             )
@@ -108,7 +106,7 @@ struct LoginView: View {
                 NavigationLink {
                     ForgotPassView()
                 } label: {
-                    Text("login_forgot_password")
+                    Text(Translation.Login.forgotPassword)
                         .font(.SFPro(17))
                         .foregroundColor(Colors.MainColor)
                 }
@@ -118,7 +116,7 @@ struct LoginView: View {
             Spacer()
 
             Button(action: {
-                errorMessageKey = ""
+                errorMessage = nil
                 attemptLogin()
             }) {
                 HStack {
@@ -128,10 +126,17 @@ struct LoginView: View {
                             .padding(.leading, 15)
                     }
 
-                    Text(isLoading ? "login_button_loading" : "login_button")
-                        .font(.SFPro(17, weight: .semibold))
-                        .foregroundColor(Colors.white)
-                        .frame(maxWidth: .infinity, alignment: .center)
+                    if isLoading {
+                        Text(Translation.Login.loginButtonLoading)
+                            .font(.SFPro(17, weight: .semibold))
+                            .foregroundColor(Colors.white)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    } else {
+                        Text(Translation.Login.loginButton)
+                            .font(.SFPro(17, weight: .semibold))
+                            .foregroundColor(Colors.white)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -142,14 +147,14 @@ struct LoginView: View {
             .padding(.horizontal, 24)
 
             HStack(spacing: 0) {
-                Text("login_no_account")
+                Text(Translation.Login.noAccount)
                     .font(.SFPro(17))
                     .foregroundColor(Colors.LightGray)
 
                 NavigationLink {
                     RegisterView()
                 } label: {
-                    Text("login_create_account")
+                    Text(Translation.Login.createAccount)
                         .font(.SFPro(17))
                         .foregroundColor(Colors.MainColor)
                 }
@@ -162,17 +167,17 @@ struct LoginView: View {
 
     private func attemptLogin() {
         guard isValidEmail(login) else {
-            errorMessageKey = "login_error_invalid_email"
+            errorMessage = Translation.Login.invalidEmail
             return
         }
 
         guard password.count >= 6 else {
-            errorMessageKey = "login_error_password_length"
+            errorMessage = Translation.Login.passwordLength
             return
         }
 
         isLoading = true
-        errorMessageKey = ""
+        errorMessage = nil
 
         Auth.auth().signIn(withEmail: login, password: password) { authResult, error in
             DispatchQueue.main.async {
@@ -186,13 +191,13 @@ struct LoginView: View {
 
                     switch error.code {
                     case 17004, 17005, 17006, 17007, 17008, 17009, 17010, 17011:
-                        self.errorMessageKey = "login_error_invalid_credentials"
+                        self.errorMessage = Translation.Login.invalidCredentials
 
                     case -1009:
-                        self.errorMessageKey = "login_error_network"
+                        self.errorMessage = Translation.Login.networkError
 
                     default:
-                        self.errorMessageKey = "login_error_invalid_credentials"
+                        self.errorMessage = Translation.Login.invalidCredentials
                     }
                 } else {
                     print("Успешный вход для: \(self.login)")

@@ -95,3 +95,5 @@
 "lesson_type_lecture" = "Lecture";
 "lesson_type_seminar" = "Seminar";
 "lesson_type_lab" = "Laboratory";
+
+"schedule_no_lessons_sunday" = "Today is Sunday, so there are no classes";

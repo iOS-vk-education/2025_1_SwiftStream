@@ -6,7 +6,7 @@ struct ForgotPassView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Text("forgot_password_title")
+            Text(Translation.ForgotPassword.title)
                 .font(.SFPro(29, weight: .semibold))
                 .foregroundColor(Colors.MainColor)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -15,7 +15,7 @@ struct ForgotPassView: View {
             
             Spacer()
             
-            Text("forgot_password_description")
+            Text(Translation.ForgotPassword.description)
                 .font(.SFPro(17))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 24)
@@ -25,7 +25,7 @@ struct ForgotPassView: View {
             Button {
                 dismiss()
             } label: {
-                Text("forgot_password_back_button")
+                Text(Translation.ForgotPassword.backButton)
                     .font(.SFPro(17))
                     .foregroundColor(Colors.white)
                     .frame(maxWidth: .infinity)

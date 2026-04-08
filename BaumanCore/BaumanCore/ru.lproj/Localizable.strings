@@ -95,3 +95,5 @@
 "lesson_type_lecture" = "Лекция";
 "lesson_type_seminar" = "Семинар";
 "lesson_type_lab" = "Лабораторная";
+
+"schedule_no_lessons_sunday" = "Сегодня воскресенье, поэтому пар нет";

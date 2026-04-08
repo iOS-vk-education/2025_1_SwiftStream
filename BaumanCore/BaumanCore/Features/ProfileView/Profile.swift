@@ -9,13 +9,22 @@ struct Profile: View {
     @State private var showImagePicker = false
     @State private var showDeleteAlert = false
 
-    private let themeOptions = ["theme_system", "theme_light", "theme_dark"]
-    private let languageOptions = ["language_russian", "language_english", "language_chinese"]
+    private let themeOptions: [LocalizedStringKey] = [
+        Translation.Profile.themeSystem,
+        Translation.Profile.themeLight,
+        Translation.Profile.themeDark
+    ]
+
+    private let languageOptions: [LocalizedStringKey] = [
+        Translation.Profile.languageRussian,
+        Translation.Profile.languageEnglish,
+        Translation.Profile.languageChinese
+    ]
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                Text("profile_title")
+                Text(Translation.Profile.title)
                     .font(.SFPro(33, weight: .regular))
                     .foregroundColor(Colors.black)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -57,19 +66,26 @@ struct Profile: View {
                             showDeleteAlert = true
                         }
                     }
-                    .alert("delete_avatar_title", isPresented: $showDeleteAlert) {
-                        Button("cancel", role: .cancel) { }
-                        Button("delete", role: .destructive) {
+                    .alert(Translation.Profile.deleteAvatarTitle, isPresented: $showDeleteAlert) {
+                        Button(Translation.Profile.cancel, role: .cancel) { }
+                        Button(Translation.Profile.delete, role: .destructive) {
                             vm.deleteAvatar()
                         }
                     } message: {
-                        Text("delete_avatar_message")
+                        Text(Translation.Profile.deleteAvatarMessage)
                     }
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(vm.student?.name ?? String(localized: "loading"))
-                            .font(.SFPro(21))
-                            .foregroundColor(Colors.black)
+
+                        if let name = vm.student?.name {
+                            Text(name)
+                                .font(.SFPro(21))
+                                .foregroundColor(Colors.black)
+                        } else {
+                            Text(Translation.Profile.loading)
+                                .font(.SFPro(21))
+                                .foregroundColor(Colors.black)
+                        }
 
                         Text(vm.student?.email ?? "")
                             .font(.SFPro(14))
@@ -94,7 +110,7 @@ struct Profile: View {
                 }
 
                 HStack {
-                    Text("group")
+                    Text(Translation.Profile.group)
                         .font(.SFPro(15, weight: .semibold))
                         .foregroundColor(Colors.black)
 
@@ -112,7 +128,7 @@ struct Profile: View {
                 .padding(.horizontal, 17)
 
                 HStack {
-                    Text("personal_number")
+                    Text(Translation.Profile.personalNumber)
                         .font(.SFPro(15, weight: .semibold))
                         .foregroundColor(Colors.black)
 
@@ -130,7 +146,7 @@ struct Profile: View {
                 .padding(.horizontal, 17)
 
                 HStack {
-                    Text("app_theme")
+                    Text(Translation.Profile.appTheme)
                         .font(.SFPro(15, weight: .semibold))
                         .foregroundColor(Colors.black)
 
@@ -138,7 +154,7 @@ struct Profile: View {
 
                     Picker("", selection: $selectedThemeRawValue) {
                         ForEach(0..<themeOptions.count, id: \.self) { index in
-                            Text(LocalizedStringKey(themeOptions[index]))
+                            Text(themeOptions[index])
                                 .tag(index)
                         }
                     }
@@ -154,7 +170,7 @@ struct Profile: View {
                 .padding(.horizontal, 17)
 
                 HStack {
-                    Text("app_language")
+                    Text(Translation.Profile.appLanguage)
                         .font(.SFPro(15, weight: .semibold))
                         .foregroundColor(Colors.black)
 
@@ -162,7 +178,7 @@ struct Profile: View {
 
                     Picker("", selection: $selectedLanguageRawValue) {
                         ForEach(0..<languageOptions.count, id: \.self) { index in
-                            Text(LocalizedStringKey(languageOptions[index]))
+                            Text(languageOptions[index])
                                 .tag(index)
                         }
                     }
@@ -188,7 +204,7 @@ struct Profile: View {
                 Button {
                     appState.logout()
                 } label: {
-                    Text("logout")
+                    Text(Translation.Profile.logout)
                         .font(.SFPro(15, weight: .semibold))
                         .foregroundColor(Colors.MainColor)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -234,12 +250,12 @@ private struct SupportBlock: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("support_service")
+            Text(Translation.Profile.supportService)
                 .font(.SFPro(15, weight: .semibold))
                 .foregroundColor(Colors.black)
 
             HStack {
-                Text("phone")
+                Text(Translation.Profile.phone)
                     .font(.SFPro(15))
                     .foregroundColor(Colors.black)
 
@@ -258,7 +274,7 @@ private struct SupportBlock: View {
             }
 
             HStack {
-                Text("email")
+                Text(Translation.Profile.email)
                     .font(.SFPro(15))
                     .foregroundColor(Colors.black)
 

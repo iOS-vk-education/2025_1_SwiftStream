@@ -54,6 +54,7 @@
 		CEC878E12EF9F354000863DF /* ForgotPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC878E02EF9F354000863DF /* ForgotPassView.swift */; };
 		CED65F872F732DF90065EFE4 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CED65F862F732DF90065EFE4 /* FirebaseFirestoreSwift */; };
 		CED65F922F7839360065EFE4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CED65F942F7839360065EFE4 /* Localizable.strings */; };
+		CED65F9A2F8643E10065EFE4 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED65F992F8643E10065EFE4 /* Translation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +104,7 @@
 		CED65F932F7839360065EFE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CED65F952F7839520065EFE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CED65F962F7839690065EFE4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CED65F992F8643E10065EFE4 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +294,7 @@
 				AC8012762EE8F166003B6419 /* Lesson.swift */,
 				CEA6A62C2EFAC11B00A13550 /* Semester.swift */,
 				CE37A9232F0480FB001CD754 /* News.swift */,
+				CED65F992F8643E10065EFE4 /* Translation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				CE2A3DFD2ED8DC7000C09F87 /* MainPage.swift in Sources */,
 				CE2A3DE12ED85A7B00C09F87 /* BaumanCoreApp.swift in Sources */,
 				AC8012752EE8F159003B6419 /* Subject.swift in Sources */,
+				CED65F9A2F8643E10065EFE4 /* Translation.swift in Sources */,
 				63684A682EE9CB7200B1DCD8 /* RegisterView.swift in Sources */,
 				AC7C347F2EF8117D000F47D5 /* Grades_semester_content.swift in Sources */,
 				CE37A92D2F054CCB001CD754 /* NavigationViewModel.swift in Sources */,

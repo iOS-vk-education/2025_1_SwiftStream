@@ -1,24 +1,23 @@
 import SwiftUI
 
-// шапка экрана (название + вкладки)
-
 struct GradesHatView: View {
     @Binding var selectedTab: Grades.Tab
     
     var body: some View {
         VStack(spacing: 24) {
             HStack {
-                Text("grades_title")
+                Text(Translation.Grades.title)
                     .fontWeight(.bold)
                     .font(.system(size: 30))
                 Spacer()
             }
             
             HStack(spacing: 24) {
-                gradesTabButton(title: "grades_current_tab", isActive: selectedTab == .current) {
+                gradesTabButton(title: Translation.Grades.current, isActive: selectedTab == .current) {
                     selectedTab = .current
                 }
-                gradesTabButton(title: "grades_session_tab", isActive: selectedTab == .session) {
+
+                gradesTabButton(title: Translation.Grades.session, isActive: selectedTab == .session) {
                     selectedTab = .session
                 }
             }
@@ -27,11 +26,10 @@ struct GradesHatView: View {
         .padding(.top, 20)
         .frame(maxWidth: .infinity)
     }
-    
-    // анимация кнопок вкладок
-    private func gradesTabButton(title: String, isActive: Bool, action: @escaping () -> Void) -> some View {
+
+    private func gradesTabButton(title: LocalizedStringKey, isActive: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            Text(LocalizedStringKey(title))
+            Text(title)
                 .font(.headline)
                 .foregroundColor(isActive ? Colors.white : Colors.black)
                 .frame(width: 110)
@@ -48,7 +46,6 @@ struct GradesHatView: View {
     }
 }
 
-// маска (для шапки)
 struct HorizontalInsetShape: Shape {
     var insetX: CGFloat
 

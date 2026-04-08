@@ -23,7 +23,7 @@ struct MapView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                Text("map_title")
+                Text(Translation.Map.title)
                     .font(.system(size: 34, weight: .bold))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
@@ -199,7 +199,7 @@ struct MapView: View {
 
                         Spacer()
 
-                        Button("map_go_button") {
+                        Button(Translation.Map.goButton) {
                             withAnimation {
                                 selectedFloor = nextFloorInfo.floor
                                 resetZoomAndScroll()
@@ -234,7 +234,7 @@ struct MapView: View {
                             )
 
                         if fromLocation.isEmpty {
-                            Text("map_from_placeholder")
+                            Text(Translation.Map.fromPlaceholder)
                                 .foregroundColor(.gray)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 16)
@@ -252,7 +252,7 @@ struct MapView: View {
                             )
 
                         if toLocation.isEmpty {
-                            Text("map_to_placeholder")
+                            Text(Translation.Map.toPlaceholder)
                                 .foregroundColor(.gray)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 16)
@@ -266,7 +266,7 @@ struct MapView: View {
                 Button(action: {
                     findRoute()
                 }) {
-                    Text("map_build_route_button")
+                    Text(Translation.Map.buildRouteButton)
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundColor(Colors.white)
                         .frame(maxWidth: .infinity)
@@ -280,7 +280,7 @@ struct MapView: View {
                 .opacity(fromLocation.isEmpty || toLocation.isEmpty ? 0.6 : 1.0)
 
                 if viewModel.isLoading {
-                    Text("map_loading_data")
+                    Text(Translation.Map.loadingData)
                         .font(.caption)
                         .foregroundColor(Colors.MainColor)
                         .padding(.bottom, 10)
