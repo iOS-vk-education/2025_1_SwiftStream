@@ -42,7 +42,7 @@ struct ImageCarousel: View {
             .frame(height: 200)
         }
         .frame(height: 220)
-        .task(priority: .background) {
+        .task {
             await vm.load()
         }
     }

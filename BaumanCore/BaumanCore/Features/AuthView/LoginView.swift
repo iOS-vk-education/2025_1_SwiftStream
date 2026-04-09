@@ -8,40 +8,44 @@ struct LoginView: View {
     @State private var login: String = ""
     @State private var password: String = ""
     @State private var isPasswordVisible = false
-    @State private var errorMessage: String = ""
+    @State private var errorMessage: LocalizedStringKey? = nil
     @State private var isLoading: Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
-            Text("Вход в аккаунт")
-                .font(.system(size: 30, weight: .bold))
+            Text(Translation.Login.title)
+                .font(.SFPro(33))
                 .foregroundColor(Colors.MainColor)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 60)
                 .padding(.horizontal, 24)
 
-            
-            if !errorMessage.isEmpty {
-                Text(errorMessage)
-                    .foregroundColor(.red)
-                    .font(.caption)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 24)
-                    .padding(.top, 8)
+            Group {
+                if let errorMessage {
+                    Text(errorMessage)
+                } else {
+                    Text(" ")
+                }
             }
+            .foregroundColor(.red)
+            .font(.caption)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(height: 20, alignment: .topLeading)
+            .padding(.horizontal, 24)
+            .padding(.top, 8)
 
             Spacer()
 
             VStack(alignment: .leading, spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Электронная почта")
+                    Text(Translation.Login.emailLabel)
                         .font(.SFPro(17))
                         .foregroundColor(Colors.black)
 
                     TextField(
                         "",
                         text: $login,
-                        prompt: Text("Введите email")
+                        prompt: Text(Translation.Login.emailPlaceholder)
                             .font(.SFPro(17))
                             .foregroundColor(Colors.LightLightGray)
                     )
@@ -57,7 +61,7 @@ struct LoginView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Пароль")
+                    Text(Translation.Login.passwordLabel)
                         .font(.SFPro(17))
                         .foregroundColor(Colors.black)
 
@@ -66,7 +70,7 @@ struct LoginView: View {
                             TextField(
                                 "",
                                 text: $password,
-                                prompt: Text("Введите пароль")
+                                prompt: Text(Translation.Login.passwordPlaceholder)
                                     .font(.SFPro(17))
                                     .foregroundColor(Colors.LightLightGray)
                             )
@@ -77,7 +81,7 @@ struct LoginView: View {
                             SecureField(
                                 "",
                                 text: $password,
-                                prompt: Text("Введите пароль")
+                                prompt: Text(Translation.Login.passwordPlaceholder)
                                     .font(.SFPro(17))
                                     .foregroundColor(Colors.LightLightGray)
                             )
@@ -102,7 +106,7 @@ struct LoginView: View {
                 NavigationLink {
                     ForgotPassView()
                 } label: {
-                    Text("Забыли пароль?")
+                    Text(Translation.Login.forgotPassword)
                         .font(.SFPro(17))
                         .foregroundColor(Colors.MainColor)
                 }
@@ -112,7 +116,7 @@ struct LoginView: View {
             Spacer()
 
             Button(action: {
-                errorMessage = ""
+                errorMessage = nil
                 attemptLogin()
             }) {
                 HStack {
@@ -121,13 +125,21 @@ struct LoginView: View {
                             .scaleEffect(1.2)
                             .padding(.leading, 15)
                     }
-                    Text(isLoading ? "Вход..." : "Войти в аккаунт →")
-                        .font(.SFPro(17, weight: .semibold))
-                        .foregroundColor(Colors.white)
-                        .frame(maxWidth: .infinity, alignment: .center)
+
+                    if isLoading {
+                        Text(Translation.Login.loginButtonLoading)
+                            .font(.SFPro(17, weight: .semibold))
+                            .foregroundColor(Colors.white)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    } else {
+                        Text(Translation.Login.loginButton)
+                            .font(.SFPro(17, weight: .semibold))
+                            .foregroundColor(Colors.white)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
                 }
                 .frame(maxWidth: .infinity)
-            }            
+            }
             .disabled(isLoading)
             .frame(height: 56)
             .background(isLoading ? Colors.MainColor.opacity(0.7) : Colors.MainColor)
@@ -135,14 +147,14 @@ struct LoginView: View {
             .padding(.horizontal, 24)
 
             HStack(spacing: 0) {
-                Text("Нет аккаунта?")
+                Text(Translation.Login.noAccount)
                     .font(.SFPro(17))
                     .foregroundColor(Colors.LightGray)
 
                 NavigationLink {
                     RegisterView()
                 } label: {
-                    Text(" Создать")
+                    Text(Translation.Login.createAccount)
                         .font(.SFPro(17))
                         .foregroundColor(Colors.MainColor)
                 }
@@ -155,17 +167,17 @@ struct LoginView: View {
 
     private func attemptLogin() {
         guard isValidEmail(login) else {
-            errorMessage = "Пожалуйста, введите действительный email."
+            errorMessage = Translation.Login.invalidEmail
             return
         }
 
         guard password.count >= 6 else {
-            errorMessage = "Пароль должен содержать не менее 6 символов."
+            errorMessage = Translation.Login.passwordLength
             return
         }
 
         isLoading = true
-        errorMessage = ""
+        errorMessage = nil
 
         Auth.auth().signIn(withEmail: login, password: password) { authResult, error in
             DispatchQueue.main.async {
@@ -176,32 +188,16 @@ struct LoginView: View {
                     print("Код: \(error.code)")
                     print("Домен: \(error.domain)")
                     print("Локализованное описание: \(error.localizedDescription)")
-                                        
-                    let errorCode = error.code
-                                        
-                    switch errorCode {
-                    case 17004: // Неверный пароль
-                        fallthrough
-                    case 17005: // Слишком много попыток
-                        fallthrough
-                    case 17006: // Пользователь не найден
-                        fallthrough
-                    case 17007: // Неверный email
-                        fallthrough
-                    case 17008: // Email уже используется
-                        fallthrough
-                    case 17009: // Слабый пароль
-                        fallthrough
-                    case 17010: // Пользователь отключен
-                        fallthrough
-                    case 17011: // Операция не разрешена
-                        self.errorMessage = "Неверный email или пароль. Проверьте введенные данные."
-                        
-                    case -1009: // Нет интернета (ошибка сети iOS)
-                        self.errorMessage = "Ошибка сети. Проверьте подключение к интернету."
-                        
+
+                    switch error.code {
+                    case 17004, 17005, 17006, 17007, 17008, 17009, 17010, 17011:
+                        self.errorMessage = Translation.Login.invalidCredentials
+
+                    case -1009:
+                        self.errorMessage = Translation.Login.networkError
+
                     default:
-                        self.errorMessage = "Неверный email или пароль. Проверьте введенные данные."
+                        self.errorMessage = Translation.Login.invalidCredentials
                     }
                 } else {
                     print("Успешный вход для: \(self.login)")
@@ -213,7 +209,7 @@ struct LoginView: View {
 
     private func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
 }
@@ -221,10 +217,31 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         let appState = AppState()
-        return NavigationStack {
-            LoginView()
-                .environmentObject(appState)
-                .tint(Colors.MainColor)
+
+        Group {
+            NavigationStack {
+                LoginView()
+                    .environmentObject(appState)
+                    .tint(Colors.MainColor)
+                    .environment(\.locale, Locale(identifier: "ru"))
+            }
+            .previewDisplayName("Russian")
+
+            NavigationStack {
+                LoginView()
+                    .environmentObject(appState)
+                    .tint(Colors.MainColor)
+                    .environment(\.locale, Locale(identifier: "en"))
+            }
+            .previewDisplayName("English")
+
+            NavigationStack {
+                LoginView()
+                    .environmentObject(appState)
+                    .tint(Colors.MainColor)
+                    .environment(\.locale, Locale(identifier: "zh-Hans"))
+            }
+            .previewDisplayName("Chinese")
         }
     }
 }

@@ -6,14 +6,14 @@ struct Schedule: View {
     @State private var lastSelectedWeek: Int = 1
     @State private var lastSelectedDay: Int = 1
 
-    var days: [(id: Int, name: String, dayNumber: String)] {
+    var days: [(id: Int, nameKey: LocalizedStringKey, dayNumber: String)] {
         [
-            (1, "ПН", dateManager.getDayNumberForDay(dayIndex: 1)),
-            (2, "ВТ", dateManager.getDayNumberForDay(dayIndex: 2)),
-            (3, "СР", dateManager.getDayNumberForDay(dayIndex: 3)),
-            (4, "ЧТ", dateManager.getDayNumberForDay(dayIndex: 4)),
-            (5, "ПТ", dateManager.getDayNumberForDay(dayIndex: 5)),
-            (6, "СБ", dateManager.getDayNumberForDay(dayIndex: 6))
+            (1, Translation.Schedule.monday, dateManager.getDayNumberForDay(dayIndex: 1)),
+            (2, Translation.Schedule.tuesday, dateManager.getDayNumberForDay(dayIndex: 2)),
+            (3, Translation.Schedule.wednesday, dateManager.getDayNumberForDay(dayIndex: 3)),
+            (4, Translation.Schedule.thursday, dateManager.getDayNumberForDay(dayIndex: 4)),
+            (5, Translation.Schedule.friday, dateManager.getDayNumberForDay(dayIndex: 5)),
+            (6, Translation.Schedule.saturday, dateManager.getDayNumberForDay(dayIndex: 6))
         ]
     }
     
@@ -24,10 +24,10 @@ struct Schedule: View {
         return nil
     }
     
-    var LessonsCount: Int {
-            if lastSelectedDay == 0 {
-                return 0
-            }
+    var lessonsCount: Int {
+        if lastSelectedDay == 0 {
+            return 0
+        }
         let mod = lastSelectedDay % 3
         return mod == 0 ? 3 : mod
     }
@@ -35,20 +35,23 @@ struct Schedule: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                Text("Расписание")
+                Text(Translation.Schedule.title)
                     .fontWeight(.bold)
                     .font(.system(size: 30))
                     .padding(.bottom, 5)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Группа: ФН12-71Б")
+                    (
+                        Text(Translation.Schedule.group) +
+                        Text(": ФН12-71Б")
+                    )
+
                     Text(dateManager.weekTitle)
                 }
                 .foregroundColor(.gray)
             }
             .padding(.top, 20)
 
-            
             HStack(spacing: 12) {
                 ForEach(Array(days.enumerated()), id: \.element.id) { index, day in
                     Button(action: {
@@ -56,8 +59,9 @@ struct Schedule: View {
                         lastSelectedDay = day.id
                     }) {
                         VStack(spacing: 4) {
-                            Text(day.name)
+                            Text(day.nameKey)
                                 .font(.system(size: 14, weight: .medium))
+
                             Text(day.dayNumber)
                                 .font(.system(size: 18, weight: .bold))
                         }
@@ -87,7 +91,7 @@ struct Schedule: View {
                     .offset(y: dateManager.animateDayButtons ? 15 : 0)
                     .animation(
                         .easeOut(duration: 0.4)
-                        .delay(Double(index) * 0.05),
+                            .delay(Double(index) * 0.05),
                         value: dateManager.animateDayButtons
                     )
                 }
@@ -103,16 +107,15 @@ struct Schedule: View {
                 }
             )
 
-
             VStack(spacing: 16) {
-                if LessonsCount == 0 {
-                    Text("Сегодня воскресенье, поэтому пар нет")
-                            .font(.title2)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                if lessonsCount == 0 {
+                    Text(Translation.Schedule.noLessonsSunday)
+                        .font(.title2)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
-                    ForEach(0..<LessonsCount, id: \.self) { index in
+                    ForEach(0..<lessonsCount, id: \.self) { index in
                         let type: LessonType = {
                             switch index % 3 {
                             case 0: return .lecture
@@ -149,8 +152,24 @@ struct Schedule: View {
         }
     }
 }
+
 struct Schedule_Previews: PreviewProvider {
     static var previews: some View {
-        BottomBarView(selectedTab: 2)
+        Group {
+            BottomBarView(selectedTab: 2)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "ru"))
+                .previewDisplayName("Russian")
+
+            BottomBarView(selectedTab: 2)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "en"))
+                .previewDisplayName("English")
+
+            BottomBarView(selectedTab: 2)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "zh-Hans"))
+                .previewDisplayName("Chinese")
+        }
     }
 }

@@ -35,7 +35,6 @@ struct MainPage: View {
             QRView()
         }
         .onAppear {
-            // ✅ Загружаем данные ТОЛЬКО один раз за сессию
             vm.loadIfNeeded(appState: appState)
         }
     }

@@ -1,0 +1,99 @@
+//экран профиля
+"profile_title" = "Профиль";
+"loading" = "Загрузка...";
+"group" = "Группа:";
+"personal_number" = "Личный номер:";
+"app_theme" = "Тема приложения:";
+"app_language" = "Язык приложения:";
+"logout" = "Выйти из аккаунта";
+
+"support_service" = "Служба поддержки университета:";
+"phone" = "Телефон:";
+"email" = "E-mail:";
+
+"delete_avatar_title" = "Удалить аватарку?";
+"cancel" = "Отмена";
+"delete" = "Удалить";
+"delete_avatar_message" = "Вы действительно хотите удалить фото профиля?";
+
+"theme_system" = "Системная";
+"theme_light" = "Светлая";
+"theme_dark" = "Темная";
+
+"language_russian" = "Русский";
+"language_english" = "Английский";
+"language_chinese" = "Китайский";
+
+//экран логина
+"login_title" = "Вход в аккаунт";
+
+"login_email_label" = "Электронная почта";
+"login_email_placeholder" = "Введите email";
+
+"login_password_label" = "Пароль";
+"login_password_placeholder" = "Введите пароль";
+
+"login_forgot_password" = "Забыли пароль?";
+
+"login_button" = "Войти в аккаунт →";
+"login_button_loading" = "Вход...";
+
+"login_no_account" = "Нет аккаунта?";
+"login_create_account" = "Создать";
+
+"login_error_invalid_email" = "Пожалуйста, введите действительный email.";
+"login_error_password_length" = "Пароль должен содержать не менее 6 символов.";
+"login_error_invalid_credentials" = "Неверный email или пароль. Проверьте введенные данные.";
+"login_error_network" = "Ошибка сети. Проверьте подключение к интернету.";
+
+//экран приветствия
+"welcome_title" = "Добро пожаловать!";
+"welcome_continue_button" = "Продолжить";
+
+//экран регистрации
+"register_title" = "Создание аккаунта";
+"register_description" = "Для получения персонального логина и пароля необходимо обратиться в деканат Вашего факультета или отправить письмо на почту support@bmstu.ru";
+"register_back_button" = "Вернуться";
+
+//экран восстановления пароля
+"forgot_password_title" = "Восстановление пароля";
+"forgot_password_description" = "Для восстановления пароля необходимо обратиться в деканат Вашего факультета или отправить письмо на почту support@bmstu.ru";
+"forgot_password_back_button" = "Вернуться";
+
+//bottombar
+"tab_route_title" = "Маршрут";
+"tab_home_title" = "Главная";
+"tab_schedule_title" = "Расписание";
+"tab_grades_title" = "Успеваемость";
+"tab_account_title" = "Аккаунт";
+
+//экран навигации
+"map_title" = "Навигатор";
+"map_route_continues_format" = "Продолжение маршрута на %@ этаже";
+"map_go_button" = "Перейти";
+"map_from_placeholder" = "Откуда";
+"map_to_placeholder" = "Куда";
+"map_build_route_button" = "Построить маршрут";
+"map_loading_data" = "Загрузка данных...";
+
+//экран успеваемости
+"grades_title" = "Успеваемость";
+"grades_current_tab" = "Текущая";
+"grades_session_tab" = "Сессия";
+
+//экран расписания
+"schedule_title" = "Расписание";
+"schedule_group_label" = "Группа";
+
+"schedule_day_mon" = "ПН";
+"schedule_day_tue" = "ВТ";
+"schedule_day_wed" = "СР";
+"schedule_day_thu" = "ЧТ";
+"schedule_day_fri" = "ПТ";
+"schedule_day_sat" = "СБ";
+
+"lesson_type_lecture" = "Лекция";
+"lesson_type_seminar" = "Семинар";
+"lesson_type_lab" = "Лабораторная";
+
+"schedule_no_lessons_sunday" = "Сегодня воскресенье, поэтому пар нет";

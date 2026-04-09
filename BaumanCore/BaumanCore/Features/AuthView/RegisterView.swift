@@ -6,7 +6,7 @@ struct RegisterView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Text("Создание аккаунта")
+            Text(Translation.Register.title)
                 .font(.SFPro(33, weight: .semibold))
                 .foregroundColor(Colors.MainColor)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -15,7 +15,7 @@ struct RegisterView: View {
             
             Spacer()
             
-            Text("Для получения персонального логина и пароля необходимо обратиться в деканат Вашего факультета или отправить письмо на почту support@bmstu.ru")
+            Text(Translation.Register.description)
                 .font(.SFPro(17))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 24)
@@ -25,7 +25,7 @@ struct RegisterView: View {
             Button {
                 dismiss()
             } label: {
-                Text("Вернуться")
+                Text(Translation.Register.backButton)
                     .font(.SFPro(17))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
@@ -42,9 +42,27 @@ struct RegisterView: View {
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            RegisterView()
-                .tint(Colors.MainColor)
+        Group {
+            NavigationStack {
+                RegisterView()
+                    .tint(Colors.MainColor)
+                    .environment(\.locale, Locale(identifier: "ru"))
+            }
+            .previewDisplayName("Russian")
+            
+            NavigationStack {
+                RegisterView()
+                    .tint(Colors.MainColor)
+                    .environment(\.locale, Locale(identifier: "en"))
+            }
+            .previewDisplayName("English")
+            
+            NavigationStack {
+                RegisterView()
+                    .tint(Colors.MainColor)
+                    .environment(\.locale, Locale(identifier: "zh-Hans"))
+            }
+            .previewDisplayName("Chinese")
         }
     }
 }

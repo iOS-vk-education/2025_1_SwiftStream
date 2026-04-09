@@ -52,6 +52,9 @@
 		CEA6A62B2EFAC05400A13550 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CEA6A62A2EFAC05400A13550 /* FirebaseDatabase */; };
 		CEA6A62D2EFAC11B00A13550 /* Semester.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6A62C2EFAC11B00A13550 /* Semester.swift */; };
 		CEC878E12EF9F354000863DF /* ForgotPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC878E02EF9F354000863DF /* ForgotPassView.swift */; };
+		CED65F872F732DF90065EFE4 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CED65F862F732DF90065EFE4 /* FirebaseFirestoreSwift */; };
+		CED65F922F7839360065EFE4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CED65F942F7839360065EFE4 /* Localizable.strings */; };
+		CED65F9A2F8643E10065EFE4 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED65F992F8643E10065EFE4 /* Translation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +101,10 @@
 		CEA6A6272EFABED600A13550 /* ServiceGrades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceGrades.swift; sourceTree = "<group>"; };
 		CEA6A62C2EFAC11B00A13550 /* Semester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semester.swift; sourceTree = "<group>"; };
 		CEC878E02EF9F354000863DF /* ForgotPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassView.swift; sourceTree = "<group>"; };
+		CED65F932F7839360065EFE4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CED65F952F7839520065EFE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		CED65F962F7839690065EFE4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CED65F992F8643E10065EFE4 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +115,7 @@
 				CEA6A62B2EFAC05400A13550 /* FirebaseDatabase in Frameworks */,
 				CE7D99D62EF99C0300F36BE2 /* FirebaseAuth in Frameworks */,
 				CE7D99D82EF99C0300F36BE2 /* FirebaseFirestore in Frameworks */,
+				CED65F872F732DF90065EFE4 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +260,7 @@
 				CE2A3DF02ED8C32200C09F87 /* Features */,
 				CE2A3DE42ED85A7D00C09F87 /* Assets.xcassets */,
 				CE2A3DE62ED85A7D00C09F87 /* Preview Content */,
+				CED65F942F7839360065EFE4 /* Localizable.strings */,
 			);
 			path = BaumanCore;
 			sourceTree = "<group>";
@@ -285,6 +294,7 @@
 				AC8012762EE8F166003B6419 /* Lesson.swift */,
 				CEA6A62C2EFAC11B00A13550 /* Semester.swift */,
 				CE37A9232F0480FB001CD754 /* News.swift */,
+				CED65F992F8643E10065EFE4 /* Translation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -335,6 +345,7 @@
 				CE7D99D52EF99C0300F36BE2 /* FirebaseAuth */,
 				CE7D99D72EF99C0300F36BE2 /* FirebaseFirestore */,
 				CEA6A62A2EFAC05400A13550 /* FirebaseDatabase */,
+				CED65F862F732DF90065EFE4 /* FirebaseFirestoreSwift */,
 			);
 			productName = BaumanCore;
 			productReference = CE2A3DDD2ED85A7B00C09F87 /* BaumanCore.app */;
@@ -362,6 +373,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				ru,
 			);
 			mainGroup = CE2A3DD42ED85A7B00C09F87;
 			packageReferences = (
@@ -382,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE2A3DE82ED85A7D00C09F87 /* Preview Assets.xcassets in Resources */,
+				CED65F922F7839360065EFE4 /* Localizable.strings in Resources */,
 				CE9785372F5B267A00586044 /* GoogleService-Info.plist in Resources */,
 				CE2A3DE52ED85A7D00C09F87 /* Assets.xcassets in Resources */,
 			);
@@ -413,6 +427,7 @@
 				CE2A3DFD2ED8DC7000C09F87 /* MainPage.swift in Sources */,
 				CE2A3DE12ED85A7B00C09F87 /* BaumanCoreApp.swift in Sources */,
 				AC8012752EE8F159003B6419 /* Subject.swift in Sources */,
+				CED65F9A2F8643E10065EFE4 /* Translation.swift in Sources */,
 				63684A682EE9CB7200B1DCD8 /* RegisterView.swift in Sources */,
 				AC7C347F2EF8117D000F47D5 /* Grades_semester_content.swift in Sources */,
 				CE37A92D2F054CCB001CD754 /* NavigationViewModel.swift in Sources */,
@@ -438,11 +453,25 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		CED65F942F7839360065EFE4 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CED65F932F7839360065EFE4 /* en */,
+				CED65F952F7839520065EFE4 /* zh-Hans */,
+				CED65F962F7839690065EFE4 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		CE2A3DE92ED85A7D00C09F87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -503,6 +532,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -644,7 +674,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 12.0.0;
+				minimumVersion = 9.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -664,6 +694,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE7D99D42EF99C0300F36BE2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
+		};
+		CED65F862F732DF90065EFE4 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE7D99D42EF99C0300F36BE2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
