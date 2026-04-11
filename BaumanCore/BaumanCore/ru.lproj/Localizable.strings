@@ -97,3 +97,18 @@
 "lesson_type_lab" = "Лабораторная";
 
 "schedule_no_lessons_sunday" = "Сегодня воскресенье, поэтому пар нет";
+
+//экран QR
+"qr_upload" = "Загрузить QR";
+"qr_change" = "Изменить QR";
+"qr_delete" = "Удалить QR";
+
+"qr_select_source" = "Выберите источник";
+"qr_take_photo" = "Сделать фото";
+"qr_choose_gallery" = "Выбрать из галереи";
+
+"qr_placeholder_title" = "Здесь будет храниться ваш QR-код";
+"qr_placeholder_description" = "Сделайте фото или выберите изображение из галереи";
+
+"qr_delete_alert_title" = "Удалить QR?";
+"qr_delete_alert_message" = "Сохраненный QR будет удалён.";

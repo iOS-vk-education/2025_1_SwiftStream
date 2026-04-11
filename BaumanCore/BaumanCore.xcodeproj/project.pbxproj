@@ -55,6 +55,7 @@
 		CED65F872F732DF90065EFE4 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CED65F862F732DF90065EFE4 /* FirebaseFirestoreSwift */; };
 		CED65F922F7839360065EFE4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CED65F942F7839360065EFE4 /* Localizable.strings */; };
 		CED65F9A2F8643E10065EFE4 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED65F992F8643E10065EFE4 /* Translation.swift */; };
+		CEFD06032F8A4C6400F4AADF /* QRStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD06022F8A4C6400F4AADF /* QRStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +106,7 @@
 		CED65F952F7839520065EFE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CED65F962F7839690065EFE4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CED65F992F8643E10065EFE4 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
+		CEFD06022F8A4C6400F4AADF /* QRStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +221,7 @@
 				CE1F70382EF1E9EF00E42C47 /* DateManager.swift */,
 				CE1C46082F52DB36008EB09C /* ImagePicker.swift */,
 				CE1C460A2F52DB51008EB09C /* AvatarStorage.swift */,
+				CEFD06022F8A4C6400F4AADF /* QRStorage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				CE2A3DF22ED8C35100C09F87 /* Schedule.swift in Sources */,
 				63684A662EE9AB8100B1DCD8 /* LoginView.swift in Sources */,
 				63CDC04E2EE992930016927C /* ColorFile.swift in Sources */,
+				CEFD06032F8A4C6400F4AADF /* QRStorage.swift in Sources */,
 				CE561DCF2F72C2E400EEA2FD /* ProfileViewModel.swift in Sources */,
 				CE7B93E42EF844F800A74073 /* WelcomeViewController.swift in Sources */,
 				CE37A9242F0480FB001CD754 /* News.swift in Sources */,
@@ -594,6 +598,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Приложению нужен доступ к камере для фотографирования QR-кода";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Нам нужен доступ к фото, чтобы установить вашу аватарку";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -625,6 +630,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Приложению нужен доступ к камере для фотографирования QR-кода";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Нам нужен доступ к фото, чтобы установить вашу аватарку";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

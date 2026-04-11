@@ -100,3 +100,18 @@
 "lesson_type_lab" = "实验课";
 
 "schedule_no_lessons_sunday" = "今天是星期日，所以没有课程";
+
+//экран QR
+"qr_upload" = "上传二维码";
+"qr_change" = "更换二维码";
+"qr_delete" = "删除二维码";
+
+"qr_select_source" = "选择来源";
+"qr_take_photo" = "拍照";
+"qr_choose_gallery" = "从相册选择";
+
+"qr_placeholder_title" = "您的二维码将显示在这里";
+"qr_placeholder_description" = "拍照或从相册选择二维码图片";
+
+"qr_delete_alert_title" = "删除二维码？";
+"qr_delete_alert_message" = "已保存的二维码将被删除。";

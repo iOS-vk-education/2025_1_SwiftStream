@@ -97,3 +97,18 @@
 "lesson_type_lab" = "Laboratory";
 
 "schedule_no_lessons_sunday" = "Today is Sunday, so there are no classes";
+
+//экран QR
+"qr_upload" = "Upload QR";
+"qr_change" = "Change QR";
+"qr_delete" = "Delete QR";
+
+"qr_select_source" = "Choose source";
+"qr_take_photo" = "Take photo";
+"qr_choose_gallery" = "Choose from gallery";
+
+"qr_placeholder_title" = "Your QR code will be stored here";
+"qr_placeholder_description" = "Take a photo or choose an image from the gallery";
+
+"qr_delete_alert_title" = "Delete QR?";
+"qr_delete_alert_message" = "The saved QR will be deleted.";

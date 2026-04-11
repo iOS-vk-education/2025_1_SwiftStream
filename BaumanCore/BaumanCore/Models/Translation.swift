@@ -110,6 +110,22 @@ enum Translation {
         static let buildRouteButton = LocalizedStringKey("map_build_route_button")
         static let loadingData = LocalizedStringKey("map_loading_data")
     }
+    
+    enum QR {
+        static let upload = LocalizedStringKey("qr_upload")
+        static let change = LocalizedStringKey("qr_change")
+        static let delete = LocalizedStringKey("qr_delete")
+
+        static let selectSource = LocalizedStringKey("qr_select_source")
+        static let takePhoto = LocalizedStringKey("qr_take_photo")
+        static let chooseFromGallery = LocalizedStringKey("qr_choose_gallery")
+
+        static let placeholderTitle = LocalizedStringKey("qr_placeholder_title")
+        static let placeholderDescription = LocalizedStringKey("qr_placeholder_description")
+
+        static let deleteAlertTitle = LocalizedStringKey("qr_delete_alert_title")
+        static let deleteAlertMessage = LocalizedStringKey("qr_delete_alert_message")
+    }
 
 }
 
