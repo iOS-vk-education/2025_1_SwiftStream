@@ -16,12 +16,12 @@
 		AC05BB3B2F8DDB370023FAB8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AC05BB3A2F8DDB370023FAB8 /* FirebaseAuth */; };
 		AC05BB3D2F8DDB370023FAB8 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = AC05BB3C2F8DDB370023FAB8 /* FirebaseDatabase */; };
 		AC05BB3F2F8DDB370023FAB8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AC05BB3E2F8DDB370023FAB8 /* FirebaseFirestore */; };
-		AC27A4CF2F5ADC0800C19D5F /* StudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC27A4CE2F5ADC0500C19D5F /* StudentViewModel.swift */; };
 		AC7C347F2EF8117D000F47D5 /* Grades_semester_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */; };
 		AC7C34812EF811A6000F47D5 /* Grades_subjects_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */; };
 		AC7C34832EF811C2000F47D5 /* Grades_main_structure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */; };
 		AC8012752EE8F159003B6419 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8012742EE8F159003B6419 /* Subject.swift */; };
 		AC8012772EE8F166003B6419 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8012762EE8F166003B6419 /* Lesson.swift */; };
+		AC86882B2F94D8A200FDC646 /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC86882A2F94D89E00FDC646 /* ScheduleViewModel.swift */; };
 		CE1C46092F52DB36008EB09C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C46082F52DB36008EB09C /* ImagePicker.swift */; };
 		CE1C460B2F52DB51008EB09C /* AvatarStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C460A2F52DB51008EB09C /* AvatarStorage.swift */; };
 		CE1F70392EF1E9EF00E42C47 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F70382EF1E9EF00E42C47 /* DateManager.swift */; };
@@ -61,12 +61,12 @@
 		63684A6D2EE9E42800B1DCD8 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		63CDC04D2EE9928B0016927C /* ColorFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFile.swift; sourceTree = "<group>"; };
 		63CDC0542EE996180016927C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		AC27A4CE2F5ADC0500C19D5F /* StudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewModel.swift; sourceTree = "<group>"; };
 		AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_semester_content.swift; sourceTree = "<group>"; };
 		AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_subjects_content.swift; sourceTree = "<group>"; };
 		AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_main_structure.swift; sourceTree = "<group>"; };
 		AC8012742EE8F159003B6419 /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		AC8012762EE8F166003B6419 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
+		AC86882A2F94D89E00FDC646 /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
 		CE1C46082F52DB36008EB09C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		CE1C460A2F52DB51008EB09C /* AvatarStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarStorage.swift; sourceTree = "<group>"; };
 		CE1F70382EF1E9EF00E42C47 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
@@ -184,12 +184,10 @@
 		63CDC0592EE997570016927C /* GradesView */ = {
 			isa = PBXGroup;
 			children = (
-				AC27A4CE2F5ADC0500C19D5F /* StudentViewModel.swift */,
 				AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */,
 				AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */,
 				AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */,
 				CE2A3DFA2ED8CACC00C09F87 /* Grades_header.swift */,
-				CE9785342F5B236E00586044 /* StudentViewModel.swift */,
 			);
 			path = GradesView;
 			sourceTree = "<group>";
@@ -293,6 +291,8 @@
 			isa = PBXGroup;
 			children = (
 				CE37A9262F0482EE001CD754 /* NewsCarouselViewModel.swift */,
+				AC86882A2F94D89E00FDC646 /* ScheduleViewModel.swift */,
+				CE9785342F5B236E00586044 /* StudentViewModel.swift */,
 				CE561DCE2F72C2E400EEA2FD /* ProfileViewModel.swift */,
 				CE561DD02F72C77800EEA2FD /* MainPageViewModel.swift */,
 			);
@@ -397,6 +397,7 @@
 				CE9785352F5B236E00586044 /* StudentViewModel.swift in Sources */,
 				AC8012772EE8F166003B6419 /* Lesson.swift in Sources */,
 				CEA6A62D2EFAC11B00A13550 /* Semester.swift in Sources */,
+				AC86882B2F94D8A200FDC646 /* ScheduleViewModel.swift in Sources */,
 				CE2A3DF62ED8C92700C09F87 /* Profile.swift in Sources */,
 				CE1C46092F52DB36008EB09C /* ImagePicker.swift in Sources */,
 				CE37A92F2F054CE0001CD754 /* Navigation.swift in Sources */,
@@ -427,7 +428,6 @@
 				AC7C34812EF811A6000F47D5 /* Grades_subjects_content.swift in Sources */,
 				CE37A9272F0482EE001CD754 /* NewsCarouselViewModel.swift in Sources */,
 				CE2A3E012ED8DCB500C09F87 /* ThreeBlueLinks.swift in Sources */,
-				AC27A4CF2F5ADC0800C19D5F /* StudentViewModel.swift in Sources */,
 				CE2A3DFB2ED8CACC00C09F87 /* Grades_header.swift in Sources */,
 				CEC878E12EF9F354000863DF /* ForgotPassView.swift in Sources */,
 				CE2A3DFF2ED8DC9D00C09F87 /* ImageCarousel.swift in Sources */,
