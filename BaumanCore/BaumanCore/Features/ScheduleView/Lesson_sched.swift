@@ -1,7 +1,6 @@
 import Foundation
 import SwiftUI
 
-
 enum LessonType: String {
     case lecture = "Лекция"
     case seminar = "Семинар"
@@ -35,24 +34,36 @@ struct LessonCardView: View {
                 .background(type.color)
 
             HStack(alignment: .top, spacing: 12) {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text(timeStart)
-                        .font(.system(size: 17, weight: .bold))
+                        .font(.system(size: 14))
+                        .foregroundColor(.gray)
+
                     Text(timeEnd)
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
                 }
+                .frame(width: 55, alignment: .leading)
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(subject)
                         .font(.system(size: 16, weight: .semibold))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.leading)
+
                     Text(teacher)
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
-                    Text("ауд. \(classroom)")
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    let trimmedClassroom = classroom.trimmingCharacters(in: .whitespacesAndNewlines)
+
+                    Text(trimmedClassroom.lowercased() == "спортивный зал" ? trimmedClassroom : "ауд. \(trimmedClassroom)")
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(12)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -63,4 +74,3 @@ struct LessonCardView: View {
         .padding(.horizontal)
     }
 }
-
