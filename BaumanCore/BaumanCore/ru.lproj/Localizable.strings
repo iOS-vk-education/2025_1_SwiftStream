@@ -94,9 +94,12 @@
 
 "lesson_type_lecture" = "Лекция";
 "lesson_type_seminar" = "Семинар";
-"lesson_type_lab" = "Лабораторная";
+"lesson_type_lab" = "Лаб. работа";
 
 "schedule_no_lessons_sunday" = "Сегодня воскресенье, поэтому пар нет";
+
+"schedule_from_here" = "Откуда";
+"schedule_to_here" = "Куда";
 
 //экран QR
 "qr_upload" = "Загрузить QR";

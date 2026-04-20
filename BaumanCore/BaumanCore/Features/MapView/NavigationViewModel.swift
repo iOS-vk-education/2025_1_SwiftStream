@@ -314,6 +314,10 @@ class NavigationViewModel: ObservableObject {
         nextFloorInfo = nil
         errorMessage = nil
     }
+    
+    func getClassroomWithFloor(number: String, floor: String) -> ClassroomWithFloor? {
+        return classroomsWithFloorCache[floor]?.first(where: { $0.classroom.number == number })
+    }
 
     private func extractFloor(from number: String) -> String? {
             if number == "elevator" {

@@ -101,6 +101,9 @@
 
 "schedule_no_lessons_sunday" = "今天是星期日，所以没有课程";
 
+"schedule_from_here" = "从这里";
+"schedule_to_here" = "到这里";
+
 //экран QR
 "qr_upload" = "上传二维码";
 "qr_change" = "更换二维码";
