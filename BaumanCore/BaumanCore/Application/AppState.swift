@@ -6,6 +6,9 @@ final class AppState: ObservableObject {
     @Published var isLoggedIn: Bool = false
     @Published var isAuthResolved: Bool = false
     @Published var student: Student? = nil
+    @Published var selectedTab: Int = 0
+    @Published var pendingFromLocation: String?
+    @Published var pendingToLocation: String?
 
     private var authStateHandle: AuthStateDidChangeListenerHandle?
 

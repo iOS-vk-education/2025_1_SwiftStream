@@ -13,6 +13,10 @@ enum Translation {
         static let friday = LocalizedStringKey("schedule_day_fri")
         static let saturday = LocalizedStringKey("schedule_day_sat")
         static let noLessonsSunday = LocalizedStringKey("schedule_no_lessons_sunday")
+        static let fromHere = NSLocalizedString("schedule_from_here", comment: "")
+        static let toHere = NSLocalizedString("schedule_to_here", comment: "")
+        static let labShort = NSLocalizedString("lesson_type_lab_short", comment: "")
+        static let labWork = NSLocalizedString("lesson_type_lab_work", comment: "")
     }
 
     enum LessonType {

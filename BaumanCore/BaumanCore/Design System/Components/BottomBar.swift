@@ -2,11 +2,13 @@ import SwiftUI
 
 struct BottomBarView: View {
     @State var selectedTab: Int = 0
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView(selection: $appState.selectedTab) {
             NavigationStack {
                 MapView()
+                    .environmentObject(appState)
             }
             .tabItem {
                 Image("tab_route").renderingMode(.template)
@@ -25,6 +27,7 @@ struct BottomBarView: View {
             
             NavigationStack {
                 Schedule()
+                    .environmentObject(appState)
             }
             .tabItem {
                 Image("tab_calendar").renderingMode(.template)
@@ -51,6 +54,9 @@ struct BottomBarView: View {
             .tag(4)
         }
         .tint(Colors.MainColor)
+        .onChange(of: selectedTab) { newValue in
+            appState.selectedTab = newValue
+        }
     }
 }
 
