@@ -8,7 +8,7 @@ final class AppState: ObservableObject {
     }
     @Published var isAuthResolved: Bool = false
     @Published var student: Student? = nil
-    @Published var selectedTab: Int = 0
+    @Published var selectedTab: Int = 1
     @Published var pendingFromLocation: String?
     @Published var pendingToLocation: String?
 

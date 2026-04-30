@@ -28,7 +28,7 @@ struct ImageCarousel: View {
                                 .clipShape(Circle())
                         }
 
-                        Text("Новости не получилось загрузить")
+                        Text(Translation.MainPage.newsLoadFailed)
                             .font(.system(size: 14))
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)

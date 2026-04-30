@@ -118,3 +118,7 @@
 
 "qr_delete_alert_title" = "删除二维码？";
 "qr_delete_alert_message" = "已保存的二维码将被删除。";
+
+//экран главной страницы
+"main_news_load_failed" = "新闻加载失败";
+"qr_pass" = "通行证";

@@ -62,7 +62,7 @@ struct MainPage: View {
                     .frame(height: 56)
                     .foregroundColor(Colors.MainColor)
                     .overlay(
-                        Text("Пропуск")
+                        Text(Translation.MainPage.pass)
                             .foregroundColor(Colors.white)
                             .font(.system(size: 17, weight: .semibold))
                     )
@@ -101,8 +101,22 @@ struct MainPage: View {
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
-        let appState = AppState()
-        return BottomBarView(selectedTab: 1)
-            .environmentObject(appState)
+        Group {
+            BottomBarView(selectedTab: 1)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "ru"))
+                .previewDisplayName("Russian")
+
+            BottomBarView(selectedTab: 1)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "en"))
+                .previewDisplayName("English")
+
+            BottomBarView(selectedTab: 1)
+                .environment(\.locale, Locale(identifier: "zh-Hans"))
+                .environmentObject(AppState())
+                .previewDisplayName("Chinese")
+        }
     }
 }
+

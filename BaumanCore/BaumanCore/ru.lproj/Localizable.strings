@@ -115,3 +115,7 @@
 
 "qr_delete_alert_title" = "Удалить QR?";
 "qr_delete_alert_message" = "Сохраненный QR будет удалён.";
+
+//экран главной страницы
+"main_news_load_failed" = "Новости не получилось загрузить";
+"qr_pass" = "Пропуск";

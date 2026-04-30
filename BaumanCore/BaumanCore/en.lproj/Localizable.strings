@@ -115,3 +115,7 @@
 
 "qr_delete_alert_title" = "Delete QR?";
 "qr_delete_alert_message" = "The saved QR will be deleted.";
+
+//экран главной страницы
+"main_news_load_failed" = "Failed to load news";
+"qr_pass" = "Pass";

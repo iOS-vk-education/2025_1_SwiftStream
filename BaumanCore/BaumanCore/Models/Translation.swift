@@ -130,6 +130,11 @@ enum Translation {
         static let deleteAlertTitle = LocalizedStringKey("qr_delete_alert_title")
         static let deleteAlertMessage = LocalizedStringKey("qr_delete_alert_message")
     }
+        
+    enum MainPage {
+        static let newsLoadFailed = LocalizedStringKey("main_news_load_failed")
+        static let pass = LocalizedStringKey("qr_pass")
+    }
 
 }
 
