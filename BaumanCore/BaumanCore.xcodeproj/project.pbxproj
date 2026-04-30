@@ -13,7 +13,6 @@
 		63684A6E2EE9E42B00B1DCD8 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63684A6D2EE9E42800B1DCD8 /* AppState.swift */; };
 		63CDC04E2EE992930016927C /* ColorFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC04D2EE9928B0016927C /* ColorFile.swift */; };
 		63CDC0552EE996180016927C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDC0542EE996180016927C /* ContentView.swift */; };
-		AC27A4CF2F5ADC0800C19D5F /* StudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC27A4CE2F5ADC0500C19D5F /* StudentViewModel.swift */; };
 		AC7C347F2EF8117D000F47D5 /* Grades_semester_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */; };
 		AC7C34812EF811A6000F47D5 /* Grades_subjects_content.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */; };
 		AC7C34832EF811C2000F47D5 /* Grades_main_structure.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */; };
@@ -46,7 +45,6 @@
 		CE7B93E42EF844F800A74073 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B93E32EF844F800A74073 /* WelcomeViewController.swift */; };
 		CE7D99D62EF99C0300F36BE2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CE7D99D52EF99C0300F36BE2 /* FirebaseAuth */; };
 		CE7D99D82EF99C0300F36BE2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE7D99D72EF99C0300F36BE2 /* FirebaseFirestore */; };
-		CE9785352F5B236E00586044 /* StudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9785342F5B236E00586044 /* StudentViewModel.swift */; };
 		CE9785372F5B267A00586044 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE9785362F5B267A00586044 /* GoogleService-Info.plist */; };
 		CEA6A6282EFABED600A13550 /* ServiceGrades.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6A6272EFABED600A13550 /* ServiceGrades.swift */; };
 		CEA6A62B2EFAC05400A13550 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CEA6A62A2EFAC05400A13550 /* FirebaseDatabase */; };
@@ -55,6 +53,8 @@
 		CED65F872F732DF90065EFE4 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CED65F862F732DF90065EFE4 /* FirebaseFirestoreSwift */; };
 		CED65F922F7839360065EFE4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CED65F942F7839360065EFE4 /* Localizable.strings */; };
 		CED65F9A2F8643E10065EFE4 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED65F992F8643E10065EFE4 /* Translation.swift */; };
+		CEE1C13F2FA3756C00D5714E /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1C13E2FA3756C00D5714E /* ScheduleViewModel.swift */; };
+		CEE1C1412FA377EE00D5714E /* StudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1C1402FA377EE00D5714E /* StudentViewModel.swift */; };
 		CEFD06032F8A4C6400F4AADF /* QRStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD06022F8A4C6400F4AADF /* QRStorage.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +65,6 @@
 		63684A6D2EE9E42800B1DCD8 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		63CDC04D2EE9928B0016927C /* ColorFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFile.swift; sourceTree = "<group>"; };
 		63CDC0542EE996180016927C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		AC27A4CE2F5ADC0500C19D5F /* StudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewModel.swift; sourceTree = "<group>"; };
 		AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_semester_content.swift; sourceTree = "<group>"; };
 		AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_subjects_content.swift; sourceTree = "<group>"; };
 		AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grades_main_structure.swift; sourceTree = "<group>"; };
@@ -97,7 +96,6 @@
 		CE561DCE2F72C2E400EEA2FD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CE561DD02F72C77800EEA2FD /* MainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewModel.swift; sourceTree = "<group>"; };
 		CE7B93E32EF844F800A74073 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		CE9785342F5B236E00586044 /* StudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewModel.swift; sourceTree = "<group>"; };
 		CE9785362F5B267A00586044 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEA6A6272EFABED600A13550 /* ServiceGrades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceGrades.swift; sourceTree = "<group>"; };
 		CEA6A62C2EFAC11B00A13550 /* Semester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semester.swift; sourceTree = "<group>"; };
@@ -106,6 +104,8 @@
 		CED65F952F7839520065EFE4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CED65F962F7839690065EFE4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CED65F992F8643E10065EFE4 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
+		CEE1C13E2FA3756C00D5714E /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
+		CEE1C1402FA377EE00D5714E /* StudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewModel.swift; sourceTree = "<group>"; };
 		CEFD06022F8A4C6400F4AADF /* QRStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,12 +194,10 @@
 		63CDC0592EE997570016927C /* GradesView */ = {
 			isa = PBXGroup;
 			children = (
-				AC27A4CE2F5ADC0500C19D5F /* StudentViewModel.swift */,
 				AC7C34822EF811BE000F47D5 /* Grades_main_structure.swift */,
 				AC7C34802EF811A0000F47D5 /* Grades_subjects_content.swift */,
 				AC7C347E2EF81176000F47D5 /* Grades_semester_content.swift */,
 				CE2A3DFA2ED8CACC00C09F87 /* Grades_header.swift */,
-				CE9785342F5B236E00586044 /* StudentViewModel.swift */,
 			);
 			path = GradesView;
 			sourceTree = "<group>";
@@ -308,6 +306,8 @@
 				CE37A9262F0482EE001CD754 /* NewsCarouselViewModel.swift */,
 				CE561DCE2F72C2E400EEA2FD /* ProfileViewModel.swift */,
 				CE561DD02F72C77800EEA2FD /* MainPageViewModel.swift */,
+				CEE1C13E2FA3756C00D5714E /* ScheduleViewModel.swift */,
+				CEE1C1402FA377EE00D5714E /* StudentViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -411,7 +411,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE9785352F5B236E00586044 /* StudentViewModel.swift in Sources */,
 				AC8012772EE8F166003B6419 /* Lesson.swift in Sources */,
 				CEA6A62D2EFAC11B00A13550 /* Semester.swift in Sources */,
 				CE2A3DF62ED8C92700C09F87 /* Profile.swift in Sources */,
@@ -424,6 +423,7 @@
 				CEA6A6282EFABED600A13550 /* ServiceGrades.swift in Sources */,
 				AC7C34832EF811C2000F47D5 /* Grades_main_structure.swift in Sources */,
 				CE2A3E052ED8DEC400C09F87 /* MapView.swift in Sources */,
+				CEE1C1412FA377EE00D5714E /* StudentViewModel.swift in Sources */,
 				CE2A3E032ED8DCC400C09F87 /* QRView.swift in Sources */,
 				CE1C460B2F52DB51008EB09C /* AvatarStorage.swift in Sources */,
 				CE1F70392EF1E9EF00E42C47 /* DateManager.swift in Sources */,
@@ -442,11 +442,11 @@
 				CEFD06032F8A4C6400F4AADF /* QRStorage.swift in Sources */,
 				CE561DCF2F72C2E400EEA2FD /* ProfileViewModel.swift in Sources */,
 				CE7B93E42EF844F800A74073 /* WelcomeViewController.swift in Sources */,
+				CEE1C13F2FA3756C00D5714E /* ScheduleViewModel.swift in Sources */,
 				CE37A9242F0480FB001CD754 /* News.swift in Sources */,
 				AC7C34812EF811A6000F47D5 /* Grades_subjects_content.swift in Sources */,
 				CE37A9272F0482EE001CD754 /* NewsCarouselViewModel.swift in Sources */,
 				CE2A3E012ED8DCB500C09F87 /* ThreeBlueLinks.swift in Sources */,
-				AC27A4CF2F5ADC0800C19D5F /* StudentViewModel.swift in Sources */,
 				CE2A3DFB2ED8CACC00C09F87 /* Grades_header.swift in Sources */,
 				CEC878E12EF9F354000863DF /* ForgotPassView.swift in Sources */,
 				CE2A3DFF2ED8DC9D00C09F87 /* ImageCarousel.swift in Sources */,
