@@ -8,15 +8,15 @@ struct Schedule: View {
     @State private var lastSelectedWeek: Int = 1
     @State private var lastSelectedDay: Int = 1
 
-    var days: [(id: Int, name: String, dayNumber: String)] {
+    var days: [(id: Int, name: LocalizedStringKey, dayNumber: String)] {
         [
-            (1, "ПН", dateManager.getDayNumberForDay(dayIndex: 1)),
-            (2, "ВТ", dateManager.getDayNumberForDay(dayIndex: 2)),
-            (3, "СР", dateManager.getDayNumberForDay(dayIndex: 3)),
-            (4, "ЧТ", dateManager.getDayNumberForDay(dayIndex: 4)),
-            (5, "ПТ", dateManager.getDayNumberForDay(dayIndex: 5)),
-            (6, "СБ", dateManager.getDayNumberForDay(dayIndex: 6)),
-            (7, "ВС", dateManager.getDayNumberForDay(dayIndex: 7))
+            (1, Translation.Schedule.monday, dateManager.getDayNumberForDay(dayIndex: 1)),
+            (2, Translation.Schedule.tuesday, dateManager.getDayNumberForDay(dayIndex: 2)),
+            (3, Translation.Schedule.wednesday, dateManager.getDayNumberForDay(dayIndex: 3)),
+            (4, Translation.Schedule.thursday, dateManager.getDayNumberForDay(dayIndex: 4)),
+            (5, Translation.Schedule.friday, dateManager.getDayNumberForDay(dayIndex: 5)),
+            (6, Translation.Schedule.saturday, dateManager.getDayNumberForDay(dayIndex: 6)),
+            (7, Translation.Schedule.sunday, dateManager.getDayNumberForDay(dayIndex: 7))
         ]
     }
 
@@ -34,13 +34,13 @@ struct Schedule: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading) {
-                Text("Расписание")
+                Text(Translation.Schedule.title)
                     .fontWeight(.bold)
                     .font(.system(size: 30))
                     .padding(.bottom, 5)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Группа: \(scheduleVM.groupName)")
+                    Text(Translation.Schedule.group) + Text(" \(scheduleVM.groupName)")
                     Text(dateManager.weekTitle)
                 }
                 .foregroundColor(.gray)
@@ -102,14 +102,14 @@ struct Schedule: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 16) {
                     if lastSelectedDay == 7 {
-                        Text("Выходной")
+                        Text(Translation.Schedule.noLessonsSunday)
                             .font(.title2)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: .infinity, minHeight: 300)
 
                     } else if filteredLessons.isEmpty {
-                        Text("Нет занятий")
+                        Text(Translation.Schedule.noLessons)
                             .font(.title2)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
@@ -127,8 +127,9 @@ struct Schedule: View {
                             )
                         }
                     }
+                    Spacer(minLength: 80)
                 }
-                .padding(.bottom, 20)
+                .padding(.bottom, 100)
                 .padding(.top, 4)
             }
         }

@@ -12,11 +12,13 @@ enum Translation {
         static let thursday = LocalizedStringKey("schedule_day_thu")
         static let friday = LocalizedStringKey("schedule_day_fri")
         static let saturday = LocalizedStringKey("schedule_day_sat")
+        static let sunday = LocalizedStringKey("schedule_day_sun")
+
+        static let noLessons = LocalizedStringKey("schedule_no_lessons")
         static let noLessonsSunday = LocalizedStringKey("schedule_no_lessons_sunday")
-        static let fromHere = NSLocalizedString("schedule_from_here", comment: "")
-        static let toHere = NSLocalizedString("schedule_to_here", comment: "")
-        static let labShort = NSLocalizedString("lesson_type_lab_short", comment: "")
-        static let labWork = NSLocalizedString("lesson_type_lab_work", comment: "")
+        
+        static let weekTitleEven = LocalizedStringKey("schedule_week_title_even")
+        static let weekTitleOdd = LocalizedStringKey("schedule_week_title_odd")
     }
 
     enum LessonType {
@@ -134,6 +136,10 @@ enum Translation {
     enum MainPage {
         static let newsLoadFailed = LocalizedStringKey("main_news_load_failed")
         static let pass = LocalizedStringKey("qr_pass")
+        
+        static let greeting = LocalizedStringKey("main_greeting")
+        static let today = LocalizedStringKey("main_today")
+        static let lessonsCount = "main_lessons_count"
     }
 
 }

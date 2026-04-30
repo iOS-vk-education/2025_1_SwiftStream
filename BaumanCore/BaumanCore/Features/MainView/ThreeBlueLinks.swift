@@ -11,7 +11,7 @@ struct ThreeBlueLinks: View {
             LinkButton(
                 systemImageName: "envelope",
                 url: studentURL,
-                accessibilityLabel: "Студенческий портал"
+                accessibilityLabel: "Сайт почты МГТУ"
             )
 
             LinkButton(
@@ -23,7 +23,7 @@ struct ThreeBlueLinks: View {
             LinkButton(
                 systemImageName: "sportscourt",
                 url: sportURL,
-                accessibilityLabel: "Спортивный сайт"
+                accessibilityLabel: "Сайт физкультурной подготовки"
             )
         }
         .padding(.horizontal, 16)

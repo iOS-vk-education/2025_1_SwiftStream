@@ -1,201 +1,91 @@
-//import Foundation
-//import SwiftUI
-//
-//final class ScheduleDateManager: ObservableObject {
-//    @Published var currentWeek: Int = 1
-//    @Published var currentDayIndex: Int = 1
-//    @Published var isEvenWeek: Bool = false
-//    @Published var currentWeekStartDate: Date = Date()
-//    @Published var animateDayButtons: Bool = false
-//
-//    private let calendar = Calendar.current
-//
-//    init() {
-//        updateRealDate()
-//        calculateWeekStartDate()
-//    }
-//
-//    private func calculateWeekStartDate() {
-//        let calendar = Calendar.current
-//        let today = Date()
-//
-//        let components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today)
-//        guard let monday = calendar.date(from: components) else {
-//            return
-//        }
-//
-//        let weeksFromCurrent = currentWeek - getCurrentAcademicWeek()
-//        if let adjustedMonday = calendar.date(byAdding: .weekOfYear, value: weeksFromCurrent, to: monday) {
-//            currentWeekStartDate = adjustedMonday
-//        }
-//    }
-//
-//    private func startOfWeek(for date: Date) -> Date {
-//        let calendar = Calendar.current
-//        let components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)
-//        return calendar.date(from: components)!
-//    }
-//
-//
-//    private func getCurrentAcademicWeek() -> Int {
-//        let today = Date()
-//        let calendar = Calendar.current
-//
-//        // Определяем дату 1 сентября
-//        let year = calendar.component(.year, from: today)
-//        var septemberComponents = DateComponents()
-//        septemberComponents.year = year
-//        septemberComponents.month = 9
-//        septemberComponents.day = 1
-//
-//        var firstSeptember = calendar.date(from: septemberComponents)!
-//        if today < firstSeptember {
-//            septemberComponents.year = year - 1
-//            firstSeptember = calendar.date(from: septemberComponents)!
-//        }
-//
-//        // Получаем понедельник недели, в которую попадает 1 сентября
-//        let startOfAcademicWeek = startOfWeek(for: firstSeptember)
-//
-//        // Получаем понедельник недели, в которую попадает сегодня
-//        let startOfCurrentWeek = startOfWeek(for: today)
-//
-//        // Считаем разницу в днях между этими двумя понедельниками
-//        let daysBetween = calendar.dateComponents([.day], from: startOfAcademicWeek, to: startOfCurrentWeek).day ?? 0
-//
-//        // Переводим разницу в неделях
-//        let weekDifference = daysBetween / 7
-//
-//        return max(1, weekDifference + 1)
-//    }
-//
-//    func getDateForDay(dayIndex: Int) -> Date? {
-//        let dayOffset = dayIndex // ПН = 0, ВТ = 1 и т.д.
-//        return calendar.date(byAdding: .day, value: dayOffset, to: currentWeekStartDate)
-//    }
-//
-//    func getDayNumberForDay(dayIndex: Int) -> String {
-//        guard let date = getDateForDay(dayIndex: dayIndex) else { return "" }
-//        let dayNumber = calendar.component(.day, from: date)
-//        return "\(dayNumber)"
-//    }
-//
-//    func updateRealDate() {
-//        let today = Date()
-//        let weekday = calendar.component(.weekday, from: today)
-//
-//        // Оставляем логику как раньше: Пн = 1, ..., Сб = 6, Вс = 0 → делаем 6 (сб)
-//        currentDayIndex = weekday == 1 ? 0 : weekday - 1 // Вс = 0, Пн = 1, ..., Сб = 6
-//
-//        currentWeek = getCurrentAcademicWeek()
-//        if weekday == 1 { // если сегодня воскресенье
-//            currentWeek -= 1 // отображаем предыдущую неделю
-//        }
-//        isEvenWeek = currentWeek % 2 == 0
-//        calculateWeekStartDate()
-//    }
-//
-//    func nextWeek() {
-//        withAnimation(.easeInOut(duration: 0.3)) {
-//            animateDayButtons = true
-//        }
-//
-//
-//        if currentWeek < 18 {
-//            currentWeek += 1
-//        }
-//        isEvenWeek = currentWeek % 2 == 0
-//        calculateWeekStartDate()
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//            withAnimation(.easeInOut(duration: 0.1)) {
-//                self.animateDayButtons = false
-//            }
-//        }
-//    }
-//
-//    func prevWeek() {
-//        withAnimation(.easeInOut(duration: 0.3)) {
-//            animateDayButtons = true
-//        }
-//
-//        currentWeek -= 1
-//        if currentWeek < 1 { currentWeek = 1 }
-//        isEvenWeek = currentWeek % 2 == 0
-//        calculateWeekStartDate()
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//            withAnimation(.easeInOut(duration: 0.1)) {
-//                self.animateDayButtons = false
-//            }
-//        }
-//    }
-//
-//    var weekTitle: String {
-//        "\(currentWeek) неделя, \(isEvenWeek ? "знаменатель" : "числитель")"
-//    }
-//}
 import Foundation
 import SwiftUI
 
 final class ScheduleDateManager: ObservableObject {
     @Published var currentWeek: Int = 1
-    @Published var currentDayIndex: Int = 1   // Пн = 1 ... Сб = 6, Вс = 7
+    @Published var currentDayIndex: Int = 1
     @Published var isEvenWeek: Bool = false
     @Published var currentWeekStartDate: Date = Date()
     @Published var animateDayButtons: Bool = false
 
-    private let calendar = Calendar.current
+    private var calendar: Calendar = {
+        var calendar = Calendar.current
+        calendar.firstWeekday = 2
+        return calendar
+    }()
+
+    private let maxWeeks = 18
 
     init() {
         updateRealDate()
     }
 
-    private func startOfWeek(for date: Date) -> Date {
-        let components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)
+    private func makeDate(year: Int, month: Int, day: Int) -> Date {
+        var components = DateComponents()
+        components.year = year
+        components.month = month
+        components.day = day
         return calendar.date(from: components)!
     }
 
-    private func getCurrentAcademicWeek() -> Int {
-        let today = Date()
+    private func firstStudyDay(from date: Date) -> Date {
+        let weekday = calendar.component(.weekday, from: date)
 
-        let year = calendar.component(.year, from: today)
-        var septemberComponents = DateComponents()
-        septemberComponents.year = year
-        septemberComponents.month = 9
-        septemberComponents.day = 1
-
-        var firstSeptember = calendar.date(from: septemberComponents)!
-        if today < firstSeptember {
-            septemberComponents.year = year - 1
-            firstSeptember = calendar.date(from: septemberComponents)!
+        if weekday == 7 {
+            return calendar.date(byAdding: .day, value: 2, to: date)!
         }
 
-        let startOfAcademicWeek = startOfWeek(for: firstSeptember)
-        let startOfCurrentWeek = startOfWeek(for: today)
+        if weekday == 1 {
+            return calendar.date(byAdding: .day, value: 1, to: date)!
+        }
+        return date
+    }
 
-        let daysBetween = calendar.dateComponents([.day], from: startOfAcademicWeek, to: startOfCurrentWeek).day ?? 0
-        let weekDifference = daysBetween / 7
+    private func fallSemesterStart(year: Int) -> Date {
+        let septemberFirst = makeDate(year: year, month: 9, day: 1)
+        return firstStudyDay(from: septemberFirst)
+    }
 
-        return max(1, weekDifference + 1)
+    private func springSemesterStart(year: Int) -> Date {
+        let februarySeventh = makeDate(year: year, month: 2, day: 7)
+        return firstStudyDay(from: februarySeventh)
+    }
+
+    private func currentSemesterStart(for date: Date) -> Date {
+        let year = calendar.component(.year, from: date)
+
+        let springStart = springSemesterStart(year: year)
+        let fallStart = fallSemesterStart(year: year)
+
+        if date >= fallStart {
+            return fallStart
+        } else if date >= springStart {
+            return springStart
+        } else {
+            return fallSemesterStart(year: year - 1)
+        }
+    }
+
+    private func academicWeek(for date: Date) -> Int {
+        let semesterStart = currentSemesterStart(for: date)
+
+        let daysBetween = calendar.dateComponents([.day], from: semesterStart, to: date).day ?? 0
+        let week = daysBetween / 7 + 1
+
+        return min(max(week, 1), maxWeeks)
     }
 
     private func calculateWeekStartDate() {
-        let today = Date()
-        let mondayOfCurrentWeek = startOfWeek(for: today)
+        let semesterStart = currentSemesterStart(for: Date())
 
-        let weeksFromCurrent = currentWeek - getCurrentAcademicWeek()
-
-        if let adjustedMonday = calendar.date(byAdding: .weekOfYear, value: weeksFromCurrent, to: mondayOfCurrentWeek) {
-            currentWeekStartDate = adjustedMonday
-        }
+        currentWeekStartDate = calendar.date(
+            byAdding: .weekOfYear,
+            value: currentWeek - 1,
+            to: semesterStart
+        ) ?? semesterStart
     }
 
     func getDateForDay(dayIndex: Int) -> Date? {
-        // Пн = 1 -> offset 0
-        // Вт = 2 -> offset 1
-        // ...
-        // Вс = 7 -> offset 6
         let dayOffset = dayIndex - 1
         return calendar.date(byAdding: .day, value: dayOffset, to: currentWeekStartDate)
     }
@@ -210,11 +100,9 @@ final class ScheduleDateManager: ObservableObject {
         let today = Date()
         let weekday = calendar.component(.weekday, from: today)
 
-        // Calendar: 1 = Sunday, 2 = Monday ... 7 = Saturday
-        // Нам надо: Monday = 1 ... Sunday = 7
         currentDayIndex = weekday == 1 ? 7 : weekday - 1
 
-        currentWeek = getCurrentAcademicWeek()
+        currentWeek = academicWeek(for: today)
         isEvenWeek = currentWeek % 2 == 0
 
         calculateWeekStartDate()
@@ -225,7 +113,7 @@ final class ScheduleDateManager: ObservableObject {
             animateDayButtons = true
         }
 
-        if currentWeek < 18 {
+        if currentWeek < maxWeeks {
             currentWeek += 1
         }
 
@@ -257,8 +145,10 @@ final class ScheduleDateManager: ObservableObject {
             }
         }
     }
-
-    var weekTitle: String {
-        "\(currentWeek) неделя, \(isEvenWeek ? "знаменатель" : "числитель")"
+    
+    var weekTitle: LocalizedStringKey {
+        isEvenWeek
+        ? "schedule_week_title_even \(currentWeek)"
+        : "schedule_week_title_odd \(currentWeek)"
     }
 }
