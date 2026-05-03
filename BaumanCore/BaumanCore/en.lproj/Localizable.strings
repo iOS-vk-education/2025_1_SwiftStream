@@ -91,6 +91,12 @@
 "schedule_day_thu" = "THU";
 "schedule_day_fri" = "FRI";
 "schedule_day_sat" = "SAT";
+"schedule_day_sun" = "SUN";
+"schedule_no_lessons" = "No lessons";
+"schedule_no_lessons_sunday" = "Day off";
+
+"schedule_week_title_even %lld" = "Week %d, denominator";
+"schedule_week_title_odd %lld" = "Week %d, numerator";
 
 "lesson_type_lecture" = "Lecture";
 "lesson_type_seminar" = "Seminar";
@@ -98,8 +104,6 @@
 
 "schedule_no_lessons_sunday" = "Today is Sunday, so there are no classes";
 
-"schedule_from_here" = "From Here";
-"schedule_to_here" = "To Here";
 
 //экран QR
 "qr_upload" = "Upload QR";
@@ -115,3 +119,11 @@
 
 "qr_delete_alert_title" = "Delete QR?";
 "qr_delete_alert_message" = "The saved QR will be deleted.";
+
+//экран главной страницы
+"main_news_load_failed" = "Failed to load news";
+"qr_pass" = "Pass";
+
+"main_greeting" = "Hello";
+"main_today" = "Today is";
+"main_lessons_count %lld" = "%lld lessons";

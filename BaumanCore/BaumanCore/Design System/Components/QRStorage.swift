@@ -1,7 +1,11 @@
 import UIKit
+import FirebaseAuth
 
 enum QRStorage {
-    private static let fileName = "user_qr.jpg"
+    private static var fileName: String {
+        let userId = Auth.auth().currentUser?.uid ?? "unknown"
+        return "user_qr_\(userId).jpg"
+    }
 
     private static var fileURL: URL {
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]

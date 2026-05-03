@@ -6,6 +6,7 @@ class StudentViewModel: ObservableObject {
 
     @Published var subjects: [SubjectData] = []
     @Published var semesters: [Semester] = []
+    @Published var student: Student?
 
     private let db = Firestore.firestore()
 
@@ -23,7 +24,7 @@ class StudentViewModel: ObservableObject {
 
         let group = DispatchGroup()
 
-        // текущая
+
         group.enter()
         userRef.collection("subjects").getDocuments { snapshot, error in
 
@@ -59,7 +60,7 @@ class StudentViewModel: ObservableObject {
                                 )
                             }
 
-                            // сортировка уроков по дню и месяцу
+                          
                             lessons.sort {
                                 Self.dayMonthValue($0.date) < Self.dayMonthValue($1.date)
                             }
@@ -87,7 +88,7 @@ class StudentViewModel: ObservableObject {
             }
         }
 
-        // семестры
+
         group.enter()
         userRef.collection("semesters").getDocuments { snapshot, error in
 
@@ -121,7 +122,7 @@ class StudentViewModel: ObservableObject {
                                 )
                             }
 
-                            // сортировка предметов внутри семестра
+                  
                             semesterSubjects.sort {
                                 Self.extractNumber($0.id) < Self.extractNumber($1.id)
                             }
@@ -151,19 +152,19 @@ class StudentViewModel: ObservableObject {
         
         group.notify(queue: .main) {
 
-            // сортировка текущих предметов
+        
             self.subjects = loadedSubjects.sorted {
                 Self.extractNumber($0.id) < Self.extractNumber($1.id)
             }
 
-            // сортировка семестров по убыванию номера
+          
             self.semesters = loadedSemesters.sorted {
                 Self.extractSemesterNumber($0.id) > Self.extractSemesterNumber($1.id)
             }
         }
     }
 
-    // сортировка lessons по дате
+    
     private static func dayMonthValue(_ dateString: String) -> Int {
 
         let normalized = dateString
@@ -179,7 +180,7 @@ class StudentViewModel: ObservableObject {
         return month * 100 + day
     }
 
-    // сортировка предметов в текущих
+   
     private static func extractNumber(_ id: String) -> Int {
 
         let numbers = id.components(separatedBy: CharacterSet.decimalDigits.inverted)
@@ -188,7 +189,7 @@ class StudentViewModel: ObservableObject {
         return Int(numbers) ?? 0
     }
 
-    // сортировка семестров
+    
     private static func extractSemesterNumber(_ id: String) -> Int {
 
         let number = id.replacingOccurrences(of: "semester", with: "")

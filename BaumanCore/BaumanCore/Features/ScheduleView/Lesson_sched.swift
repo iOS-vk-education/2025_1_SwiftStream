@@ -1,32 +1,11 @@
 import Foundation
 import SwiftUI
 
+
 enum LessonType {
     case lecture
     case seminar
     case lab
-
-    var color: Color {
-        switch self {
-        case .lecture:
-            return Color.blue.opacity(0.4)
-        case .seminar:
-            return Color.mint.opacity(0.4)
-        case .lab:
-            return Color.purple.opacity(0.4)
-        }
-    }
-    
-    var textColor: Color {
-        switch self {
-        case .lecture:
-            return .blue
-        case .seminar:
-            return .mint
-        case .lab:
-            return .purple
-        }
-    }
 
     var title: LocalizedStringKey {
         switch self {
@@ -38,6 +17,17 @@ enum LessonType {
             return Translation.LessonType.lab
         }
     }
+
+    var color: Color {
+        switch self {
+        case .lecture:
+            return Color.blue.opacity(0.4)
+        case .seminar:
+            return Color.mint.opacity(0.4)
+        case .lab:
+            return Color.purple.opacity(0.4)
+        }
+    }
 }
 
 struct LessonCardView: View {
@@ -47,12 +37,11 @@ struct LessonCardView: View {
     let subject: String
     let teacher: String
     let classroom: String
-    var onClassroomTap: ((String) -> Void)? = nil
 
     var body: some View {
         VStack(spacing: 0) {
             Text(type.title)
-                .font(.system(size: 14, weight: .bold))
+                .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, 3)
@@ -60,32 +49,36 @@ struct LessonCardView: View {
                 .background(type.color)
 
             HStack(alignment: .top, spacing: 12) {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text(timeStart)
-                        .font(.system(size: 17, weight: .bold))
+                        .font(.system(size: 14))
+                        .foregroundColor(.gray)
 
                     Text(timeEnd)
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
                 }
+                .frame(width: 55, alignment: .leading)
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(subject)
                         .font(.system(size: 16, weight: .semibold))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.leading)
 
                     Text(teacher)
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
+                        .fixedSize(horizontal: false, vertical: true)
 
-                    Button(action: {
-                        onClassroomTap?(classroom)
-                    }) {
-                        Text("ауд. \(classroom)")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(Colors.MainColor)
-                            .underline()
-                    }
+                    let trimmedClassroom = classroom.trimmingCharacters(in: .whitespacesAndNewlines)
+
+                    Text(trimmedClassroom.lowercased() == "спортивный зал" ? trimmedClassroom : "ауд. \(trimmedClassroom)")
+                        .font(.system(size: 14))
+                        .foregroundColor(.gray)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(12)
             .frame(maxWidth: .infinity, alignment: .leading)

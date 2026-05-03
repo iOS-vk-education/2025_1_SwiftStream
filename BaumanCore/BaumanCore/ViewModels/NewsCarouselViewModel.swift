@@ -7,28 +7,43 @@ final class NewsCarouselViewModel: ObservableObject {
     @Published var errorText: String?
 
     private let service = NewsService()
-    private var hasLoaded = false
+    private var hasLoadedSuccessfully = false
+    private var didTryInitialLoad = false
 
-    func load() async {
-        guard !hasLoaded else { return }
-        
+    func loadIfNeeded() async {
+        guard !didTryInitialLoad else { return }
+
+        didTryInitialLoad = true
+        await load(force: true)
+    }
+
+    func load(force: Bool = false) async {
+        if isLoading {
+            return
+        }
+
+        if hasLoadedSuccessfully && !force {
+            return
+        }
+
         isLoading = true
         errorText = nil
-        
-        defer {
-            isLoading = false
-            hasLoaded = true
-        }
-        
+
         do {
             let news = try await service.fetchNews(limit: 10)
+
             items = news
-            if news.isEmpty { errorText = "Новости не найдены" }
-        } catch {
-            if items.isEmpty {
-                items = []
-                errorText = "Ошибка загрузки: \(error.localizedDescription)"
+            hasLoadedSuccessfully = true
+
+            if news.isEmpty {
+                errorText = "Новости не найдены"
             }
+        } catch {
+            items = []
+            hasLoadedSuccessfully = false
+            errorText = "Новости не получилось загрузить"
         }
+
+        isLoading = false
     }
 }

@@ -94,15 +94,18 @@
 "schedule_day_thu" = "周四";
 "schedule_day_fri" = "周五";
 "schedule_day_sat" = "周六";
+"schedule_day_sun" = "周日";
+"schedule_no_lessons" = "没有课程";
+"schedule_no_lessons_sunday" = "休息日";
+
+"schedule_week_title_even %lld" = "第 %d 周，偶数周";
+"schedule_week_title_odd %lld" = "第 %d 周，奇数周";
 
 "lesson_type_lecture" = "讲座";
 "lesson_type_seminar" = "研讨课";
 "lesson_type_lab" = "实验课";
 
 "schedule_no_lessons_sunday" = "今天是星期日，所以没有课程";
-
-"schedule_from_here" = "从这里";
-"schedule_to_here" = "到这里";
 
 //экран QR
 "qr_upload" = "上传二维码";
@@ -118,3 +121,11 @@
 
 "qr_delete_alert_title" = "删除二维码？";
 "qr_delete_alert_message" = "已保存的二维码将被删除。";
+
+//экран главной страницы
+"main_news_load_failed" = "新闻加载失败";
+"qr_pass" = "通行证";
+
+"main_greeting" = "你好";
+"main_today" = "今天是";
+"main_lessons_count %lld" = "%lld 节课";

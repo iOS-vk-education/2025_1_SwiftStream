@@ -91,6 +91,9 @@
 "schedule_day_thu" = "ЧТ";
 "schedule_day_fri" = "ПТ";
 "schedule_day_sat" = "СБ";
+"schedule_day_sun" = "ВС";
+"schedule_no_lessons" = "Нет занятий";
+"schedule_no_lessons_sunday" = "Выходной";
 
 "lesson_type_lecture" = "Лекция";
 "lesson_type_seminar" = "Семинар";
@@ -98,8 +101,9 @@
 
 "schedule_no_lessons_sunday" = "Сегодня воскресенье, поэтому пар нет";
 
-"schedule_from_here" = "Откуда";
-"schedule_to_here" = "Куда";
+"schedule_week_title_even %lld" = "%d неделя, знаменатель";
+"schedule_week_title_odd %lld" = "%d неделя, числитель";
+
 
 //экран QR
 "qr_upload" = "Загрузить QR";
@@ -115,3 +119,11 @@
 
 "qr_delete_alert_title" = "Удалить QR?";
 "qr_delete_alert_message" = "Сохраненный QR будет удалён.";
+
+//экран главной страницы
+"main_news_load_failed" = "Новости не получилось загрузить";
+"qr_pass" = "Пропуск";
+
+"main_greeting" = "Привет";
+"main_today" = "Сегодня";
+"main_lessons_count %lld" = "%lld пары";

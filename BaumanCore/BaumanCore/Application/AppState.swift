@@ -3,10 +3,12 @@ import FirebaseAuth
 
 @MainActor
 final class AppState: ObservableObject {
-    @Published var isLoggedIn: Bool = false
+    var isLoggedIn: Bool {
+        Auth.auth().currentUser != nil
+    }
     @Published var isAuthResolved: Bool = false
     @Published var student: Student? = nil
-    @Published var selectedTab: Int = 0
+    @Published var selectedTab: Int = 1
     @Published var pendingFromLocation: String?
     @Published var pendingToLocation: String?
 
@@ -15,8 +17,6 @@ final class AppState: ObservableObject {
     init() {
         authStateHandle = Auth.auth().addStateDidChangeListener { [weak self] _, user in
             guard let self = self else { return }
-
-            self.isLoggedIn = user != nil
             self.isAuthResolved = true
 
             if user == nil {
