@@ -1,6 +1,7 @@
 struct Student {
     var nameLocalized: [String: String]
     var faculty: String
+    var group: String
     var groupLocalized: [String: String]
     var studentID: String
     var email: String

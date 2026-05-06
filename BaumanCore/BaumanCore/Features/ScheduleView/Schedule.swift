@@ -7,6 +7,18 @@ struct Schedule: View {
     @State private var selectedTab: Int = 2
     @State private var lastSelectedWeek: Int = 1
     @State private var lastSelectedDay: Int = 1
+    @AppStorage("userSelectedLanguage") private var selectedLanguageRawValue = 0
+
+    private var currentLanguageCode: String {
+        switch selectedLanguageRawValue {
+        case 1:
+            return "en"
+        case 2:
+            return "zh"
+        default:
+            return "ru"
+        }
+    }
 
     var days: [(id: Int, name: LocalizedStringKey, dayNumber: String)] {
         [
@@ -40,7 +52,7 @@ struct Schedule: View {
                     .padding(.bottom, 5)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(Translation.Schedule.group) + Text(" \(scheduleVM.groupName)")
+                    Text(Translation.Schedule.group) + Text(" \(scheduleVM.localizedGroupName(languageCode: currentLanguageCode))")
                     Text(dateManager.weekTitle)
                 }
                 .foregroundColor(.gray)
@@ -118,12 +130,14 @@ struct Schedule: View {
                     } else {
                         ForEach(filteredLessons) { lesson in
                             LessonCardView(
-                                type: mapType(lesson.type),
+                                type: mapType(lesson.typeKey),
+                                typeTitle: lesson.localizedType(languageCode: currentLanguageCode),
                                 timeStart: lesson.timeStart,
                                 timeEnd: lesson.timeEnd,
-                                subject: lesson.subject,
-                                teacher: lesson.teacher,
-                                classroom: lesson.classroom
+                                subject: lesson.localizedSubject(languageCode: currentLanguageCode),
+                                teacher: lesson.localizedTeacher(languageCode: currentLanguageCode),
+                                classroom: lesson.classroom,
+                                languageCode: currentLanguageCode
                             )
                         }
                     }
@@ -145,14 +159,14 @@ struct Schedule: View {
             scheduleVM.fetchScheduleForCurrentUser()
         }
     }
-
-    func mapType(_ type: String) -> LessonType {
-        switch type.lowercased() {
-        case "lecture", "лекция":
+    
+    func mapType(_ typeKey: String) -> LessonType {
+        switch typeKey {
+        case "lecture":
             return .lecture
-        case "seminar", "семинар":
+        case "seminar":
             return .seminar
-        case "lab", "лабораторная", "лабораторная работа":
+        case "lab":
             return .lab
         default:
             return .lecture

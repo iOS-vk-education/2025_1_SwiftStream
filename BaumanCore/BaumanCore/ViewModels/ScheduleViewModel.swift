@@ -6,6 +6,7 @@ class ScheduleViewModel: ObservableObject {
 
     @Published var lessons: [ScheduleLesson] = []
     @Published var groupName: String = ""
+    @Published var groupLocalized: [String: String] = [:]
 
     private let db = Firestore.firestore()
 
@@ -29,14 +30,16 @@ class ScheduleViewModel: ObservableObject {
             }
 
             let group = data["group"] as? String ?? ""
+            let groupLocalized = self.localizedMap(from: data["groupLocalized"])
 
             if group.isEmpty {
-                print("У пользователя не указана группа")
+                print("У пользователя не указана группа. Верни поле group в Firebase.")
                 return
             }
 
             DispatchQueue.main.async {
                 self.groupName = group
+                self.groupLocalized = groupLocalized
             }
 
             self.fetchSchedule(group: group)
@@ -73,14 +76,14 @@ class ScheduleViewModel: ObservableObject {
 
                     let lesson = ScheduleLesson(
                         id: "\(group)_\(index)",
-                        subject: item["subject"] as? String ?? "",
-                        teacher: item["teacher"] as? String ?? "",
+                        subjectLocalized: self.localizedMap(from: item["subject"]),
+                        teacherLocalized: self.localizedMap(from: item["teacher"]),
+                        typeLocalized: self.localizedMap(from: item["type"]),
                         classroom: item["room"] as? String ?? "",
                         timeStart: item["startTime"] as? String ?? "",
                         timeEnd: item["endTime"] as? String ?? "",
-                        type: item["type"] as? String ?? "Лекция",
                         day: mappedDay,
-                        week: 0,      // 0 = показывать на любой неделе
+                        week: 0,
                         order: index
                     )
 
@@ -100,7 +103,7 @@ class ScheduleViewModel: ObservableObject {
 
                 print("Загружено пар: \(loadedLessons.count)")
                 for lesson in loadedLessons {
-                    print("Пара: \(lesson.subject), day=\(lesson.day), start=\(lesson.timeStart)")
+                    print("Пара: \(lesson.localizedSubject(languageCode: "ru")), day=\(lesson.day), start=\(lesson.timeStart)")
                 }
             }
     }
@@ -110,6 +113,48 @@ class ScheduleViewModel: ObservableObject {
             $0.day == day && ($0.week == 0 || $0.week == week)
         }
         .sorted { $0.timeStart < $1.timeStart }
+    }
+
+    func localizedGroupName(languageCode: String) -> String {
+        let code = normalizedLanguageCode(languageCode)
+
+        return groupLocalized[code]
+        ?? groupLocalized["ru"]
+        ?? groupLocalized["en"]
+        ?? groupLocalized["zh"]
+        ?? groupName
+    }
+
+    private func localizedMap(from value: Any?) -> [String: String] {
+        if let map = value as? [String: String] {
+            return map
+        }
+
+        if let map = value as? [String: Any] {
+            var result: [String: String] = [:]
+
+            for (key, value) in map {
+                if let stringValue = value as? String {
+                    result[key] = stringValue
+                }
+            }
+
+            return result
+        }
+
+        return [:]
+    }
+
+    private func normalizedLanguageCode(_ languageCode: String) -> String {
+        if languageCode.hasPrefix("zh") {
+            return "zh"
+        }
+
+        if languageCode.hasPrefix("en") {
+            return "en"
+        }
+
+        return "ru"
     }
 
     private func mapDayStringToInt(_ day: String) -> Int {

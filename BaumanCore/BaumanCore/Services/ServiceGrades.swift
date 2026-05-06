@@ -61,6 +61,7 @@ class FirebaseService {
             
             let nameLocalized = self.localizedMap(from: data["name"])
             let groupLocalized = self.localizedMap(from: data["groupLocalized"])
+            let group = data["group"] as? String ?? ""
             let faculty = data["faculty"] as? String ?? ""
             let studentID = data["studentID"] as? String ?? ""
             let email = data["email"] as? String ?? ""
@@ -110,6 +111,7 @@ class FirebaseService {
             let student = Student(
                 nameLocalized: nameLocalized,
                 faculty: faculty,
+                group: group,
                 groupLocalized: groupLocalized,
                 studentID: studentID,
                 email: email,
