@@ -1,10 +1,9 @@
 import SwiftUI
 
-// контент внутри каждого предмета текущих
-
 struct SubjectRowView: View {
     let subject: SubjectData
     @Binding var expandedSubjectId: String?
+    let languageCode: String
     
     private var isExpanded: Bool {
         expandedSubjectId == subject.id
@@ -37,12 +36,10 @@ struct SubjectRowView: View {
             .clipped()
         }
     }
-    
-    // шапка конкретного предмета
-    
+
     var header: some View {
         HStack(alignment: .center) {
-            Text(subject.name)
+            Text(subject.localizedName(languageCode: languageCode))
                 .font(.title2)
                 .foregroundColor(Colors.black)
                 .multilineTextAlignment(.leading)
@@ -65,27 +62,28 @@ struct SubjectRowView: View {
         .padding(.vertical, 10)
     }
     
-    // один урок (семинар, лекция, рк и тп)
-    
     private func gradeItem(lesson: Lesson) -> some View {
         
-        // определим что за предмет
-        
         let special: Bool = {
-            let title = lesson.title.lowercased()
-            return title.contains("лаб") || title.contains("рубеж")
+            let title = lesson.localizedTitle(languageCode: languageCode).lowercased()
+
+            return title.contains("лаб")
+                || title.contains("laboratory")
+                || title.contains("lab")
+                || title.contains("实验")
+                || title.contains("рубеж")
         }()
 
         return VStack(alignment: .leading, spacing: 6) {
             HStack {
-                Text(lesson.title)
+                Text(lesson.localizedTitle(languageCode: languageCode))
                     .fontWeight(special ? .semibold : .regular)
                     .lineLimit(nil)
                 
                 Spacer()
 
-                Text(lesson.status)
-                    .foregroundColor(lesson.statusColor)
+                Text(lesson.localizedStatus(languageCode: languageCode))
+                    .foregroundColor(lesson.localizedStatusColor(languageCode: languageCode))
             }
 
             Text(lesson.date)

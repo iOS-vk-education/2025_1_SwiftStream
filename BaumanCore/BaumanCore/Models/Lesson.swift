@@ -1,10 +1,62 @@
 import Foundation
+import SwiftUI
 
 struct Lesson: Identifiable {
     var id: String
-    var title: String
+    var titleLocalized: [String: String]
     var date: String
-    var status: String
+    var statusLocalized: [String: String]
+
+    func localizedTitle(languageCode: String) -> String {
+        localizedValue(from: titleLocalized, languageCode: languageCode)
+    }
+
+    func localizedStatus(languageCode: String) -> String {
+        localizedValue(from: statusLocalized, languageCode: languageCode)
+    }
+
+    func localizedStatusColor(languageCode: String) -> Color {
+        let status = localizedStatus(languageCode: languageCode)
+            .lowercased()
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if status.contains("посещ")
+            || status.contains("attended")
+            || status.contains("已出勤") {
+            return .green
+        }
+
+        if status.contains("пропущ")
+            || status.contains("absent")
+            || status.contains("未出勤") {
+            return .red
+        }
+
+        return .gray
+    }
+
+    private func localizedValue(from map: [String: String], languageCode: String) -> String {
+        let code = Self.normalizedLanguageCode(languageCode)
+
+        return map[code]
+        ?? map["ru"]
+        ?? map["en"]
+        ?? map["zh"]
+        ?? map.values.first
+        ?? ""
+    }
+
+    private static func normalizedLanguageCode(_ languageCode: String) -> String {
+        if languageCode.hasPrefix("zh") {
+            return "zh"
+        }
+
+        if languageCode.hasPrefix("en") {
+            return "en"
+        }
+
+        return "ru"
+    }
 }
 
 struct ScheduleLesson: Identifiable {

@@ -72,39 +72,59 @@ class FirebaseService {
             var subjects: [SubjectData] = []
             if let subjectsData = data["subjects"] as? [[String: Any]] {
                 for subjectDict in subjectsData {
-                    let name = subjectDict["name"] as? String ?? ""
+                    let nameLocalized = self.localizedMap(from: subjectDict["name"])
                     let progress = subjectDict["progress"] as? String ?? "0/100"
                     var lessons: [Lesson] = []
-                    
+
                     if let lessonsArray = subjectDict["lessons"] as? [[String: Any]] {
                         for lessonDict in lessonsArray {
                             let lesson = Lesson(
                                 id: UUID().uuidString,
-                                title: lessonDict["title"] as? String ?? "",
+                                titleLocalized: self.localizedMap(from: lessonDict["title"]),
                                 date: lessonDict["date"] as? String ?? "",
-                                status: lessonDict["status"] as? String ?? ""
+                                statusLocalized: self.localizedMap(from: lessonDict["status"])
                             )
+
                             lessons.append(lesson)
                         }
                     }
-                    subjects.append(SubjectData(id: UUID().uuidString, name: name, progress: progress, lessons: lessons))
+
+                    subjects.append(
+                        SubjectData(
+                            id: UUID().uuidString,
+                            nameLocalized: nameLocalized,
+                            progress: progress,
+                            lessons: lessons
+                        )
+                    )
                 }
             }
             
             var semesters: [Semester] = []
             if let semestersData = data["semesters"] as? [[String: Any]] {
                 for semesterDict in semestersData {
-                    let title = semesterDict["title"] as? String ?? ""
+                    let titleLocalized = self.localizedMap(from: semesterDict["title"])
                     var semesterSubjects: [SemesterSubject] = []
-                    
+
                     if let subjectsArray = semesterDict["subjects"] as? [[String: Any]] {
                         for subDict in subjectsArray {
-                            let name = subDict["name"] as? String ?? ""
-                            let grade = subDict["grade"] as? String ?? ""
-                            semesterSubjects.append(SemesterSubject(id: UUID().uuidString, name: name, grade: grade))
+                            semesterSubjects.append(
+                                SemesterSubject(
+                                    id: UUID().uuidString,
+                                    nameLocalized: self.localizedMap(from: subDict["name"]),
+                                    gradeLocalized: self.localizedMap(from: subDict["grade"])
+                                )
+                            )
                         }
                     }
-                    semesters.append(Semester(id: UUID().uuidString, title: title, subjects: semesterSubjects))
+
+                    semesters.append(
+                        Semester(
+                            id: UUID().uuidString,
+                            titleLocalized: titleLocalized,
+                            subjects: semesterSubjects
+                        )
+                    )
                 }
             }
             
