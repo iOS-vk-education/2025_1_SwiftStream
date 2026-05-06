@@ -4,6 +4,27 @@ import FirebaseAuth
 
 class FirebaseService {
     
+    
+    private func localizedMap(from value: Any?) -> [String: String] {
+        if let map = value as? [String: String] {
+            return map
+        }
+
+        if let map = value as? [String: Any] {
+            var result: [String: String] = [:]
+
+            for (key, value) in map {
+                if let stringValue = value as? String {
+                    result[key] = stringValue
+                }
+            }
+
+            return result
+        }
+
+        return [:]
+    }
+    
     func fetchStudent(completion: @escaping (Student?) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else {
             print("Пользователь не авторизован")
@@ -38,15 +59,15 @@ class FirebaseService {
             
             print("Документ получен! Данные: \(data)")
             
-            let name = data["name"] as? String ?? ""
+            let nameLocalized = self.localizedMap(from: data["name"])
+            let groupLocalized = self.localizedMap(from: data["groupLocalized"])
             let faculty = data["faculty"] as? String ?? ""
-            let group = data["group"] as? String ?? ""
             let studentID = data["studentID"] as? String ?? ""
             let email = data["email"] as? String ?? ""
+
+            print("Извлечено имя: '\(nameLocalized)'")
+            print("Извлечена группа: '\(groupLocalized)'")
             
-            print("Извлечено имя: '\(name)'")
-            
-            // --- Обработка Subjects ---
             var subjects: [SubjectData] = []
             if let subjectsData = data["subjects"] as? [[String: Any]] {
                 for subjectDict in subjectsData {
@@ -69,7 +90,6 @@ class FirebaseService {
                 }
             }
             
-            // --- Обработка Semesters ---
             var semesters: [Semester] = []
             if let semestersData = data["semesters"] as? [[String: Any]] {
                 for semesterDict in semestersData {
@@ -88,16 +108,16 @@ class FirebaseService {
             }
             
             let student = Student(
-                name: name,
+                nameLocalized: nameLocalized,
                 faculty: faculty,
-                group: group,
+                groupLocalized: groupLocalized,
                 studentID: studentID,
                 email: email,
                 subjects: subjects,
                 semesters: semesters
             )
-            
-            print("Student создан успешно: \(student.name)")
+
+            print("Student создан успешно: \(student.localizedName(languageCode: "ru"))")
             completion(student)
         }
     }
