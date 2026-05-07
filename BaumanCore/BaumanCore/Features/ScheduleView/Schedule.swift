@@ -136,7 +136,7 @@ struct Schedule: View {
                                 timeEnd: lesson.timeEnd,
                                 subject: lesson.localizedSubject(languageCode: currentLanguageCode),
                                 teacher: lesson.localizedTeacher(languageCode: currentLanguageCode),
-                                classroom: lesson.classroom,
+                                classroom: lesson.localizedClassroom(languageCode: currentLanguageCode),
                                 languageCode: currentLanguageCode
                             )
                         }

@@ -78,7 +78,9 @@ struct LessonCardView: View {
     }
 
     private var classroomText: String {
-        let trimmedClassroom = classroom.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        let trimmedClassroom = classroom
+            .trimmingCharacters(in: .whitespacesAndNewlines)
 
         guard !trimmedClassroom.isEmpty else {
             return ""
@@ -86,11 +88,16 @@ struct LessonCardView: View {
 
         let lowercasedClassroom = trimmedClassroom.lowercased()
 
-        if lowercasedClassroom == "спортивный зал"
-            || lowercasedClassroom == "gym"
-            || lowercasedClassroom == "体育馆" {
+ 
+
+        if lowercasedClassroom.contains("спортивный зал")
+            || lowercasedClassroom.contains("sports hall")
+            || lowercasedClassroom.contains("体育馆") {
+
             return trimmedClassroom
         }
+
+
 
         if languageCode.hasPrefix("zh") {
             return "教室 \(trimmedClassroom)"

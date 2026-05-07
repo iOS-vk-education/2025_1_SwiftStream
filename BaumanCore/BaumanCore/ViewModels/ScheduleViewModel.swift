@@ -80,6 +80,7 @@ class ScheduleViewModel: ObservableObject {
                         teacherLocalized: self.localizedMap(from: item["teacher"]),
                         typeLocalized: self.localizedMap(from: item["type"]),
                         classroom: item["room"] as? String ?? "",
+                        classroomLocalized: self.localizedMap(from: item["roomLocalized"]),
                         timeStart: item["startTime"] as? String ?? "",
                         timeEnd: item["endTime"] as? String ?? "",
                         day: mappedDay,
