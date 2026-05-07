@@ -19,7 +19,7 @@ extension Color {
 
 enum Colors {
     static var MainColor: Color {
-        Color("MainColor") // имя цвета в Assets
+        Color("MainColor")
     }
     
     static var black: Color {
@@ -66,20 +66,43 @@ enum Colors {
     }
 }
 
-// оценки уроков
 extension Lesson {
-    var statusColor: Color {
-        switch status {
-        case "Посещено", "Сдано", "Защищено вовремя": return Colors.excellentmark
-        case "Не сдано", "Не посещено": return Colors.badmark
-        case "Защищено с опозданием": return Colors.mediummark
-        default: return Colors.nomark
+    func statusColor(languageCode: String) -> Color {
+        let status = localizedStatus(languageCode: languageCode)
+            .lowercased()
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if status.contains("посещено")
+            || status.contains("сдано")
+            || status.contains("защищено вовремя")
+            || status.contains("attended")
+            || status.contains("passed")
+            || status.contains("submitted")
+            || status.contains("已出勤")
+            || status.contains("已通过") {
+            return Colors.excellentmark
         }
+
+        if status.contains("не сдано")
+            || status.contains("не посещено")
+            || status.contains("absent")
+            || status.contains("not attended")
+            || status.contains("failed")
+            || status.contains("未出勤")
+            || status.contains("未通过") {
+            return Colors.badmark
+        }
+
+        if status.contains("опоздан")
+            || status.contains("late")
+            || status.contains("迟") {
+            return Colors.mediummark
+        }
+
+        return Colors.nomark
     }
 }
 
-
-// оценки дисциплин семестра
 func colorForGrade(_ grade: String) -> Color {
     switch grade {
     case "Отлично", "Зачтено":

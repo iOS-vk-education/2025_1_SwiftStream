@@ -5,6 +5,19 @@ import FirebaseAuth
 struct Grades: View {
     @State private var selectedTab: Tab = .current
     @State private var expandedSubjectId: String? = nil
+    
+    @AppStorage("userSelectedLanguage") private var selectedLanguageRawValue = 0
+
+    private var currentLanguageCode: String {
+        switch selectedLanguageRawValue {
+        case 1:
+            return "en"
+        case 2:
+            return "zh"
+        default:
+            return "ru"
+        }
+    }
 
     enum Tab {
         case current
@@ -24,11 +37,15 @@ struct Grades: View {
                         ForEach(subjects, id: \.id) { subject in
                             SubjectRowView(
                                 subject: subject,
-                                expandedSubjectId: $expandedSubjectId
+                                expandedSubjectId: $expandedSubjectId,
+                                languageCode: currentLanguageCode
                             )
                         }
                     } else {
-                        SessionTabView(semesters: semesters)
+                        SessionTabView(
+                            semesters: semesters,
+                            languageCode: currentLanguageCode
+                        )
                     }
                 }
                 .padding(.horizontal)
@@ -53,7 +70,6 @@ struct Grades: View {
             expandedSubjectId = nil
         }
         
-        // Подписываемся на обновления ViewModel
         .onReceive(studentVM.$subjects) { subjects in
             self.subjects = subjects
         }
@@ -65,16 +81,26 @@ struct Grades: View {
 
 struct SessionTabView: View {
     var semesters: [Semester]
+    let languageCode: String
+
     @State private var expandedSemester: String? = nil
 
     var body: some View {
         VStack(spacing: 12) {
             ForEach(semesters, id: \.id) { semester in
                 SemesterSection(
-                    title: semester.title,
+                    title: semester.localizedTitle(languageCode: languageCode),
                     isExpanded: expandedSemester == semester.id,
                     onToggle: { toggle(semester.id) },
-                    subjects: semester.subjects.map { ($0.name, $0.grade, colorForGrade($0.grade)) }
+                    subjects: semester.subjects.map {
+                        let grade = $0.localizedGrade(languageCode: languageCode)
+
+                        return (
+                            $0.localizedName(languageCode: languageCode),
+                            grade,
+                            colorForGradeText(grade)
+                        )
+                    }
                 )
             }
         }
@@ -86,5 +112,44 @@ struct SessionTabView: View {
         withAnimation(.easeInOut(duration: 0.5)) {
             expandedSemester = expandedSemester == id ? nil : id
         }
+    }
+
+    private func colorForGradeText(_ grade: String) -> Color {
+        let normalized = grade
+            .lowercased()
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if normalized.contains("отлич")
+            || normalized.contains("зачт")
+            || normalized.contains("excellent")
+            || normalized.contains("passed")
+            || normalized.contains("优秀")
+            || normalized.contains("通过") {
+            return Colors.excellentmark
+        }
+
+        if normalized.contains("хорош")
+            || normalized.contains("good")
+            || normalized.contains("良好") {
+            return Colors.goodmark
+        }
+
+        if normalized.contains("удов")
+            || normalized.contains("satisfactory")
+            || normalized.contains("satisfactorily")
+            || normalized.contains("及格") {
+            return Colors.mediummark
+        }
+
+        if normalized.contains("неуд")
+            || normalized.contains("не зачт")
+            || normalized.contains("bad")
+            || normalized.contains("fail")
+            || normalized.contains("failed")
+            || normalized.contains("不及格") {
+            return Colors.badmark
+        }
+
+        return Colors.nomark
     }
 }

@@ -2,6 +2,7 @@ import Foundation
 import FirebaseFirestore
 import Combine
 import FirebaseCore
+import FirebaseFirestoreSwift
 
 class NavigationViewModel: ObservableObject {
     @Published var classrooms: [Classroom] = []
@@ -312,6 +313,10 @@ class NavigationViewModel: ObservableObject {
         currentFloorSegment.removeAll()
         nextFloorInfo = nil
         errorMessage = nil
+    }
+    
+    func getClassroomWithFloor(number: String, floor: String) -> ClassroomWithFloor? {
+        return classroomsWithFloorCache[floor]?.first(where: { $0.classroom.number == number })
     }
 
     private func extractFloor(from number: String) -> String? {

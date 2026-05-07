@@ -5,6 +5,18 @@ struct MainPage: View {
     @State private var showQR = false
     @EnvironmentObject var appState: AppState
     @StateObject private var vm = MainPageViewModel()
+    @AppStorage("userSelectedLanguage") private var selectedLanguageRawValue = 0
+
+    private var currentLanguageCode: String {
+        switch selectedLanguageRawValue {
+        case 1:
+            return "en"
+        case 2:
+            return "zh"
+        default:
+            return "ru"
+        }
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -14,7 +26,8 @@ struct MainPage: View {
             ThreeBlueLinks()
                 .padding(.top, 20)
             
-            if let name = appState.student?.name, !name.isEmpty {
+            if let student = appState.student,
+               !student.localizedName(languageCode: currentLanguageCode).isEmpty {
                 HeaderView(studentName: studentName())
                     .padding(.top, 40)
                     .transition(.opacity)
@@ -35,18 +48,23 @@ struct MainPage: View {
             QRView()
         }
         .onAppear {
-            // ✅ Загружаем данные ТОЛЬКО один раз за сессию
             vm.loadIfNeeded(appState: appState)
         }
     }
-    
+
     private func studentName() -> String {
-        guard let fullName = appState.student?.name, !fullName.isEmpty else {
+        guard let student = appState.student else {
             return ""
         }
-        
+
+        let fullName = student.localizedName(languageCode: currentLanguageCode)
+
+        guard !fullName.isEmpty else {
+            return ""
+        }
+
         let parts = fullName.split(separator: " ")
-        
+
         if parts.count > 1 {
             return String(parts[1])
         } else {
@@ -63,7 +81,7 @@ struct MainPage: View {
                     .frame(height: 56)
                     .foregroundColor(Colors.MainColor)
                     .overlay(
-                        Text("Пропуск")
+                        Text(Translation.MainPage.pass)
                             .foregroundColor(Colors.white)
                             .font(.system(size: 17, weight: .semibold))
                     )
@@ -73,37 +91,69 @@ struct MainPage: View {
 
     struct HeaderView: View {
         let studentName: String
-        
+
+        @StateObject private var dateManager = ScheduleDateManager()
+        @StateObject private var scheduleVM = ScheduleViewModel()
+
+        private var todayLessonsCount: Int {
+            guard dateManager.currentDayIndex != 7 else {
+                return 0
+            }
+
+            return scheduleVM
+                .getLessons(
+                    for: dateManager.currentDayIndex,
+                    week: dateManager.currentWeek
+                )
+                .count
+        }
+
         var body: some View {
             VStack(alignment: .leading, spacing: 2) {
-                Text("Привет, \(studentName)!")
+                (Text(Translation.MainPage.greeting) + Text(", \(studentName)!"))
                     .font(.system(size: 34, weight: .bold))
                     .padding(.bottom, 2)
 
-                Text("Сегодня пятница, 10 неделя")
-                    .font(.system(size: 17, weight: .regular))
-                    .foregroundColor(.primary)
+                .font(.system(size: 17, weight: .regular))
+                .foregroundColor(.primary)
 
-                Text("7 ноября")
+                Text(Date.now, format: .dateTime.day().month(.wide))
                     .font(.system(size: 17, weight: .regular))
                     .foregroundColor(.secondary)
                     .padding(.top, 2)
 
-                Text("3 пары")
+                Text(LocalizedStringKey("main_lessons_count \(todayLessonsCount)"))
                     .font(.system(size: 15, weight: .regular))
                     .foregroundColor(.secondary)
                     .padding(.top, 6)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 16)
+            .onAppear {
+                dateManager.updateRealDate()
+                scheduleVM.fetchScheduleForCurrentUser()
+            }
         }
     }
 }
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
-        let appState = AppState()
-        return BottomBarView(selectedTab: 1)
-            .environmentObject(appState)
+        Group {
+            BottomBarView(selectedTab: 1)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "ru"))
+                .previewDisplayName("Russian")
+
+            BottomBarView(selectedTab: 1)
+                .environmentObject(AppState())
+                .environment(\.locale, Locale(identifier: "en"))
+                .previewDisplayName("English")
+
+            BottomBarView(selectedTab: 1)
+                .environment(\.locale, Locale(identifier: "zh-Hans"))
+                .environmentObject(AppState())
+                .previewDisplayName("Chinese")
+        }
     }
 }

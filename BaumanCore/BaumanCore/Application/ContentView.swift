@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct WelcomeViewControllerWrapper: UIViewControllerRepresentable {
     @EnvironmentObject var appState: AppState
 
@@ -11,17 +10,17 @@ struct WelcomeViewControllerWrapper: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
-        
     }
 }
-
 
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
 
     var body: some View {
         Group {
-            if appState.isLoggedIn {
+            if !appState.isAuthResolved {
+                ProgressView()
+            } else if appState.isLoggedIn {
                 BottomBarView(selectedTab: 1)
             } else {
                 NavigationStack {

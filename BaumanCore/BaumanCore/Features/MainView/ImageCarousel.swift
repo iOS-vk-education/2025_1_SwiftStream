@@ -7,21 +7,36 @@ struct ImageCarousel: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             ZStack {
-                if vm.items.isEmpty {
+                if vm.isLoading {
                     ProgressView()
                         .scaleEffect(1.2)
                         .tint(Colors.MainColor)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                if let error = vm.errorText {
-                    Text(error)
-                        .font(.system(size: 13))
-                        .foregroundColor(.red)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 16)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                if !vm.items.isEmpty {
+
+                } else if vm.items.isEmpty && vm.errorText != nil {
+                    VStack(spacing: 10) {
+                        Button {
+                            Task {
+                                await vm.load(force: true)
+                            }
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
+                                .font(.system(size: 22, weight: .semibold))
+                                .foregroundColor(.white)
+                                .frame(width: 52, height: 52)
+                                .background(Colors.MainColor)
+                                .clipShape(Circle())
+                        }
+
+                        Text(Translation.MainPage.newsLoadFailed)
+                            .font(.system(size: 14))
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 16)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+                } else if !vm.items.isEmpty {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
                             ForEach(vm.items) { item in
@@ -42,8 +57,8 @@ struct ImageCarousel: View {
             .frame(height: 200)
         }
         .frame(height: 220)
-        .task(priority: .background) {
-            await vm.load()
+        .task {
+            await vm.loadIfNeeded()
         }
     }
 }
@@ -56,7 +71,10 @@ private struct NewsCard: View {
             AsyncImage(url: item.imageURL) { phase in
                 switch phase {
                 case .success(let image):
-                    image.resizable().scaledToFill()
+                    image
+                        .resizable()
+                        .scaledToFill()
+
                 default:
                     Color(.systemGray6)
                         .shimmering()
@@ -91,7 +109,7 @@ extension View {
             .rotationEffect(.degrees(45))
             .animation(
                 .easeInOut(duration: 1.2)
-                .repeatForever(autoreverses: false),
+                    .repeatForever(autoreverses: false),
                 value: UUID()
             )
         )

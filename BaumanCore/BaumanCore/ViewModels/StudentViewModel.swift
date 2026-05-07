@@ -37,10 +37,11 @@ class StudentViewModel: ObservableObject {
                     subjectsGroup.enter()
 
                     let data = doc.data()
-
+                    
                     let id = doc.documentID
-                    let name = data["name"] as? String ?? ""
+                    let nameLocalized = self.localizedMap(from: data["name"])
                     let progress = data["progress"] as? String ?? ""
+
 
                     doc.reference.collection("lessons").getDocuments { lessonsSnapshot, _ in
 
@@ -51,12 +52,12 @@ class StudentViewModel: ObservableObject {
                             lessons = lessonDocs.map { lDoc in
 
                                 let lData = lDoc.data()
-
+                                
                                 return Lesson(
                                     id: lDoc.documentID,
-                                    title: lData["title"] as? String ?? "",
+                                    titleLocalized: self.localizedMap(from: lData["title"]),
                                     date: lData["date"] as? String ?? "",
-                                    status: lData["status"] as? String ?? ""
+                                    statusLocalized: self.localizedMap(from: lData["status"])
                                 )
                             }
 
@@ -68,7 +69,7 @@ class StudentViewModel: ObservableObject {
 
                         let subject = SubjectData(
                             id: id,
-                            name: name,
+                            nameLocalized: nameLocalized,
                             progress: progress,
                             lessons: lessons
                         )
@@ -103,7 +104,7 @@ class StudentViewModel: ObservableObject {
                     let data = doc.data()
 
                     let semesterID = doc.documentID
-                    let title = data["title"] as? String ?? ""
+                    let titleLocalized = self.localizedMap(from: data["title"])
 
                     doc.reference.collection("subjects").getDocuments { subjectsSnapshot, _ in
 
@@ -117,8 +118,8 @@ class StudentViewModel: ObservableObject {
 
                                 return SemesterSubject(
                                     id: sDoc.documentID,
-                                    name: sData["name"] as? String ?? "",
-                                    grade: sData["grade"] as? String ?? ""
+                                    nameLocalized: self.localizedMap(from: sData["name"]),
+                                    gradeLocalized: self.localizedMap(from: sData["grade"])
                                 )
                             }
 
@@ -127,10 +128,10 @@ class StudentViewModel: ObservableObject {
                                 Self.extractNumber($0.id) < Self.extractNumber($1.id)
                             }
                         }
-
+                        
                         let semester = Semester(
                             id: semesterID,
-                            title: title,
+                            titleLocalized: titleLocalized,
                             subjects: semesterSubjects
                         )
 
@@ -163,7 +164,49 @@ class StudentViewModel: ObservableObject {
             }
         }
     }
+    private func localizedString(from value: Any?) -> String {
+        if let string = value as? String {
+            return string
+        }
 
+        if let map = value as? [String: String] {
+            return map["ru"]
+            ?? map["en"]
+            ?? map["zh"]
+            ?? map.values.first
+            ?? ""
+        }
+
+        if let map = value as? [String: Any] {
+            return map["ru"] as? String
+            ?? map["en"] as? String
+            ?? map["zh"] as? String
+            ?? map.values.compactMap { $0 as? String }.first
+            ?? ""
+        }
+
+        return ""
+    }
+    
+    private func localizedMap(from value: Any?) -> [String: String] {
+        if let map = value as? [String: String] {
+            return map
+        }
+
+        if let map = value as? [String: Any] {
+            var result: [String: String] = [:]
+
+            for (key, value) in map {
+                if let stringValue = value as? String {
+                    result[key] = stringValue
+                }
+            }
+
+            return result
+        }
+
+        return [:]
+    }
     
     private static func dayMonthValue(_ dateString: String) -> Int {
 
