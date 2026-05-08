@@ -19,6 +19,9 @@ enum Translation {
         
         static let weekTitleEven = LocalizedStringKey("schedule_week_title_even")
         static let weekTitleOdd = LocalizedStringKey("schedule_week_title_odd")
+        
+        static let fromHere = LocalizedStringKey("from_here")
+        static let toHere = LocalizedStringKey("to_here")
     }
 
     enum LessonType {

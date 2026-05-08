@@ -102,6 +102,9 @@
 "lesson_type_seminar" = "Seminar";
 "lesson_type_lab" = "Lab work";
 
+"from_here" = "From here";
+"to_here" = "To here";
+
 "schedule_no_lessons_sunday" = "Today is Sunday, no classes";
 
 
