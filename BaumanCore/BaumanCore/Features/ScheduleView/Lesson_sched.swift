@@ -28,8 +28,11 @@ struct LessonCardView: View {
     let classroom: String
     let languageCode: String
 
+    var onClassroomTap: ((String) -> Void)? = nil
+
     var body: some View {
         VStack(spacing: 0) {
+
             Text(typeTitle)
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(.white)
@@ -39,6 +42,7 @@ struct LessonCardView: View {
                 .background(type.color)
 
             HStack(alignment: .top, spacing: 12) {
+
                 VStack(alignment: .leading, spacing: 2) {
                     Text(timeStart)
                         .font(.system(size: 14))
@@ -51,20 +55,45 @@ struct LessonCardView: View {
                 .frame(width: 55, alignment: .leading)
 
                 VStack(alignment: .leading, spacing: 4) {
+
                     Text(subject)
                         .font(.system(size: 16, weight: .semibold))
                         .fixedSize(horizontal: false, vertical: true)
-                        .lineLimit(nil)
                         .multilineTextAlignment(.leading)
 
                     Text(teacher)
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
-                        .fixedSize(horizontal: false, vertical: true)
 
-                    Text(classroomText)
-                        .font(.system(size: 14))
-                        .foregroundColor(.gray)
+                    HStack(spacing: 0) {
+
+                        // префикс НЕ кликабельный
+                        if !prefix.isEmpty {
+                            Text(prefix)
+                                .font(.system(size: 14))
+                                .foregroundColor(.gray)
+                        }
+
+                        // кликабельна ТОЛЬКО аудитория
+                        if isClickableClassroom {
+
+                            Button(action: {
+                                onClassroomTap?(classroom)
+                            }) {
+                                Text(classroomDisplayText)
+                                    .font(.system(size: 14, weight: .medium))
+                                    .foregroundColor(Colors.MainColor)
+                                    .underline()
+                            }
+                            .buttonStyle(.plain)
+
+                        } else {
+
+                            Text(classroomDisplayText)
+                                .font(.system(size: 14))
+                                .foregroundColor(.gray)
+                        }
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -77,29 +106,52 @@ struct LessonCardView: View {
         .padding(.horizontal)
     }
 
-    private var classroomText: String {
-        let trimmedClassroom = classroom.trimmingCharacters(in: .whitespacesAndNewlines)
+    // MARK: - Helpers
 
-        guard !trimmedClassroom.isEmpty else {
+    private var trimmedClassroom: String {
+        classroom.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var lowercased: String {
+        trimmedClassroom.lowercased()
+    }
+
+    private var isSportsHall: Bool {
+        lowercased.contains("спорт") ||
+        lowercased.contains("sports hall") ||
+        lowercased.contains("体育馆")
+    }
+    
+    private var isClickableClassroom: Bool {
+
+        if isSportsHall {
+            return false
+        }
+
+        let room = lowercased
+
+        return !room.contains("к")
+            && !room.contains("х")
+            && !room.contains("л")
+    }
+
+    private var prefix: String {
+        if isSportsHall {
             return ""
         }
 
-        let lowercasedClassroom = trimmedClassroom.lowercased()
-
-        if lowercasedClassroom == "спортивный зал"
-            || lowercasedClassroom == "gym"
-            || lowercasedClassroom == "体育馆" {
-            return trimmedClassroom
-        }
-
         if languageCode.hasPrefix("zh") {
-            return "教室 \(trimmedClassroom)"
+            return "教室 "
         }
 
         if languageCode.hasPrefix("en") {
-            return "room \(trimmedClassroom)"
+            return "room "
         }
 
-        return "ауд. \(trimmedClassroom)"
+        return "ауд. "
+    }
+
+    private var classroomDisplayText: String {
+        trimmedClassroom
     }
 }

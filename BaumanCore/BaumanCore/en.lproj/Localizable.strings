@@ -102,7 +102,10 @@
 "lesson_type_seminar" = "Seminar";
 "lesson_type_lab" = "Lab work";
 
-"schedule_no_lessons_sunday" = "Today is Sunday, so there are no classes";
+"from_here" = "From here";
+"to_here" = "To here";
+
+"schedule_no_lessons_sunday" = "Today is Sunday, no classes";
 
 
 //экран QR

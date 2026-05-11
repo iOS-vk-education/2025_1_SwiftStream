@@ -68,17 +68,21 @@ struct SubjectRowView: View {
             let title = lesson.localizedTitle(languageCode: languageCode).lowercased()
 
             return title.contains("лаб")
-                || title.contains("laboratory")
+                || title.contains("midterm")
                 || title.contains("lab")
-                || title.contains("实验")
+                || title.contains("阶段测试")
+                || title.contains("实验课")
                 || title.contains("рубеж")
         }()
 
         return VStack(alignment: .leading, spacing: 6) {
             HStack {
-                Text(lesson.localizedTitle(languageCode: languageCode))
-                    .fontWeight(special ? .semibold : .regular)
-                    .lineLimit(nil)
+                Text(
+                    lesson.localizedTitle(languageCode: languageCode)
+                        .replacingOccurrences(of: "Лабораторная работа ", with: "Лабораторная\nработа ")
+                )
+                .fontWeight(special ? .semibold : .regular)
+                .lineLimit(nil)
                 
                 Spacer()
 

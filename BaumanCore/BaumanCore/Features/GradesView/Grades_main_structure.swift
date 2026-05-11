@@ -98,7 +98,7 @@ struct SessionTabView: View {
                         return (
                             $0.localizedName(languageCode: languageCode),
                             grade,
-                            colorForGradeText(grade)
+                            colorForGrade(grade)
                         )
                     }
                 )
@@ -112,44 +112,5 @@ struct SessionTabView: View {
         withAnimation(.easeInOut(duration: 0.5)) {
             expandedSemester = expandedSemester == id ? nil : id
         }
-    }
-
-    private func colorForGradeText(_ grade: String) -> Color {
-        let normalized = grade
-            .lowercased()
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-
-        if normalized.contains("отлич")
-            || normalized.contains("зачт")
-            || normalized.contains("excellent")
-            || normalized.contains("passed")
-            || normalized.contains("优秀")
-            || normalized.contains("通过") {
-            return Colors.excellentmark
-        }
-
-        if normalized.contains("хорош")
-            || normalized.contains("good")
-            || normalized.contains("良好") {
-            return Colors.goodmark
-        }
-
-        if normalized.contains("удов")
-            || normalized.contains("satisfactory")
-            || normalized.contains("satisfactorily")
-            || normalized.contains("及格") {
-            return Colors.mediummark
-        }
-
-        if normalized.contains("неуд")
-            || normalized.contains("не зачт")
-            || normalized.contains("bad")
-            || normalized.contains("fail")
-            || normalized.contains("failed")
-            || normalized.contains("不及格") {
-            return Colors.badmark
-        }
-
-        return Colors.nomark
     }
 }

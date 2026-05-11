@@ -146,7 +146,7 @@ struct LoginView: View {
             .cornerRadius(13)
             .padding(.horizontal, 24)
 
-            HStack(spacing: 0) {
+            HStack(spacing: 4) {
                 Text(Translation.Login.noAccount)
                     .font(.SFPro(17))
                     .foregroundColor(Colors.LightGray)

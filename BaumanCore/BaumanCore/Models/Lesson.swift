@@ -20,19 +20,47 @@ struct Lesson: Identifiable {
             .lowercased()
             .trimmingCharacters(in: .whitespacesAndNewlines)
 
-        if status.contains("посещ")
-            || status.contains("attended")
-            || status.contains("已出勤") {
-            return .green
+        if status == "посещено"
+            || status == "attended"
+            || status == "已出勤"
+            || status == "защищено вовремя"
+            || status == "completed on time"
+            || status == "按时答辩"
+            || status == "сдано"
+            || status == "passed"
+            || status == "通过" {
+
+            return Colors.excellentmark
         }
 
-        if status.contains("пропущ")
-            || status.contains("absent")
-            || status.contains("未出勤") {
-            return .red
+        if status == "не посещено"
+            || status == "absent"
+            || status == "缺勤"
+            || status == "не защищено"
+            || status == "not completed"
+            || status == "未完成"
+            || status == "не сдано"
+            || status == "failed"
+            || status == "未提交" {
+
+            return Colors.badmark
         }
 
-        return .gray
+        if status == "защищено с опозданием"
+            || status == "completed late"
+            || status == "延期答辩" {
+
+            return Colors.mediummark
+        }
+
+        if status == "не проставлено"
+            || status == "not marked"
+            || status == "未评分" {
+
+            return Colors.nomark
+        }
+
+        return Colors.nomark
     }
 
     private func localizedValue(from map: [String: String], languageCode: String) -> String {
@@ -60,6 +88,7 @@ struct Lesson: Identifiable {
 }
 
 struct ScheduleLesson: Identifiable {
+
     var id: String
 
     var subjectLocalized: [String: String]
@@ -67,6 +96,8 @@ struct ScheduleLesson: Identifiable {
     var typeLocalized: [String: String]
 
     var classroom: String
+    var classroomLocalized: [String: String]?
+
     var timeStart: String
     var timeEnd: String
     var day: Int
@@ -85,7 +116,19 @@ struct ScheduleLesson: Identifiable {
         localizedValue(from: typeLocalized, languageCode: languageCode)
     }
 
+    func localizedClassroom(languageCode: String) -> String {
+        if let classroomLocalized, !classroomLocalized.isEmpty {
+            return localizedValue(
+                from: classroomLocalized,
+                languageCode: languageCode
+            )
+        }
+
+        return classroom
+    }
+
     var typeKey: String {
+
         let rawType = (
             typeLocalized["en"]
             ?? typeLocalized["ru"]
@@ -100,26 +143,31 @@ struct ScheduleLesson: Identifiable {
             || rawType.contains("laborator")
             || rawType.contains("лаборатор")
             || rawType.contains("实验") {
+
             return "lab"
         }
 
         if rawType.contains("seminar")
             || rawType.contains("семинар")
             || rawType.contains("研讨") {
+
             return "seminar"
         }
 
         if rawType.contains("lecture")
             || rawType.contains("лекция")
             || rawType.contains("讲座") {
+
             return "lecture"
         }
 
         print("Неизвестный тип пары:", rawType)
+
         return "lecture"
     }
 
     private func localizedValue(from map: [String: String], languageCode: String) -> String {
+
         let code = Self.normalizedLanguageCode(languageCode)
 
         return map[code]
@@ -131,6 +179,7 @@ struct ScheduleLesson: Identifiable {
     }
 
     private static func normalizedLanguageCode(_ languageCode: String) -> String {
+
         if languageCode.hasPrefix("zh") {
             return "zh"
         }

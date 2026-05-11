@@ -68,35 +68,49 @@ enum Colors {
 
 extension Lesson {
     func statusColor(languageCode: String) -> Color {
+
         let status = localizedStatus(languageCode: languageCode)
             .lowercased()
             .trimmingCharacters(in: .whitespacesAndNewlines)
 
-        if status.contains("посещено")
-            || status.contains("сдано")
-            || status.contains("защищено вовремя")
-            || status.contains("attended")
-            || status.contains("passed")
-            || status.contains("submitted")
-            || status.contains("已出勤")
-            || status.contains("已通过") {
+        if status == "посещено"
+            || status == "attended"
+            || status == "已出勤"
+            || status == "защищено вовремя"
+            || status == "completed on time"
+            || status == "按时答辩"
+            || status == "сдано"
+            || status == "passed"
+            || status == "通过" {
+
             return Colors.excellentmark
         }
 
-        if status.contains("не сдано")
-            || status.contains("не посещено")
-            || status.contains("absent")
-            || status.contains("not attended")
-            || status.contains("failed")
-            || status.contains("未出勤")
-            || status.contains("未通过") {
+        if status == "не посещено"
+            || status == "absent"
+            || status == "缺勤"
+            || status == "не защищено"
+            || status == "not completed"
+            || status == "未完成"
+            || status == "не сдано"
+            || status == "failed"
+            || status == "未提交" {
+
             return Colors.badmark
         }
 
-        if status.contains("опоздан")
-            || status.contains("late")
-            || status.contains("迟") {
+        if status == "защищено с опозданием"
+            || status == "completed late"
+            || status == "延期答辩" {
+
             return Colors.mediummark
+        }
+
+        if status == "не проставлено"
+            || status == "not marked"
+            || status == "未评分" {
+
+            return Colors.nomark
         }
 
         return Colors.nomark
@@ -105,13 +119,13 @@ extension Lesson {
 
 func colorForGrade(_ grade: String) -> Color {
     switch grade {
-    case "Отлично", "Зачтено":
+    case "Отлично", "Зачтено", "Excellent", "Passed", "优秀", "通过":
         return Colors.excellentmark
-    case "Хорошо":
+    case "Хорошо", "Good", "良好":
         return Colors.goodmark
-    case "Удов":
+    case "Удов", "Satisfactory", "及格":
         return Colors.mediummark
-    case "Неуд", "Не зачтено":
+    case "Неуд", "Не зачтено", "Bad", "Failed", "不及格", "未通过":
         return Colors.badmark
     default:
         return Colors.nomark
