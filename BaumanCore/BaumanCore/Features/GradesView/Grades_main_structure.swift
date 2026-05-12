@@ -5,6 +5,19 @@ import FirebaseAuth
 struct Grades: View {
     @State private var selectedTab: Tab = .current
     @State private var expandedSubjectId: String? = nil
+    
+    @AppStorage("userSelectedLanguage") private var selectedLanguageRawValue = 0
+
+    private var currentLanguageCode: String {
+        switch selectedLanguageRawValue {
+        case 1:
+            return "en"
+        case 2:
+            return "zh"
+        default:
+            return "ru"
+        }
+    }
 
     enum Tab {
         case current
@@ -24,11 +37,15 @@ struct Grades: View {
                         ForEach(subjects, id: \.id) { subject in
                             SubjectRowView(
                                 subject: subject,
-                                expandedSubjectId: $expandedSubjectId
+                                expandedSubjectId: $expandedSubjectId,
+                                languageCode: currentLanguageCode
                             )
                         }
                     } else {
-                        SessionTabView(semesters: semesters)
+                        SessionTabView(
+                            semesters: semesters,
+                            languageCode: currentLanguageCode
+                        )
                     }
                 }
                 .padding(.horizontal)
@@ -53,7 +70,6 @@ struct Grades: View {
             expandedSubjectId = nil
         }
         
-        // Подписываемся на обновления ViewModel
         .onReceive(studentVM.$subjects) { subjects in
             self.subjects = subjects
         }
@@ -65,16 +81,26 @@ struct Grades: View {
 
 struct SessionTabView: View {
     var semesters: [Semester]
+    let languageCode: String
+
     @State private var expandedSemester: String? = nil
 
     var body: some View {
         VStack(spacing: 12) {
             ForEach(semesters, id: \.id) { semester in
                 SemesterSection(
-                    title: semester.title,
+                    title: semester.localizedTitle(languageCode: languageCode),
                     isExpanded: expandedSemester == semester.id,
                     onToggle: { toggle(semester.id) },
-                    subjects: semester.subjects.map { ($0.name, $0.grade, colorForGrade($0.grade)) }
+                    subjects: semester.subjects.map {
+                        let grade = $0.localizedGrade(languageCode: languageCode)
+
+                        return (
+                            $0.localizedName(languageCode: languageCode),
+                            grade,
+                            colorForGrade(grade)
+                        )
+                    }
                 )
             }
         }

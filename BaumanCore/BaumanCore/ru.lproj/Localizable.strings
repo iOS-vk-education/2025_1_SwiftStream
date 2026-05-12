@@ -99,7 +99,10 @@
 "lesson_type_seminar" = "Семинар";
 "lesson_type_lab" = "Лаб. работа";
 
-"schedule_no_lessons_sunday" = "Сегодня воскресенье, поэтому пар нет";
+"from_here" = "Отсюда";
+"to_here" = "Сюда";
+
+"schedule_no_lessons_sunday" = "Сегодня воскресенье, занятий нет";
 
 "schedule_week_title_even %lld" = "%d неделя, знаменатель";
 "schedule_week_title_odd %lld" = "%d неделя, числитель";

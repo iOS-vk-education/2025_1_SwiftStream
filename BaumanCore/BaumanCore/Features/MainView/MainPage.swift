@@ -5,6 +5,18 @@ struct MainPage: View {
     @State private var showQR = false
     @EnvironmentObject var appState: AppState
     @StateObject private var vm = MainPageViewModel()
+    @AppStorage("userSelectedLanguage") private var selectedLanguageRawValue = 0
+
+    private var currentLanguageCode: String {
+        switch selectedLanguageRawValue {
+        case 1:
+            return "en"
+        case 2:
+            return "zh"
+        default:
+            return "ru"
+        }
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -13,8 +25,9 @@ struct MainPage: View {
 
             ThreeBlueLinks()
                 .padding(.top, 20)
-
-            if let name = appState.student?.name, !name.isEmpty {
+            
+            if let student = appState.student,
+               !student.localizedName(languageCode: currentLanguageCode).isEmpty {
                 HeaderView(studentName: studentName())
                     .padding(.top, 40)
                     .transition(.opacity)
@@ -40,7 +53,13 @@ struct MainPage: View {
     }
 
     private func studentName() -> String {
-        guard let fullName = appState.student?.name, !fullName.isEmpty else {
+        guard let student = appState.student else {
+            return ""
+        }
+
+        let fullName = student.localizedName(languageCode: currentLanguageCode)
+
+        guard !fullName.isEmpty else {
             return ""
         }
 

@@ -5,6 +5,19 @@ struct MapView: View {
     @StateObject private var viewModel = NavigationViewModel()
     @EnvironmentObject var appState: AppState
     @Environment(\.colorScheme) private var colorScheme
+    
+    @AppStorage("userSelectedLanguage") private var selectedLanguageRawValue = 0
+
+    private var currentLanguageCode: String {
+        switch selectedLanguageRawValue {
+        case 1:
+            return "en"
+        case 2:
+            return "zh"
+        default:
+            return "ru"
+        }
+    }
 
     @State private var fromLocation = ""
     @State private var toLocation = ""
@@ -475,7 +488,22 @@ struct MapView: View {
     }
 
     private func routeContinuesText(for floor: String) -> String {
-        let format = NSLocalizedString("map_route_continues_format", comment: "")
+
+        let format: String
+
+        if currentLanguageCode.hasPrefix("en") {
+
+            format = "Route continues on floor %@"
+
+        } else if currentLanguageCode.hasPrefix("zh") {
+
+            format = "路线继续到第%@层"
+
+        } else {
+
+            format = "Продолжение маршрута на %@ этаже"
+        }
+
         return String(format: format, floor)
     }
 

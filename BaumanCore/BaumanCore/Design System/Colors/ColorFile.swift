@@ -19,7 +19,7 @@ extension Color {
 
 enum Colors {
     static var MainColor: Color {
-        Color("MainColor") // имя цвета в Assets
+        Color("MainColor")
     }
     
     static var black: Color {
@@ -66,29 +66,66 @@ enum Colors {
     }
 }
 
-// оценки уроков
 extension Lesson {
-    var statusColor: Color {
-        switch status {
-        case "Посещено", "Сдано", "Защищено вовремя": return Colors.excellentmark
-        case "Не сдано", "Не посещено": return Colors.badmark
-        case "Защищено с опозданием": return Colors.mediummark
-        default: return Colors.nomark
+    func statusColor(languageCode: String) -> Color {
+
+        let status = localizedStatus(languageCode: languageCode)
+            .lowercased()
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if status == "посещено"
+            || status == "attended"
+            || status == "已出勤"
+            || status == "защищено вовремя"
+            || status == "completed on time"
+            || status == "按时答辩"
+            || status == "сдано"
+            || status == "passed"
+            || status == "通过" {
+
+            return Colors.excellentmark
         }
+
+        if status == "не посещено"
+            || status == "absent"
+            || status == "缺勤"
+            || status == "не защищено"
+            || status == "not completed"
+            || status == "未完成"
+            || status == "не сдано"
+            || status == "failed"
+            || status == "未提交" {
+
+            return Colors.badmark
+        }
+
+        if status == "защищено с опозданием"
+            || status == "completed late"
+            || status == "延期答辩" {
+
+            return Colors.mediummark
+        }
+
+        if status == "не проставлено"
+            || status == "not marked"
+            || status == "未评分" {
+
+            return Colors.nomark
+        }
+
+        return Colors.nomark
     }
 }
 
-
-// оценки дисциплин семестра
 func colorForGrade(_ grade: String) -> Color {
     switch grade {
-    case "Отлично", "Зачтено":
+    case "Отлично", "Зачтено", "Excellent", "Passed", "优秀", "通过":
         return Colors.excellentmark
-    case "Хорошо":
+    case "Хорошо", "Good", "良好":
         return Colors.goodmark
-    case "Удов":
+    case "Удов", "Satisfactory", "及格":
         return Colors.mediummark
-    case "Неуд", "Не зачтено":
+    case "Неуд", "Не зачтено", "Bad", "Failed", "不及格", "未通过":
         return Colors.badmark
     default:
         return Colors.nomark

@@ -8,6 +8,17 @@ struct Profile: View {
     @StateObject private var vm = ProfileViewModel()
     @State private var showImagePicker = false
     @State private var showDeleteAlert = false
+    
+    private var currentLanguageCode: String {
+        switch selectedLanguageRawValue {
+        case 1:
+            return "en"
+        case 2:
+            return "zh"
+        default:
+            return "ru"
+        }
+    }
 
     private let themeOptions: [LocalizedStringKey] = [
         Translation.Profile.themeSystem,
@@ -36,7 +47,7 @@ struct Profile: View {
 
                         Spacer()
 
-                        Text(vm.student?.group ?? "")
+                        Text(vm.student?.localizedGroup(languageCode: currentLanguageCode) ?? "")
                             .font(.SFPro(15))
                             .foregroundColor(Colors.black)
                     }
@@ -214,8 +225,8 @@ struct Profile: View {
             }
 
             VStack(alignment: .leading, spacing: 4) {
-                if let name = vm.student?.name {
-                    Text(name)
+                if let student = vm.student {
+                    Text(student.localizedName(languageCode: currentLanguageCode))
                         .font(.SFPro(21))
                         .foregroundColor(Colors.black)
                         .multilineTextAlignment(.leading)
